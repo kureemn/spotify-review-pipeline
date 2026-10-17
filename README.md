@@ -57,7 +57,7 @@ the same as "classified" (valid completed records).
 | Criterion | Where to look |
 |---|---|
 | Full ingestion, coverage, classification | `grading/ingestion.json` (byte-identical to the course profile) · checker output in [Verify without an API key](#verify-without-an-api-key) |
-| Runnable staged program, bounded calls, saved handoffs, resume | `python -m pipeline run --input <csv>` · ≤ 50 reviews per enrichment request · `runs/<id>/out/` handoffs · **real interrupt + resume of the graded run**: timed recording [`resume_demo.rec`](docs/evidence/resume_demo.rec) (macOS `script -p`), readable [transcript](docs/evidence/resume_demo_transcript.txt), `grading/checkpoint_before.json` / `checkpoint_after.json` |
+| Runnable staged program, bounded calls, saved handoffs, resume | `python -m pipeline run --input <csv>` · ≤ 50 reviews per enrichment request · `runs/<id>/out/` handoffs · **real interrupt + resume of the graded run**: [screen recording `resume_demo.mov`](docs/evidence/resume_demo.mov) (2 min 16 s replay of the timed recording), timed recording [`resume_demo.rec`](docs/evidence/resume_demo.rec) (macOS `script -p`), readable [transcript](docs/evidence/resume_demo_transcript.txt), `grading/checkpoint_before.json` / `checkpoint_after.json` |
 | Reproducible ranking + deployed dashboard / backend / database | `python -m pipeline rank --from rerank --records grading/records.jsonl.gz --membership grading/membership.csv` (byte-identical, 8 s, no model) · [live dashboard](https://spotify-review-insights-smoky.vercel.app) → Vercel functions ([`dashboard/api/`](dashboard/api/)) → Neon Postgres ([`dashboard/db/`](dashboard/db/)) |
 
 ## Architecture (summary)
@@ -122,7 +122,7 @@ dev-checkpoint calls whose results it reused by review ID).
 
 | Control | Real outcome (graded run unless noted) | Evidence |
 |---|---|---|
-| Interrupt + resume | A real SIGINT at 12:24:54 drained the 10 in-flight batches and saved **138,483** completed. The resume started from that count, and **0** already-completed IDs were re-sent | [`docs/evidence/resume_demo.rec`](docs/evidence/resume_demo.rec) (`script -p` replays it) · `grading/checkpoint_before.json` / `checkpoint_after.json` |
+| Interrupt + resume | A real SIGINT at 12:24:54 drained the 10 in-flight batches and saved **138,483** completed. The resume started from that count, and **0** already-completed IDs were re-sent | [video](docs/evidence/resume_demo.mov) · [`docs/evidence/resume_demo.rec`](docs/evidence/resume_demo.rec) (`script -p` replays it) · `grading/checkpoint_before.json` / `checkpoint_after.json` |
 | Retry once on invalid output | Item-level failures (quote not an exact substring, omitted items) were retried once. 322 saved with the full text as the quote plus `needs_review` | `run_log.jsonl` batch events (`failure_reasons`) |
 | Transient errors | Bounded backoff with jitter (≤ 4 retries per request). No rate limiting occurred at 10 workers on flex | `calls` table |
 | Provider content filter | One batch was rejected with HTTP 400 and **stopped session 2** (a bug: every 400 was fatal). Fixed to bisect the batch down to the offending review and quarantine only that review. Tested offline, then the run resumed. No rejection recurred | commit `87fc271` · [failure case](#a-failed--ambiguous-case-and-its-handling) |
