@@ -1,0 +1,81 @@
+{
+  "run_id": "demo-spendcap",
+  "label_config": "gpt-6-luna+effort-none+enrich-v1+schema-v2+quote150+entities-lexicon-v1",
+  "status_counts": {
+    "completed": 112,
+    "pending": 388
+  },
+  "quarantine_reasons": {},
+  "cache_reuse_records": 12,
+  "calls": {
+    "enrich": {
+      "succeeded": {
+        "calls": 4,
+        "input_tokens": 13759,
+        "output_tokens": 4933,
+        "cached_tokens": 7323,
+        "cache_write_tokens": 6424,
+        "reasoning_tokens": 0,
+        "cost_usd_estimated_from_usage": 0.001672,
+        "all_usage_available": true
+      }
+    }
+  },
+  "spent_usd_estimated_from_usage": 0.001672,
+  "spend_limit_usd": 0.005,
+  "project_budget_usd": 9.5,
+  "service_tiers": {
+    "flex": 4
+  },
+  "ledger_refusals": 1,
+  "workers": 1,
+  "stage_times": {
+    "ingest": [
+      {
+        "invocation": 1,
+        "seconds": 0.013
+      }
+    ],
+    "enrich": [
+      {
+        "invocation": 1,
+        "seconds": 48.319
+      }
+    ],
+    "export": [
+      {
+        "invocation": 1,
+        "seconds": 0.011
+      }
+    ]
+  },
+  "wall_clock": [
+    {
+      "invocation": 1,
+      "seconds": 49.48,
+      "stages": [
+        "ingest",
+        "enrich",
+        "verify",
+        "group",
+        "rank",
+        "memo"
+      ],
+      "status": "enrich_stopped:spend_limit"
+    }
+  ],
+  "sessions": [
+    {
+      "session": 1,
+      "stage": "enrich",
+      "started_at": 1792280019.8915598,
+      "ended_at": 1792280068.209968,
+      "phase": "initial",
+      "completed_before": 0,
+      "completed_after": 112,
+      "calls": 4,
+      "stop_reason": "spend_limit"
+    }
+  ],
+  "cost_note": "Costs are usage x rates in pipeline/config.py (see cost/rates.csv); not a provider invoice."
+}

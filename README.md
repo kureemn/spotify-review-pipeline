@@ -51,7 +51,7 @@ the same as "classified" (valid completed records).
 |---|---|
 | 50 human labels, per-field comparison, error analysis | [`golden/golden_50_labeled.csv`](golden/golden_50_labeled.csv) (committed before evaluation) · [`golden_report.md`](evals/golden/golden_report.md) (agreement, macro F1, confusion tables) · [`golden_error_analysis.md`](evals/golden/golden_error_analysis.md) (patterns, quote-support inspection, needs_review as a predictor) · per-case [`golden_cases.jsonl`](evals/golden/golden_cases.jsonl) · protocol **predeclared** in [`docs/RUBRIC_PLAN.md`](docs/RUBRIC_PLAN.md) |
 | Independent verification, planted-error and injection tests | blind verifier (text + rubric only): `runs/full-v1/out/verify/` · planted errors: [`evals/planted/`](evals/planted/) (30/30 gross) and [`evals/planted_subtle/`](evals/planted_subtle/) (57/60 near-miss) · injection: [`evals/injection/`](evals/injection/) (5/5 resisted by both roles, 15 ordinary reviews in the same batch unaffected) |
-| Real 100-review cold/warm pilot, offline calculator, retry/spend/recovery controls | [`cost/report.md`](cost/report.md) · `python3 cost/calculator.py selftest` · controls demonstrated in [Controls in action](#controls-in-action) |
+| Real 100-review cold/warm pilot, offline calculator, retry/spend/recovery controls | [`cost/report.md`](cost/report.md) · `python3 cost/calculator.py selftest` · controls demonstrated with real outcomes in [Controls in action](#controls-in-action): interrupt + resume, retries, content-filter recovery, **spend-cap stop** |
 
 ### Working result
 | Criterion | Where to look |
@@ -127,6 +127,7 @@ dev-checkpoint calls whose results it reused by review ID).
 | Transient errors | Bounded backoff with jitter (≤ 4 retries per request). No rate limiting occurred at 10 workers on flex | `calls` table |
 | Provider content filter | One batch was rejected with HTTP 400 and **stopped session 2** (a bug: every 400 was fatal). Fixed to bisect the batch down to the offending review and quarantine only that review. Tested offline, then the run resumed. No rejection recurred | commit `87fc271` · [failure case](#a-failed--ambiguous-case-and-its-handling) |
 | Spend ledger | Worst-case cost reserved before every dispatch; run cap $7.50, project cap $9.50 across all runs. Spent $5.46 / $5.57 | `run_log.jsonl` `budget` events |
+| Spend cap stop (real, deliberate) | Real run on the 500-review checkpoint with a fresh cache and a **$0.005 cap**: 4 batches saved (112 completed, **$0.001672** spent). The next request was **refused before dispatch** (spent + worst-case reservation > cap): 1 ledger refusal, `stop_reason=spend_limit`. The 388 remaining reviews stay **pending** (resumable, not quarantined) and downstream stages are skipped | [`runs/demo-spendcap/out/run_log.jsonl`](runs/demo-spendcap/out/run_log.jsonl) · [`run_summary.json`](runs/demo-spendcap/out/run_summary.json) |
 | Credit exhaustion | `insufficient_quota` (HTTP 429) is fatal rather than retried | `pipeline/llm.py` |
 | Fault injection (offline) | Mock provider: transient errors, malformed JSON, dropped items, fabricated quotes, duplicate JSON, content flags. All recovered or quarantined with reasons; the checker passed except for deliberate quarantines | `scripts/mock_resume_test.sh` |
 
