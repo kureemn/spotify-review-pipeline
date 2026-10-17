@@ -1,0 +1,307 @@
+{
+  "rate_multiplier": 1.0,
+  "rates_file": "/Users/admin/Agentic AI Class/final_assignment/cost/rates.csv",
+  "unpriced_usage_rows": 0,
+  "measured": {
+    "input": {
+      "file": "cost_100.csv",
+      "sha256_matches_manifest": true,
+      "ids_match_cost_100": true,
+      "records": 100,
+      "unique_texts": 100
+    },
+    "cold": {
+      "run_id": "pilot-cold",
+      "status_counts": {
+        "completed": 100
+      },
+      "wall_clock_s": 38.572,
+      "stage_times_s": {
+        "ingest": 0.005,
+        "enrich": 19.843,
+        "export": 0.003,
+        "verify": 3.554,
+        "group": 7.337,
+        "rank": 0.003,
+        "memo": 7.085
+      },
+      "api_usd": 0.0033431524999999996,
+      "result_cache_hits": 0,
+      "texts_sent_to_model": 100,
+      "per_1000_inputs_usd": 0.033431525,
+      "per_completed_record_usd": 3.3431524999999995e-05,
+      "throughput_records_per_s": 2.5925541843824536
+    },
+    "warm": {
+      "run_id": "pilot-warm",
+      "status_counts": {
+        "completed": 100
+      },
+      "wall_clock_s": 0.553,
+      "api_usd": 0.0,
+      "result_cache_hits": 100,
+      "new_enrichment_calls": 0,
+      "new_downstream_calls": 0
+    },
+    "stage_settings": {
+      "enrich": {
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "effort": "none",
+        "service_tier_requested": "flex",
+        "prompt_version": "enrich-v1",
+        "prompt_sha": "d753d125fd69",
+        "batch_size": 50,
+        "max_output_tokens": 3500
+      },
+      "verify": {
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "effort": "none",
+        "service_tier_requested": "flex",
+        "prompt_version": "verify-v1",
+        "prompt_sha": "b49e80c19673",
+        "batch_size": 50,
+        "max_output_tokens": 3000
+      },
+      "group": {
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "effort": "none",
+        "service_tier_requested": "standard",
+        "prompt_version": "group-v1",
+        "prompt_sha": "b38970b15743",
+        "batch_size": 60,
+        "max_output_tokens": 6000
+      },
+      "memo": {
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "effort": "none",
+        "service_tier_requested": "standard",
+        "prompt_version": "memo-v1",
+        "prompt_sha": "2a2068649048",
+        "batch_size": 1,
+        "max_output_tokens": 3000
+      }
+    },
+    "workers": 1,
+    "stages": {
+      "cold": {
+        "enrich": {
+          "input_uncached": 12.0,
+          "cost_usd": 0.0012657774999999998,
+          "input_cached": 7323.0,
+          "cache_write": 6313.0,
+          "output": 3336.0,
+          "requests_attempts": 4.0,
+          "failed_attempts": 0.0,
+          "retries": 2.0,
+          "reasoning_tokens": 0.0,
+          "items_in_requests": 103.0,
+          "tiers": [
+            "flex"
+          ],
+          "usage_missing": 0.0
+        },
+        "verify": {
+          "input_uncached": 3.0,
+          "cost_usd": 0.00023127499999999997,
+          "input_cached": 0.0,
+          "cache_write": 1830.0,
+          "output": 467.0,
+          "requests_attempts": 1.0,
+          "failed_attempts": 0.0,
+          "retries": 0.0,
+          "reasoning_tokens": 0.0,
+          "items_in_requests": 20.0,
+          "tiers": [
+            "flex"
+          ],
+          "usage_missing": 0.0
+        },
+        "group": {
+          "input_uncached": 3.0,
+          "cost_usd": 0.0008557999999999999,
+          "input_cached": 0.0,
+          "cache_write": 3324.0,
+          "output": 880.0,
+          "requests_attempts": 1.0,
+          "failed_attempts": 0.0,
+          "retries": 0.0,
+          "reasoning_tokens": 0.0,
+          "items_in_requests": 45.0,
+          "tiers": [
+            "standard"
+          ],
+          "usage_missing": 0.0
+        },
+        "memo": {
+          "input_uncached": 3.0,
+          "cost_usd": 0.0009903,
+          "input_cached": 0.0,
+          "cache_write": 4764.0,
+          "output": 789.0,
+          "requests_attempts": 1.0,
+          "failed_attempts": 0.0,
+          "retries": 0.0,
+          "reasoning_tokens": 0.0,
+          "items_in_requests": 0.0,
+          "tiers": [
+            "standard"
+          ],
+          "usage_missing": 0.0
+        }
+      },
+      "warm": {}
+    }
+  },
+  "projections": [
+    {
+      "scenario": "base",
+      "label": "exact-text reuse",
+      "distinct_texts_classified": 484189,
+      "enrich_requests": 9684,
+      "tier": "flex",
+      "cached_input_share": 0.5366,
+      "cache_write_share": 0.4626,
+      "input_tokens_per_request": 3412.0,
+      "output_tokens_per_review": 32.39,
+      "enrich_usd": 5.1148295873250005,
+      "verify_usd": 0.1142204271945,
+      "group_memo_fixed_usd": 0.0031298,
+      "fallback_usd": 0.0,
+      "total_api_usd": 5.2321798145195,
+      "per_1000_inputs_usd": 0.007920081097086534,
+      "per_completed_record_usd": 7.920236954869673e-06,
+      "elapsed_hours": 1.999525651041667,
+      "workers": 8,
+      "exceeds_budget": false
+    },
+    {
+      "scenario": "base",
+      "label": "no reuse",
+      "distinct_texts_classified": 660609,
+      "enrich_requests": 13213,
+      "tier": "flex",
+      "cached_input_share": 0.5366,
+      "cache_write_share": 0.4626,
+      "input_tokens_per_request": 3412.0,
+      "output_tokens_per_review": 32.39,
+      "enrich_usd": 6.978536157681251,
+      "verify_usd": 0.1558379934045,
+      "group_memo_fixed_usd": 0.0031298,
+      "fallback_usd": 0.0,
+      "total_api_usd": 7.137503951085751,
+      "per_1000_inputs_usd": 0.010804217769141432,
+      "per_completed_record_usd": 1.0804430383306542e-05,
+      "elapsed_hours": 2.7243511176215285,
+      "workers": 8,
+      "exceeds_budget": false
+    },
+    {
+      "scenario": "conservative",
+      "label": "exact-text reuse",
+      "distinct_texts_classified": 484189,
+      "enrich_requests": 9684,
+      "tier": "standard",
+      "cached_input_share": 0.0,
+      "cache_write_share": 1.0,
+      "input_tokens_per_request": 3412.0,
+      "output_tokens_per_review": 32.39,
+      "enrich_usd": 13.766957373786408,
+      "verify_usd": 0.246357784145,
+      "group_memo_fixed_usd": 0.0031298,
+      "fallback_usd": 0.0,
+      "total_api_usd": 14.016444957931407,
+      "per_1000_inputs_usd": 0.021217042359975003,
+      "per_completed_record_usd": 2.1217459886152638e-05,
+      "elapsed_hours": 3.558021041666668,
+      "workers": 8,
+      "exceeds_budget": true
+    },
+    {
+      "scenario": "conservative",
+      "label": "no reuse",
+      "distinct_texts_classified": 660609,
+      "enrich_requests": 13213,
+      "tier": "standard",
+      "cached_input_share": 0.0,
+      "cache_write_share": 1.0,
+      "input_tokens_per_request": 3412.0,
+      "output_tokens_per_review": 32.39,
+      "enrich_usd": 18.783366406067962,
+      "verify_usd": 0.336121162245,
+      "group_memo_fixed_usd": 0.0031298,
+      "fallback_usd": 0.0,
+      "total_api_usd": 19.122617368312962,
+      "per_1000_inputs_usd": 0.028946382906280693,
+      "per_completed_record_usd": 2.8946952536694114e-05,
+      "elapsed_hours": 4.8508144965277795,
+      "workers": 8,
+      "exceeds_budget": true
+    }
+  ],
+  "controls": {
+    "budget_usd": 10.0,
+    "output_token_cap_per_request": 3500,
+    "max_workers": 8,
+    "max_fallback_fraction": 0.0
+  },
+  "local_compute": {
+    "machine": "Apple M1 Pro laptop, 16 GB",
+    "usd_per_hour": null,
+    "note": "Orchestration runs locally; electricity/hardware cost not measured -> reported as unknown, not zero."
+  },
+  "dev_checkpoints": [],
+  "rates": {
+    "gpt-6-luna|standard|input_uncached": {
+      "per_unit": 1.0000000000000001e-07,
+      "source": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+      "checked": "2026-10-16",
+      "quoted": "$0.1 per 1,000,000 tokens"
+    },
+    "gpt-6-luna|standard|input_cached": {
+      "per_unit": 1e-08,
+      "source": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+      "checked": "2026-10-16",
+      "quoted": "$0.01 per 1,000,000 tokens"
+    },
+    "gpt-6-luna|standard|cache_write": {
+      "per_unit": 1.25e-07,
+      "source": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+      "checked": "2026-10-16",
+      "quoted": "$0.125 per 1,000,000 tokens"
+    },
+    "gpt-6-luna|standard|output": {
+      "per_unit": 5e-07,
+      "source": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+      "checked": "2026-10-16",
+      "quoted": "$0.5 per 1,000,000 tokens"
+    },
+    "gpt-6-luna|flex|input_uncached": {
+      "per_unit": 5.0000000000000004e-08,
+      "source": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+      "checked": "2026-10-16",
+      "quoted": "$0.05 per 1,000,000 tokens"
+    },
+    "gpt-6-luna|flex|input_cached": {
+      "per_unit": 5e-09,
+      "source": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+      "checked": "2026-10-16",
+      "quoted": "$0.005 per 1,000,000 tokens"
+    },
+    "gpt-6-luna|flex|cache_write": {
+      "per_unit": 6.25e-08,
+      "source": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+      "checked": "2026-10-16",
+      "quoted": "$0.0625 per 1,000,000 tokens"
+    },
+    "gpt-6-luna|flex|output": {
+      "per_unit": 2.5e-07,
+      "source": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+      "checked": "2026-10-16",
+      "quoted": "$0.25 per 1,000,000 tokens"
+    }
+  }
+}

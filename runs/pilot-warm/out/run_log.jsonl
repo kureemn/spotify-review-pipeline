@@ -1,0 +1,14 @@
+{"ts": 1792219833.253, "stage": "run", "event": "start", "run_id": "pilot-warm", "invocation": 1, "input": "/Users/admin/Agentic AI Class/final_assignment/data/cost_100.csv", "stages": ["ingest", "enrich", "verify", "group", "rank", "memo"], "provider": "openai", "label_config": "gpt-6-luna+effort-none+enrich-v1+schema-v2+quote150+entities-lexicon-v1", "workers": 1, "spend_limit_usd": 0.5}
+{"ts": 1792219833.31, "stage": "ingest", "event": "done", "records": 100, "pending": 100, "quarantined": 0, "distinct_texts": 100, "seconds": 0.0}
+{"ts": 1792219833.792, "stage": "run", "event": "budget", "run_cap_usd": 0.5, "project_budget_usd": 9.5, "other_runs_spent_usd": 0.003343, "this_run_spent_usd": 0, "effective_cap_usd": 0.5}
+{"ts": 1792219833.792, "stage": "enrich", "event": "session_start", "session": 1, "phase": "initial", "completed_before": 0, "label_config": "gpt-6-luna+effort-none+enrich-v1+schema-v2+quote150+entities-lexicon-v1", "workers": 1, "spend_limit_usd": 0.5}
+{"ts": 1792219833.795, "stage": "enrich", "event": "queued", "pending_reviews": 0, "distinct_texts": 0, "batches": 0}
+{"ts": 1792219833.795, "stage": "enrich", "event": "session_end", "session": 1, "phase": "initial", "stop_reason": "queue_empty", "completed_before": 0, "completed_after": 100, "spent_usd": 0, "requests": 0, "attempts": 0, "failed_attempts": 0, "batches_committed": 0, "completed_model": 0, "completed_reuse_in_run": 0, "completed_cache_hit": 100, "quote_fallbacks": 0, "item_retries": 0, "quarantined": 0}
+{"ts": 1792219833.798, "stage": "verify", "event": "start", "population": 100, "declared_rate": 0.2, "sample": 20}
+{"ts": 1792219833.799, "stage": "verify", "event": "stage_cache_hit", "key": "37f33bfda434f932", "review_ids": 20}
+{"ts": 1792219833.8, "stage": "verify", "event": "done", "verify_config": "gpt-6-luna+effort-none+verify-v1", "declared_rate": 0.2, "seed": "verify-v1", "sampling": "sha256(seed + ':' + review_id) / 16^12 < declared_rate over model-labelled records", "population_model_labelled": 100, "sample_size": 20, "verified": 20, "unverified_in_sample": 0, "topic_agreement": 0.95, "intent_agreement": 0.95, "severity_exact": 0.9, "severity_within_1": 1.0, "severity_mae": 0.1, "disagreements": 4}
+{"ts": 1792219833.8, "stage": "group", "event": "stage_cache_hit", "key": "64d55428d9f6d0ae", "review_ids": 45}
+{"ts": 1792219833.801, "stage": "group", "event": "done", "issues": 16, "members": 50, "mixed": ["catalog.recommendations", "downloads.downloads_lost_failing", "playback.audio_quality", "playback.device_connect", "usability.ui_redesign"]}
+{"ts": 1792219833.804, "stage": "memo", "event": "stage_cache_hit", "key": "dd7bf3bc4128a010", "review_ids": 0}
+{"ts": 1792219833.806, "stage": "memo", "event": "done", "status": "validated", "source": "cache", "problems": [], "cited_claims": 9}
+{"ts": 1792219833.807, "stage": "run", "event": "end", "status": "ok", "wall_clock_s": 0.553, "counts": {"completed": 100}, "spent_usd": 0}

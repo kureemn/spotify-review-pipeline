@@ -1,0 +1,48 @@
+{
+  "verify_config": "gpt-6-luna+effort-none+verify-v1",
+  "declared_rate": 0.2,
+  "seed": "verify-v1",
+  "sampling": "sha256(seed + ':' + review_id) / 16^12 < declared_rate over model-labelled records",
+  "population_model_labelled": 100,
+  "sample_size": 20,
+  "verified": 20,
+  "unverified_in_sample": 0,
+  "topic_agreement": 0.95,
+  "intent_agreement": 0.95,
+  "severity_exact": 0.9,
+  "severity_within_1": 1.0,
+  "severity_mae": 0.1,
+  "disagreements": 4,
+  "topic_confusion": [
+    {
+      "enrich": "other",
+      "verify": "other",
+      "count": 13
+    },
+    {
+      "enrich": "catalog",
+      "verify": "catalog",
+      "count": 3
+    },
+    {
+      "enrich": "access",
+      "verify": "access",
+      "count": 1
+    },
+    {
+      "enrich": "other",
+      "verify": "usability",
+      "count": 1
+    },
+    {
+      "enrich": "playback",
+      "verify": "playback",
+      "count": 1
+    },
+    {
+      "enrich": "usability",
+      "verify": "usability",
+      "count": 1
+    }
+  ]
+}

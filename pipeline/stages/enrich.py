@@ -239,5 +239,7 @@ class Enricher:
         if parsed is not None or err == "invalid_output":
             self.stats["batches_committed"] += 1
         self.log("enrich", "batch", n=len(ids), completed=len(completed), failed=len(failed_items),
+                 failure_reasons={r: sum(1 for _, w in failed_items if w == r) for r in {w for _, w in failed_items}},
+                 failed_ids=[x[0] for x, _ in failed_items][:50],
                  quarantined=len(quarantined), retry_round=retry_n, error=err, attempts=len(attempts))
         return follow_up

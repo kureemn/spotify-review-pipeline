@@ -1,0 +1,17 @@
+rank,issue_id,complaint_count,severity_sum,mean_severity,priority_score
+1,billing.free_tier_restrictions,10,30,3.000000,30
+2,other.general,11,22,2.000000,22
+3,usability.ads,7,15,2.142857,15
+4,usability.ui_redesign,5,12,2.400000,12
+5,access.login_failure,2,8,4.000000,8
+6,playback.crashes_wont_open,2,8,4.000000,8
+7,catalog.lyrics,2,5,2.500000,5
+8,catalog.missing_content,2,5,2.500000,5
+9,catalog.recommendations,2,4,2.000000,4
+10,downloads.offline_mode,1,4,4.000000,4
+11,downloads.downloads_lost_failing,1,3,3.000000,3
+12,playback.audio_quality,1,3,3.000000,3
+13,playback.connectivity_errors,1,3,3.000000,3
+14,playback.device_connect,1,3,3.000000,3
+15,playback.stops_skips_lag,1,3,3.000000,3
+16,usability.shuffle_queue_controls,1,3,3.000000,3

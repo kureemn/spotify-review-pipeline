@@ -1,0 +1,269 @@
+{
+  "grouping_rule": "issue_id = topic.subtopic of each completed complaint/cancellation record; one issue per review",
+  "group_config": "gpt-6-luna+effort-none+group-v1+k8",
+  "issues": [
+    {
+      "issue_id": "access.login_failure",
+      "topic": "access",
+      "subtopic": "login_failure",
+      "name": "Unable to Access Account",
+      "summary": "Users say they cannot log in or get into their account, with one also mentioning too many ads.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "de0a9cdf-8974-48bc-802f-331228df4619",
+        "32fb340f-4f9f-4551-8dae-755221e58d6a"
+      ],
+      "member_count": 2,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "billing.free_tier_restrictions",
+      "topic": "billing",
+      "subtopic": "free_tier_restrictions",
+      "name": "Basic Playback Behind Premium",
+      "summary": "Users complain that choosing songs, skipping, and other basic listening controls are restricted or require Premium.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "21915fcd-9a35-48ba-b277-6296c4154603",
+        "a78d831a-69f4-428a-9235-cfdd9775c509",
+        "ad730d1a-829a-4dc4-9561-7e1cd07e2c30",
+        "7084ced1-0428-4093-9328-442f74719b4f",
+        "d146397f-4a94-4980-be00-ae9212eca3a7",
+        "89ea2c30-db8b-459d-8ab7-bbcb7f92c774",
+        "ebc64fe2-9553-4528-87d5-cb4bb9783be6",
+        "88439ec2-7c49-4c57-bedb-c5e098692aff"
+      ],
+      "member_count": 10,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "catalog.lyrics",
+      "topic": "catalog",
+      "subtopic": "lyrics",
+      "name": "Lyrics Missing for Some Songs",
+      "summary": "Users report that lyrics are unavailable or do not appear for some songs.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "47becad0-8ae5-4a10-9731-fde8f2091862",
+        "e0127547-4edd-44a0-8d5e-e8398bc07086"
+      ],
+      "member_count": 2,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "catalog.missing_content",
+      "topic": "catalog",
+      "subtopic": "missing_content",
+      "name": "Missing Music Catalog Content",
+      "summary": "Users say that many songs or particular genres, such as gospel, are missing or underrepresented.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "0658feaa-5bec-416e-b6b0-3de2a4c14580",
+        "a1a28752-3256-4f81-b888-3e943343529f"
+      ],
+      "member_count": 2,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "catalog.recommendations",
+      "topic": "catalog",
+      "subtopic": "recommendations",
+      "name": "Recommendations Less Current",
+      "summary": "One user says recommendations used to include more new and recently updated songs; the other expresses an intention to switch services.",
+      "coherence": "mixed",
+      "outlier_ids": [
+        "618d1dbb-0186-4537-923a-7b4dabf19afb"
+      ],
+      "example_ids": [
+        "618d1dbb-0186-4537-923a-7b4dabf19afb",
+        "1807cc68-ba99-4edc-b6f1-2a1478e69109"
+      ],
+      "member_count": 2,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "downloads.downloads_lost_failing",
+      "topic": "downloads",
+      "subtopic": "downloads_lost_failing",
+      "name": "Downloads Fail or Disappear",
+      "summary": "The example says the user is considering canceling Premium but does not mention downloads.",
+      "coherence": "mislabeled",
+      "outlier_ids": [
+        "2ffdf599-a0d5-4c01-bf26-025215d44c06"
+      ],
+      "example_ids": [
+        "2ffdf599-a0d5-4c01-bf26-025215d44c06"
+      ],
+      "member_count": 1,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "downloads.offline_mode",
+      "topic": "downloads",
+      "subtopic": "offline_mode",
+      "name": "Offline Playback Not Working",
+      "summary": "A user reports that offline playback is not working.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "dcff57c6-abd6-413b-b255-aec3dc34fcbd"
+      ],
+      "member_count": 1,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "other.general",
+      "topic": "other",
+      "subtopic": "general",
+      "name": "General Dissatisfaction",
+      "summary": "Users express broad dissatisfaction, describe the app as bad, complain of unspecified restrictions, or mention unrelated reasons for boycotting it.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "b47c203f-366e-4409-922d-cd52aa8bbef6",
+        "06a45bd5-3ed9-43af-b7f2-8b9487e2ffff",
+        "33526c6f-7a49-4b3d-bd20-d1bc191c494c",
+        "89a8e180-7846-4421-a2b6-fa7787e9d0d2",
+        "486d1d7a-d6f6-41ea-81ad-ed875452729c",
+        "178c3b49-b689-4fe4-92a2-2257a58e6d95",
+        "c1ab120a-f91f-4ee3-87f5-66f352e2d47f",
+        "2d5cdd20-3094-40a5-bc6e-653302b59b56"
+      ],
+      "member_count": 11,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "playback.audio_quality",
+      "topic": "playback",
+      "subtopic": "audio_quality",
+      "name": "Music Adjustment Bug",
+      "summary": "A user says music adjustment does not work properly.",
+      "coherence": "mislabeled",
+      "outlier_ids": [
+        "9c9757da-6b99-4c95-a0e7-0661ee858027"
+      ],
+      "example_ids": [
+        "9c9757da-6b99-4c95-a0e7-0661ee858027"
+      ],
+      "member_count": 1,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "playback.connectivity_errors",
+      "topic": "playback",
+      "subtopic": "connectivity_errors",
+      "name": "Wi-Fi Connection Failure",
+      "summary": "A user says the app cannot connect to the internet when they use Wi-Fi.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "4ab2089a-ffa8-49e7-a8a3-aeb583a96796"
+      ],
+      "member_count": 1,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "playback.crashes_wont_open",
+      "topic": "playback",
+      "subtopic": "crashes_wont_open",
+      "name": "App Crashes or Stuck Loading",
+      "summary": "Users report that the app crashes on launch or remains stuck on its loading screen.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "55cc3abf-c295-4591-8c3a-78085cfdefaa",
+        "66a29b3c-c14d-440e-b722-b23e0c99ae82"
+      ],
+      "member_count": 2,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "playback.device_connect",
+      "topic": "playback",
+      "subtopic": "device_connect",
+      "name": "Google Assistant Playback Failure",
+      "summary": "A user says Google Assistant reports that it is playing a Spotify playlist but no songs play.",
+      "coherence": "mislabeled",
+      "outlier_ids": [
+        "46ff0c74-5e86-4e5b-b4cd-36201aab0f9e"
+      ],
+      "example_ids": [
+        "46ff0c74-5e86-4e5b-b4cd-36201aab0f9e"
+      ],
+      "member_count": 1,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "playback.stops_skips_lag",
+      "topic": "playback",
+      "subtopic": "stops_skips_lag",
+      "name": "Playback Stops Unexpectedly",
+      "summary": "A user reports that music stops partway through and then starts a different song instead of resuming.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "6c257eba-3dca-49f6-b7f0-4c4484d81e26"
+      ],
+      "member_count": 1,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "usability.ads",
+      "topic": "usability",
+      "subtopic": "ads",
+      "name": "Frequent or Loud Ads",
+      "summary": "Users complain that ads are too frequent, interrupt songs, replace music, or are too loud, often noting the Premium tier.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "cf6166ae-d71a-4839-9add-088645ad3b78",
+        "035213ba-b1b9-411c-b028-70296e5f0e73",
+        "85383985-844d-4f9b-bcd9-d6016ac35f6b",
+        "3e8bdc92-4934-457e-85cc-8b9d14bf51c0",
+        "e5e6c55f-3069-4b7c-9807-f8b5d5bf2726",
+        "c2738a4f-e57c-46bc-a4ad-8ec5a4b5d5cd",
+        "ab67a772-c3b7-42ba-9b80-8d21d3857018"
+      ],
+      "member_count": 7,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "usability.shuffle_queue_controls",
+      "topic": "usability",
+      "subtopic": "shuffle_queue_controls",
+      "name": "Unexpected Playlist Shuffle",
+      "summary": "A user says songs from a playlist play randomly.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "5c9c17d3-9d6a-4fa1-a2a4-ae98eefbbd25"
+      ],
+      "member_count": 1,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "usability.ui_redesign",
+      "topic": "usability",
+      "subtopic": "ui_redesign",
+      "name": "Unpopular App Update",
+      "summary": "Users criticize recent updates or the new home screen, and one reports no clear way to disable automatic playback.",
+      "coherence": "mixed",
+      "outlier_ids": [
+        "d455c11e-c530-4c03-a395-38f5a5cdb8d3"
+      ],
+      "example_ids": [
+        "ca16e65d-d2ff-4453-a495-b8c422809330",
+        "45c561b9-cc47-4d80-95d3-f0d20bc84af3",
+        "94c9f2f9-36fa-4c11-936e-660514fe7a35",
+        "9e5f9745-f8be-48d3-b9de-4d118507d94a",
+        "d455c11e-c530-4c03-a395-38f5a5cdb8d3"
+      ],
+      "member_count": 5,
+      "naming_source": "model"
+    }
+  ]
+}

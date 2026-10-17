@@ -189,17 +189,23 @@ def project(meas_cold, priced, calls, rates, assumptions, scenario, distinct, la
     items = sum(c["n_items"] for c in ok) or 1
     per_req_in = in_tok / max(len(ok), 1)
     out_per_review = out_tok / items
-    cached_share = sc["cache_hit_share_of_input"]
-    if cached_share == "measured":
-        all_ok = [c for c in calls if c["role"] == "enrich" and c["outcome"] == "succeeded"]
-        cached_share = (sum(c["cached_tokens"] for c in all_ok) / max(sum(c["input_tokens"] for c in all_ok), 1))
-        for d in assumptions.get("_dev_cached_shares", []):
-            cached_share = max(cached_share, d)
+    # Input billing mix (uncached / cached / cache-write) measured from successful enrichment calls,
+    # refreshed by dev checkpoints when available. Conservative: no cache hits, all non-cached input
+    # billed at the (more expensive) cache-write rate.
+    all_ok = [c for c in calls if c["role"] == "enrich" and c["outcome"] == "succeeded"]
+    tot_in = max(sum(c["input_tokens"] for c in all_ok), 1)
+    mix = {"input_cached": sum(c["cached_tokens"] for c in all_ok) / tot_in,
+           "cache_write": sum(c["cache_write_tokens"] for c in all_ok) / tot_in}
+    if assumptions.get("_dev_input_mix"):
+        mix = assumptions["_dev_input_mix"]
+    if sc["cache_hit_share_of_input"] != "measured":
+        mix = {"input_cached": float(sc["cache_hit_share_of_input"]), "cache_write": 1 - float(sc["cache_hit_share_of_input"])}
+    mix["input_uncached"] = max(1 - mix["input_cached"] - mix["cache_write"], 0)
+    cached_share = mix["input_cached"]
     requests = math.ceil(distinct / batch)
     mult_req = 1 + sc["retry_rate"] + sc["invalid_retry_rate"]
-    tokens = {"input_cached": requests * per_req_in * cached_share * mult_req,
-              "input_uncached": requests * per_req_in * (1 - cached_share) * mult_req,
-              "cache_write": 0, "output": distinct * out_per_review * (1 + sc["invalid_retry_rate"] + sc["retry_rate"])}
+    tokens = {item: requests * per_req_in * share * mult_req for item, share in mix.items()}
+    tokens["output"] = distinct * out_per_review * (1 + sc["invalid_retry_rate"] + sc["retry_rate"])
     enrich_cost = sum(tokens[i] * rates[(model, tier, i)]["per_unit"] for i in tokens)
     # Verification: measured cost per verified text x declared full-run rate.
     vcalls = [c for c in calls if c["pilot_phase"] == "cold" and c["role"] == "verify"]
@@ -224,7 +230,7 @@ def project(meas_cold, priced, calls, rates, assumptions, scenario, distinct, la
     fixed_s = sum(meas_cold["stage_times_s"].get(s, 0) for s in ("group", "rank", "memo")) + assumptions.get("measured_full_ingest_s", 0)
     hours = (enrich_s + verify_s + fixed_s) / 3600
     return {"scenario": scenario, "label": label, "distinct_texts_classified": distinct, "enrich_requests": requests,
-            "tier": tier, "cached_input_share": round(cached_share, 4), "input_tokens_per_request": round(per_req_in, 1),
+            "tier": tier, "cached_input_share": round(cached_share, 4), "cache_write_share": round(mix["cache_write"], 4), "input_tokens_per_request": round(per_req_in, 1),
             "output_tokens_per_review": round(out_per_review, 2), "enrich_usd": enrich_cost, "verify_usd": verify_cost,
             "group_memo_fixed_usd": fixed, "fallback_usd": fallback, "total_api_usd": total,
             "per_1000_inputs_usd": total / assumptions["full_run"]["rows"] * 1000,
@@ -249,13 +255,13 @@ def replay(a):
     if full_ingest.exists():
         assumptions["measured_full_ingest_s"] = json.loads(full_ingest.read_text())["seconds"]
     # Dev checkpoints (500 / 10k) refresh the cache-share estimate when present.
-    shares = []
-    for d in meas.get("dev", []):
+    # The largest dev checkpoint best reflects steady-state prompt caching; use its input mix.
+    for d in sorted(meas.get("dev", []), key=lambda d: d["records"]):
         ok = [u for u in d.get("usage", []) if u["stage"] == "enrich" and u["outcome"] == "succeeded"]
         tot = sum(int(u["billed_units"]) for u in ok if u["item"] != "output")
         if tot:
-            shares.append(sum(int(u["billed_units"]) for u in ok if u["item"] == "input_cached") / tot)
-    assumptions["_dev_cached_shares"] = shares
+            assumptions["_dev_input_mix"] = {i: sum(int(u["billed_units"]) for u in ok if u["item"] == i) / tot
+                                             for i in ("input_cached", "cache_write")}
 
     cost_by_phase = defaultdict(float)
     for u in priced:
@@ -356,10 +362,10 @@ def render(r):
           "(uncached input = input − cached − cache-write); reasoning tokens are inside output and not added again; "
           "each call is priced at the tier the provider reported using.", "",
           "## Full-run projection (660,622 rows · 660,609 nonempty classifications · 13 empty-text quarantines)", "",
-          "| scenario | work | requests | tier | cached share | in tok/req | out tok/review | enrich | verify | group+memo (once) | **total API** | per 1k rows | elapsed (h) | budget |",
+          "| scenario | work | requests | tier | cached / cache-write share | in tok/req | out tok/review | enrich | verify | group+memo (once) | **total API** | per 1k rows | elapsed (h) | budget |",
           "|---|---|---|---|---|---|---|---|---|---|---|---|---|---|"]
     for p in r["projections"]:
-        L.append(f"| {p['scenario']} | {p['label']} ({p['distinct_texts_classified']:,}) | {p['enrich_requests']:,} | {p['tier']} | {p['cached_input_share']:.0%} | "
+        L.append(f"| {p['scenario']} | {p['label']} ({p['distinct_texts_classified']:,}) | {p['enrich_requests']:,} | {p['tier']} | {p['cached_input_share']:.0%} / {p['cache_write_share']:.0%} | "
                  f"{p['input_tokens_per_request']:,.0f} | {p['output_tokens_per_review']:.1f} | {money(p['enrich_usd'])} | {money(p['verify_usd'])} | "
                  f"{money(p['group_memo_fixed_usd'])} | **{money(p['total_api_usd'])}** | {money(p['per_1000_inputs_usd'])} | {p['elapsed_hours']:.1f} | "
                  f"{'⚠️ EXCEEDS' if p['exceeds_budget'] else 'within'} {money(r['controls']['budget_usd'])} |")
@@ -367,7 +373,8 @@ def render(r):
     L += ["", f"Controls: spend limit **{money(ctl['budget_usd'])}** (enforced in code across all runs with pre-dispatch reservations) · "
           f"output-token cap {ctl['output_token_cap_per_request']}/request · max workers {ctl['max_workers']} · "
           f"stronger-model fallback fraction {ctl['max_fallback_fraction']:.0%} (none configured).",
-          "Base: measured tokens, measured prompt-cache share, small retry rates. Conservative: standard tier, zero prompt-cache hits, "
+          "Base: measured tokens and measured input billing mix (cached / cache-write / uncached), small retry rates. "
+          "Conservative: standard tier, zero prompt-cache hits with all input billed at the higher cache-write rate, "
           "10% transient + 5% invalid retries, 50% parallel efficiency.", "",
           f"Local compute: {r['local_compute']['machine']} — cost **unknown** ({r['local_compute']['note']}).", ""]
     if r["dev_checkpoints"]:
