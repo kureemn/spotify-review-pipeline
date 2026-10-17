@@ -1,0 +1,3 @@
+{"ts": 1792200567.177, "stage": "run", "event": "start", "run_id": "full-v1", "invocation": 1, "input": "data/spotify_reviews_18months.csv", "stages": ["ingest"], "provider": "openai", "label_config": "gpt-6-luna+effort-none+enrich-v1+schema-v1+quote150+entities-lexicon-v1", "workers": 1, "spend_limit_usd": 2.0}
+{"ts": 1792200585.799, "stage": "ingest", "event": "done", "records": 660622, "pending": 660609, "quarantined": 13, "distinct_texts": 484189, "seconds": 18.59}
+{"ts": 1792200591.168, "stage": "run", "event": "end", "status": "ok", "wall_clock_s": 23.922, "counts": {"pending": 660609, "quarantined": 13}, "spent_usd": 0}

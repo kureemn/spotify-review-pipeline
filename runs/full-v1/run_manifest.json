@@ -1,0 +1,68 @@
+{
+  "run_id": "full-v1",
+  "input": "spotify_reviews_18months.csv",
+  "code": {
+    "git_commit": null,
+    "pipeline_dirty": true,
+    "pipeline_files_sha256": "121906cf3c0022d6"
+  },
+  "label_config": "gpt-6-luna+effort-none+enrich-v1+schema-v1+quote150+entities-lexicon-v1",
+  "config": {
+    "provider": "openai",
+    "enrich": {
+      "model": "gpt-6-luna",
+      "effort": "none",
+      "prompt_version": "v1",
+      "batch_size": 50,
+      "max_output_tokens": 4500
+    },
+    "verify": {
+      "model": "gpt-6-luna",
+      "effort": "none",
+      "prompt_version": "v1",
+      "batch_size": 50,
+      "max_output_tokens": 3000
+    },
+    "group": {
+      "model": "gpt-6-luna",
+      "effort": "none",
+      "prompt_version": "v1",
+      "batch_size": 60,
+      "max_output_tokens": 6000
+    },
+    "memo": {
+      "model": "gpt-6-luna",
+      "effort": "none",
+      "prompt_version": "v1",
+      "batch_size": 1,
+      "max_output_tokens": 3000
+    },
+    "short_quote_chars": 150,
+    "verify_rate": 0.02,
+    "verify_seed": "verify-v1",
+    "group_examples": 8,
+    "memo_top_issues": 12,
+    "memo_evidence_per_issue": 3,
+    "workers": 1,
+    "spend_limit_usd": 2.0,
+    "max_minutes": 0,
+    "max_transient_retries": 4,
+    "max_invalid_retries": 1,
+    "request_timeout_s": 90,
+    "stop_after_batches": 0,
+    "mock_faults": ""
+  },
+  "prompts": {
+    "enrich_v1": "c59602a042b9",
+    "verify_v1": "b49e80c19673",
+    "group_v1": "b38970b15743",
+    "memo_v1": "2a2068649048"
+  },
+  "cache_db": "cache/result_cache.db",
+  "python": "3.12.14",
+  "source": {
+    "file_sha256": "1fc85de68a304dd8978b537cfa58793d5f41cbaf417fa32cb53899f83a2fcef6",
+    "bytes": 97400616,
+    "records": 660622
+  }
+}
