@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spotify Review Insights</title>
+<meta name="description" content="660,622 Spotify Google Play reviews classified by a multi-agent pipeline: metrics, issue ranking and an AI recommendation with traceable evidence.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%232a78d6'/><rect x='7' y='17' width='4' height='8' rx='1' fill='white'/><rect x='14' y='11' width='4' height='14' rx='1' fill='white'/><rect x='21' y='7' width='4' height='18' rx='1' fill='white'/></svg>">
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #f4f3f0; --surface-1: #fcfcfb; --surface-2: #f0efec; --line: #e2e0da; --grid: #ecebe7;
+    --text-primary: #0b0b0b; --text-secondary: #52514e; --text-muted: #7a7974;
+    --series-1: #2a78d6; --series-2: #eb6834; --series-3: #1baf7a; --series-4: #eda100;
+    --seq-1: #86b6ef; --seq-2: #5598e7; --seq-3: #2a78d6; --seq-4: #1c5cab; --seq-5: #104281;
+    --good: #0ca30c; --warning: #fab219; --critical: #d03b3b; --accent: #2a78d6; --accent-soft: #e4effc;
+    --shadow: 0 1px 2px rgba(0,0,0,.05), 0 4px 16px rgba(0,0,0,.04);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #111110; --surface-1: #1a1a19; --surface-2: #232321; --line: #31312e; --grid: #2a2a28;
+      --text-primary: #ffffff; --text-secondary: #c3c2b7; --text-muted: #908f87;
+      --series-1: #3987e5; --series-2: #d95926; --series-3: #199e70; --series-4: #c98500;
+      --seq-1: #184f95; --seq-2: #256abf; --seq-3: #3987e5; --seq-4: #6da7ec; --seq-5: #9ec5f4;
+      --accent: #3987e5; --accent-soft: #1b2a3d; --shadow: none;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #111110; --surface-1: #1a1a19; --surface-2: #232321; --line: #31312e; --grid: #2a2a28;
+    --text-primary: #ffffff; --text-secondary: #c3c2b7; --text-muted: #908f87;
+    --series-1: #3987e5; --series-2: #d95926; --series-3: #199e70; --series-4: #c98500;
+    --seq-1: #184f95; --seq-2: #256abf; --seq-3: #3987e5; --seq-4: #6da7ec; --seq-5: #9ec5f4;
+    --accent: #3987e5; --accent-soft: #1b2a3d; --shadow: none;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text-primary);
+         font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 24px 24px 64px; }
+  header.top { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+  h1 { font-size: 24px; margin: 0; letter-spacing: -.01em; }
+  h2 { font-size: 16px; margin: 0 0 4px; }
+  .sub { color: var(--text-secondary); font-size: 13px; }
+  .muted { color: var(--text-muted); font-size: 12px; }
+  .card { background: var(--surface-1); border: 1px solid var(--line); border-radius: 12px; padding: 18px; box-shadow: var(--shadow); }
+  .grid { display: grid; gap: 16px; }
+  .kpis { grid-template-columns: repeat(6, minmax(0, 1fr)); margin-bottom: 16px; }
+  .kpi .label { color: var(--text-secondary); font-size: 12px; }
+  .kpi .value { font-size: 24px; font-weight: 650; letter-spacing: -.01em; margin-top: 2px; font-variant-numeric: tabular-nums; }
+  .kpi .note { color: var(--text-muted); font-size: 12px; margin-top: 2px; }
+  .two { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); margin-bottom: 16px; }
+  .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; padding: 2px 8px; border-radius: 999px;
+           background: var(--surface-2); color: var(--text-secondary); border: 1px solid var(--line); white-space: nowrap; }
+  .badge .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .rec-area { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--accent); font-weight: 650; }
+  .rec-headline { font-size: 20px; font-weight: 650; margin: 4px 0 10px; letter-spacing: -.01em; }
+  .memo { font-size: 14px; color: var(--text-primary); max-height: 560px; overflow: auto; padding-right: 6px; }
+  .memo h3 { font-size: 14px; margin: 16px 0 6px; }
+  .memo p, .memo li { margin: 0 0 8px; }
+  .memo ul, .memo ol { padding-left: 20px; margin: 0 0 8px; }
+  .claim { font: 600 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--accent-soft); color: var(--accent);
+           border-radius: 4px; padding: 2px 4px; cursor: help; border: none; }
+  .rid { font: 11px ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--accent); background: none; border: none;
+         padding: 0; cursor: pointer; text-decoration: underline dotted; }
+  .controls { display: flex; gap: 6px; flex-wrap: wrap; margin: 8px 0 12px; }
+  .seg { border: 1px solid var(--line); background: var(--surface-1); color: var(--text-secondary); border-radius: 7px;
+         padding: 4px 10px; font: inherit; font-size: 13px; cursor: pointer; }
+  .seg[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; }
+  th { text-align: left; color: var(--text-secondary); font-weight: 600; font-size: 12px; padding: 8px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  td { padding: 8px; border-bottom: 1px solid var(--grid); vertical-align: middle; }
+  td.num, th.num { text-align: right; }
+  tbody tr { cursor: pointer; }
+  tbody tr:hover { background: var(--surface-2); }
+  tbody tr.sel { background: var(--accent-soft); }
+  .issue-name { font-weight: 600; }
+  .issue-id { font: 11px ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--text-muted); }
+  .scorebar { display: flex; align-items: center; gap: 8px; justify-content: flex-end; }
+  .scorebar .track { width: 90px; height: 8px; }
+  .scorebar .fill { height: 8px; background: var(--series-1); border-radius: 0 4px 4px 0; }
+  .flag { color: var(--text-muted); font-size: 12px; }
+  .table-scroll { overflow-x: auto; }
+  svg text { fill: var(--text-secondary); font-size: 11px; }
+  .tooltip { position: fixed; pointer-events: none; z-index: 50; background: var(--surface-1); color: var(--text-primary);
+             border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; font-size: 12px; box-shadow: 0 6px 24px rgba(0,0,0,.15);
+             max-width: 300px; display: none; }
+  .tooltip b { font-variant-numeric: tabular-nums; }
+  .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; color: var(--text-secondary); margin-bottom: 6px; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend i { width: 14px; height: 3px; border-radius: 2px; display: inline-block; }
+  .legend i.sq { width: 10px; height: 10px; border-radius: 2px; }
+  .drill { margin-top: 16px; }
+  .quote { border-left: 3px solid var(--line); padding: 4px 0 4px 10px; margin: 8px 0; font-size: 13px; }
+  .quote .meta { font-size: 11px; color: var(--text-muted); margin-top: 2px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .sevstack { display: flex; height: 14px; gap: 2px; margin: 6px 0 4px; }
+  .sevstack div { height: 14px; }
+  .sevstack div:first-child { border-radius: 4px 0 0 4px; } .sevstack div:last-child { border-radius: 0 4px 4px 0; }
+  details summary { cursor: pointer; color: var(--text-secondary); font-size: 13px; }
+  .err { color: var(--critical); }
+  dialog { border: 1px solid var(--line); border-radius: 12px; background: var(--surface-1); color: var(--text-primary); max-width: 640px; width: calc(100% - 32px); }
+  dialog::backdrop { background: rgba(0,0,0,.35); }
+  .kv { display: grid; grid-template-columns: 150px 1fr; gap: 4px 12px; font-size: 13px; }
+  .kv div:nth-child(odd) { color: var(--text-secondary); }
+  footer { margin-top: 28px; color: var(--text-muted); font-size: 12px; }
+  footer a { color: var(--accent); }
+  @media (max-width: 1100px) { .kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); } .two { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) { .wrap { padding: 16px 16px 48px; } .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .kpi .value { font-size: 20px; } .kv { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>Spotify Review Insights</h1>
+      <div class="sub" id="subtitle">Loading saved pipeline results from the database…</div>
+    </div>
+    <div class="badge" id="source-badge"><span class="dot" style="background:var(--text-muted)"></span>connecting</div>
+  </header>
+
+  <section class="grid kpis" id="kpis" aria-label="Overall metrics"></section>
+
+  <section class="grid two">
+    <div class="card" aria-labelledby="rec-title">
+      <div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start;flex-wrap:wrap">
+        <h2 id="rec-title">AI-generated recommendation</h2>
+        <span class="badge" id="memo-badge"></span>
+      </div>
+      <div class="muted" id="memo-src">Written by the memo agent from saved aggregates only; every bracketed claim ID resolves to a code-computed number.</div>
+      <div style="margin-top:12px"><div class="rec-area" id="rec-area"></div><div class="rec-headline" id="rec-headline"></div></div>
+      <div class="memo" id="memo"></div>
+    </div>
+    <div class="card" aria-labelledby="areas-title">
+      <h2 id="areas-title">Product areas</h2>
+      <div class="muted">Completed complaint + cancellation records per area (one area per review).</div>
+      <div class="controls" role="group" aria-label="Area metric">
+        <button class="seg" data-metric="complaint_records" aria-pressed="true">Complaints</button>
+        <button class="seg" data-metric="severity_sum" aria-pressed="false">Severity sum</button>
+        <button class="seg" data-metric="sev4plus_complaints" aria-pressed="false">Severity ≥ 4</button>
+        <button class="seg" data-metric="cancellation_records" aria-pressed="false">Cancellation intent</button>
+      </div>
+      <div id="areas"></div>
+      <details style="margin-top:8px"><summary>Table view</summary><div class="table-scroll" id="areas-table"></div></details>
+    </div>
+  </section>
+
+  <section class="card" aria-labelledby="rank-title" style="margin-bottom:16px">
+    <div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap">
+      <div>
+        <h2 id="rank-title">Issue ranking</h2>
+        <div class="muted">Baseline: priority = complaint count × mean severity = severity sum; ties by issue ID. Click an issue for its evidence.</div>
+      </div>
+      <div class="controls" role="group" aria-label="Ranking filter">
+        <button class="seg" data-filter="all" aria-pressed="true">All issues</button>
+        <button class="seg" data-filter="specific" aria-pressed="false">Specific only (hide *.general)</button>
+      </div>
+    </div>
+    <div class="table-scroll"><table id="ranking"><thead><tr>
+      <th class="num">#</th><th>Issue</th><th>Area</th><th class="num">Complaints</th><th class="num">Mean severity</th>
+      <th class="num">Priority score</th><th class="num">Cancellation</th><th>Grouping check</th></tr></thead><tbody></tbody></table></div>
+    <div class="drill" id="drill" hidden></div>
+  </section>
+
+  <section class="card" aria-labelledby="trend-title">
+    <h2 id="trend-title">Complaint share by month</h2>
+    <div class="muted">Each area's share of all complaint + cancellation records in that calendar month (denominator = all complaints that month). First and last months are partial; hover or open the table for counts.</div>
+    <div class="legend" id="trend-legend" style="margin-top:10px"></div>
+    <div id="trend"></div>
+    <details style="margin-top:8px"><summary>Table view</summary><div class="table-scroll" id="trend-table"></div></details>
+  </section>
+
+  <footer id="footer">Data: BwandoWando, “3.4 Million Spotify Google Store Reviews” v2 (Kaggle, CC0), course extract 2022-05-17 → 2023-11-17.
+    Self-selected public reviews: no revenue, plan tier or confirmed churn; cancellation language is expressed intent.</footer>
+</div>
+<div class="tooltip" id="tip" role="status"></div>
+<dialog id="review-dialog"><div id="review-body"></div><form method="dialog" style="text-align:right;margin-top:12px"><button class="seg">Close</button></form></dialog>
+<script src="app.js" defer></script>
+</body>
+</html>
