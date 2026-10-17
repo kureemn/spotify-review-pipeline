@@ -2,9 +2,9 @@
   "run_id": "full-v1",
   "input": "spotify_reviews_18months.csv",
   "code": {
-    "git_commit": "79cc06e",
-    "pipeline_dirty": true,
-    "pipeline_files_sha256": "8c6526cc9fb20bc3"
+    "git_commit": "87fc271",
+    "pipeline_dirty": false,
+    "pipeline_files_sha256": "f70e3d8596b93e8d"
   },
   "label_config": "gpt-6-luna+effort-none+enrich-v1+schema-v2+quote150+entities-lexicon-v1",
   "config": {
@@ -14,7 +14,7 @@
       "effort": "none",
       "prompt_version": "v1",
       "batch_size": 50,
-      "max_output_tokens": 3500,
+      "max_output_tokens": 6000,
       "service_tier": "flex"
     },
     "verify": {
@@ -47,13 +47,13 @@
     "group_examples": 8,
     "memo_top_issues": 12,
     "memo_evidence_per_issue": 3,
-    "workers": 1,
-    "spend_limit_usd": 2.0,
+    "workers": 10,
+    "spend_limit_usd": 7.5,
     "max_minutes": 0,
     "max_transient_retries": 4,
     "max_invalid_retries": 1,
     "request_timeout_s": 300,
-    "project_budget_usd": 10.0,
+    "project_budget_usd": 9.5,
     "stop_after_batches": 0,
     "mock_faults": ""
   },

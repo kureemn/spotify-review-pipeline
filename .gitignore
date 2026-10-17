@@ -28,3 +28,7 @@ runs/*/out/enriched.jsonl
 runs/*/out/quarantine.jsonl
 runs/*/systest_cache.db*
 cost/.selftest_assumptions.json
+# duplicates of grading/ (kept out of git to save space)
+runs/full-v1/out/membership.csv
+runs/full-v1/out/checkpoint_*.json
+rerank/

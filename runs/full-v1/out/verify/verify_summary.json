@@ -1,0 +1,278 @@
+{
+  "verify_config": "gpt-6-luna+effort-none+verify-v1",
+  "declared_rate": 0.02,
+  "seed": "verify-v1",
+  "sampling": "sha256(seed + ':' + review_id) / 16^12 < declared_rate over model-labelled records",
+  "population_model_labelled": 484058,
+  "sample_size": 9707,
+  "verified": 9707,
+  "unverified_in_sample": 0,
+  "topic_agreement": 0.8803,
+  "intent_agreement": 0.9481,
+  "severity_exact": 0.8881,
+  "severity_within_1": 0.9948,
+  "severity_mae": 0.1171,
+  "disagreements": 2365,
+  "topic_confusion": [
+    {
+      "enrich": "other",
+      "verify": "other",
+      "count": 3962
+    },
+    {
+      "enrich": "usability",
+      "verify": "usability",
+      "count": 1728
+    },
+    {
+      "enrich": "billing",
+      "verify": "billing",
+      "count": 1160
+    },
+    {
+      "enrich": "playback",
+      "verify": "playback",
+      "count": 707
+    },
+    {
+      "enrich": "catalog",
+      "verify": "catalog",
+      "count": 626
+    },
+    {
+      "enrich": "catalog",
+      "verify": "other",
+      "count": 313
+    },
+    {
+      "enrich": "access",
+      "verify": "access",
+      "count": 184
+    },
+    {
+      "enrich": "usability",
+      "verify": "other",
+      "count": 184
+    },
+    {
+      "enrich": "downloads",
+      "verify": "downloads",
+      "count": 162
+    },
+    {
+      "enrich": "usability",
+      "verify": "billing",
+      "count": 113
+    },
+    {
+      "enrich": "playback",
+      "verify": "other",
+      "count": 74
+    },
+    {
+      "enrich": "usability",
+      "verify": "catalog",
+      "count": 45
+    },
+    {
+      "enrich": "billing",
+      "verify": "usability",
+      "count": 42
+    },
+    {
+      "enrich": "catalog",
+      "verify": "usability",
+      "count": 42
+    },
+    {
+      "enrich": "other",
+      "verify": "usability",
+      "count": 34
+    },
+    {
+      "enrich": "billing",
+      "verify": "other",
+      "count": 32
+    },
+    {
+      "enrich": "usability",
+      "verify": "playback",
+      "count": 31
+    },
+    {
+      "enrich": "other",
+      "verify": "billing",
+      "count": 30
+    },
+    {
+      "enrich": "playback",
+      "verify": "usability",
+      "count": 30
+    },
+    {
+      "enrich": "other",
+      "verify": "catalog",
+      "count": 26
+    },
+    {
+      "enrich": "other",
+      "verify": "playback",
+      "count": 26
+    },
+    {
+      "enrich": "support",
+      "verify": "support",
+      "count": 16
+    },
+    {
+      "enrich": "catalog",
+      "verify": "billing",
+      "count": 15
+    },
+    {
+      "enrich": "catalog",
+      "verify": "playback",
+      "count": 12
+    },
+    {
+      "enrich": "downloads",
+      "verify": "other",
+      "count": 12
+    },
+    {
+      "enrich": "playback",
+      "verify": "billing",
+      "count": 12
+    },
+    {
+      "enrich": "playback",
+      "verify": "catalog",
+      "count": 12
+    },
+    {
+      "enrich": "billing",
+      "verify": "playback",
+      "count": 8
+    },
+    {
+      "enrich": "billing",
+      "verify": "catalog",
+      "count": 6
+    },
+    {
+      "enrich": "other",
+      "verify": "downloads",
+      "count": 6
+    },
+    {
+      "enrich": "playback",
+      "verify": "access",
+      "count": 6
+    },
+    {
+      "enrich": "playback",
+      "verify": "downloads",
+      "count": 6
+    },
+    {
+      "enrich": "billing",
+      "verify": "downloads",
+      "count": 5
+    },
+    {
+      "enrich": "downloads",
+      "verify": "billing",
+      "count": 5
+    },
+    {
+      "enrich": "catalog",
+      "verify": "downloads",
+      "count": 4
+    },
+    {
+      "enrich": "downloads",
+      "verify": "usability",
+      "count": 4
+    },
+    {
+      "enrich": "access",
+      "verify": "billing",
+      "count": 3
+    },
+    {
+      "enrich": "downloads",
+      "verify": "playback",
+      "count": 3
+    },
+    {
+      "enrich": "access",
+      "verify": "playback",
+      "count": 2
+    },
+    {
+      "enrich": "billing",
+      "verify": "support",
+      "count": 2
+    },
+    {
+      "enrich": "other",
+      "verify": "access",
+      "count": 2
+    },
+    {
+      "enrich": "other",
+      "verify": "support",
+      "count": 2
+    },
+    {
+      "enrich": "support",
+      "verify": "other",
+      "count": 2
+    },
+    {
+      "enrich": "support",
+      "verify": "usability",
+      "count": 2
+    },
+    {
+      "enrich": "usability",
+      "verify": "downloads",
+      "count": 2
+    },
+    {
+      "enrich": "access",
+      "verify": "catalog",
+      "count": 1
+    },
+    {
+      "enrich": "access",
+      "verify": "other",
+      "count": 1
+    },
+    {
+      "enrich": "access",
+      "verify": "usability",
+      "count": 1
+    },
+    {
+      "enrich": "billing",
+      "verify": "access",
+      "count": 1
+    },
+    {
+      "enrich": "catalog",
+      "verify": "access",
+      "count": 1
+    },
+    {
+      "enrich": "downloads",
+      "verify": "catalog",
+      "count": 1
+    },
+    {
+      "enrich": "usability",
+      "verify": "support",
+      "count": 1
+    }
+  ]
+}

@@ -1,0 +1,617 @@
+{
+  "RUN_FACTS": {
+    "source_records": 660622,
+    "nonempty_reviews": 660609,
+    "empty_text_quarantined": 13,
+    "completed_classifications": 660471,
+    "unresolved_or_quarantined_nonempty": 138,
+    "exact_text_reuse_records": 176413,
+    "review_window": "2022-05-17 to 2023-11-15",
+    "data_caveat": "self-selected public Google Play reviews; no revenue, plan tier or confirmed churn"
+  },
+  "RANKED_ISSUES": [
+    {
+      "rank": 1,
+      "issue_id": "billing.free_tier_restrictions",
+      "name": "Free Features Behind Premium",
+      "summary": "Free users complain that features such as repeat, choosing songs, or lyrics require Premium or have been removed.",
+      "coherence": "coherent"
+    },
+    {
+      "rank": 2,
+      "issue_id": "other.general",
+      "name": "General Dissatisfaction and Boycotts",
+      "summary": "Examples express broad dislike, boycott intentions, or unrelated political and service complaints without a specific product issue.",
+      "coherence": "coherent"
+    },
+    {
+      "rank": 3,
+      "issue_id": "usability.ads",
+      "name": "Too Many Ads",
+      "summary": "Users complain that ads are too frequent, repetitive, or appear before they can listen.",
+      "coherence": "coherent"
+    },
+    {
+      "rank": 4,
+      "issue_id": "usability.ui_redesign",
+      "name": "Unpopular App Updates",
+      "summary": "Users broadly dislike recent updates or the new version without specifying a particular layout or navigation change.",
+      "coherence": "mislabeled"
+    },
+    {
+      "rank": 5,
+      "issue_id": "usability.shuffle_queue_controls",
+      "name": "Shuffle and Queue Controls",
+      "summary": "Users report repeated shuffle order, unwanted added songs, and trouble controlling what plays next.",
+      "coherence": "mixed"
+    },
+    {
+      "rank": 6,
+      "issue_id": "playback.stops_skips_lag",
+      "name": "Playback Stops or Pauses",
+      "summary": "Users say playback stops, pauses, or cuts out unexpectedly, sometimes repeating or playing unintended songs.",
+      "coherence": "mixed"
+    },
+    {
+      "rank": 7,
+      "issue_id": "access.login_failure",
+      "name": "Unable to Log In",
+      "summary": "Users say they cannot log in or are logged out, with sign-in attempts or login links failing.",
+      "coherence": "coherent"
+    },
+    {
+      "rank": 8,
+      "issue_id": "playback.crashes_wont_open",
+      "name": "App Crashes or Won't Open",
+      "summary": "Users report that the app will not open, freezes, closes, or crashes.",
+      "coherence": "coherent"
+    },
+    {
+      "rank": 9,
+      "issue_id": "usability.library_playlists",
+      "name": "Library and Liked Songs Problems",
+      "summary": "Users report difficulty accessing, loading, or organizing liked songs, playlists, and library content.",
+      "coherence": "coherent"
+    },
+    {
+      "rank": 10,
+      "issue_id": "catalog.missing_content",
+      "name": "Songs and Artists Missing",
+      "summary": "Users say songs, albums, or artists are unavailable, removed, or missing from the catalog.",
+      "coherence": "coherent"
+    },
+    {
+      "rank": 11,
+      "issue_id": "catalog.lyrics",
+      "name": "Lyrics Missing or Incorrect",
+      "summary": "Users report missing, unavailable, malfunctioning, or inaccurate lyrics and lyrics controls.",
+      "coherence": "coherent"
+    },
+    {
+      "rank": 12,
+      "issue_id": "playback.connectivity_errors",
+      "name": "False Offline or Network Errors",
+      "summary": "Users say the app reports no connection or offline status despite having internet access.",
+      "coherence": "mixed"
+    }
+  ],
+  "CLAIMS": [
+    {
+      "claim_id": "C001",
+      "issue_id": "billing.free_tier_restrictions",
+      "metric": "complaint_count",
+      "value": "52477"
+    },
+    {
+      "claim_id": "C002",
+      "issue_id": "billing.free_tier_restrictions",
+      "metric": "severity_sum",
+      "value": "150324"
+    },
+    {
+      "claim_id": "C003",
+      "issue_id": "billing.free_tier_restrictions",
+      "metric": "mean_severity",
+      "value": "2.864569"
+    },
+    {
+      "claim_id": "C004",
+      "issue_id": "billing.free_tier_restrictions",
+      "metric": "priority_score",
+      "value": "150324"
+    },
+    {
+      "claim_id": "C005",
+      "issue_id": "other.general",
+      "metric": "complaint_count",
+      "value": "69942"
+    },
+    {
+      "claim_id": "C006",
+      "issue_id": "other.general",
+      "metric": "severity_sum",
+      "value": "139456"
+    },
+    {
+      "claim_id": "C007",
+      "issue_id": "other.general",
+      "metric": "mean_severity",
+      "value": "1.993881"
+    },
+    {
+      "claim_id": "C008",
+      "issue_id": "other.general",
+      "metric": "priority_score",
+      "value": "139456"
+    },
+    {
+      "claim_id": "C009",
+      "issue_id": "usability.ads",
+      "metric": "complaint_count",
+      "value": "39367"
+    },
+    {
+      "claim_id": "C010",
+      "issue_id": "usability.ads",
+      "metric": "severity_sum",
+      "value": "85650"
+    },
+    {
+      "claim_id": "C011",
+      "issue_id": "usability.ads",
+      "metric": "mean_severity",
+      "value": "2.175680"
+    },
+    {
+      "claim_id": "C012",
+      "issue_id": "usability.ads",
+      "metric": "priority_score",
+      "value": "85650"
+    },
+    {
+      "claim_id": "C013",
+      "issue_id": "usability.ui_redesign",
+      "metric": "complaint_count",
+      "value": "25649"
+    },
+    {
+      "claim_id": "C014",
+      "issue_id": "usability.ui_redesign",
+      "metric": "severity_sum",
+      "value": "54939"
+    },
+    {
+      "claim_id": "C015",
+      "issue_id": "usability.ui_redesign",
+      "metric": "mean_severity",
+      "value": "2.141955"
+    },
+    {
+      "claim_id": "C016",
+      "issue_id": "usability.ui_redesign",
+      "metric": "priority_score",
+      "value": "54939"
+    },
+    {
+      "claim_id": "C017",
+      "issue_id": "usability.shuffle_queue_controls",
+      "metric": "complaint_count",
+      "value": "15716"
+    },
+    {
+      "claim_id": "C018",
+      "issue_id": "usability.shuffle_queue_controls",
+      "metric": "severity_sum",
+      "value": "44660"
+    },
+    {
+      "claim_id": "C019",
+      "issue_id": "usability.shuffle_queue_controls",
+      "metric": "mean_severity",
+      "value": "2.841690"
+    },
+    {
+      "claim_id": "C020",
+      "issue_id": "usability.shuffle_queue_controls",
+      "metric": "priority_score",
+      "value": "44660"
+    },
+    {
+      "claim_id": "C021",
+      "issue_id": "playback.stops_skips_lag",
+      "metric": "complaint_count",
+      "value": "12837"
+    },
+    {
+      "claim_id": "C022",
+      "issue_id": "playback.stops_skips_lag",
+      "metric": "severity_sum",
+      "value": "40269"
+    },
+    {
+      "claim_id": "C023",
+      "issue_id": "playback.stops_skips_lag",
+      "metric": "mean_severity",
+      "value": "3.136948"
+    },
+    {
+      "claim_id": "C024",
+      "issue_id": "playback.stops_skips_lag",
+      "metric": "priority_score",
+      "value": "40269"
+    },
+    {
+      "claim_id": "C025",
+      "issue_id": "access.login_failure",
+      "metric": "complaint_count",
+      "value": "8018"
+    },
+    {
+      "claim_id": "C026",
+      "issue_id": "access.login_failure",
+      "metric": "severity_sum",
+      "value": "31253"
+    },
+    {
+      "claim_id": "C027",
+      "issue_id": "access.login_failure",
+      "metric": "mean_severity",
+      "value": "3.897855"
+    },
+    {
+      "claim_id": "C028",
+      "issue_id": "access.login_failure",
+      "metric": "priority_score",
+      "value": "31253"
+    },
+    {
+      "claim_id": "C029",
+      "issue_id": "playback.crashes_wont_open",
+      "metric": "complaint_count",
+      "value": "7757"
+    },
+    {
+      "claim_id": "C030",
+      "issue_id": "playback.crashes_wont_open",
+      "metric": "severity_sum",
+      "value": "27919"
+    },
+    {
+      "claim_id": "C031",
+      "issue_id": "playback.crashes_wont_open",
+      "metric": "mean_severity",
+      "value": "3.599201"
+    },
+    {
+      "claim_id": "C032",
+      "issue_id": "playback.crashes_wont_open",
+      "metric": "priority_score",
+      "value": "27919"
+    },
+    {
+      "claim_id": "C033",
+      "issue_id": "usability.library_playlists",
+      "metric": "complaint_count",
+      "value": "6305"
+    },
+    {
+      "claim_id": "C034",
+      "issue_id": "usability.library_playlists",
+      "metric": "severity_sum",
+      "value": "18388"
+    },
+    {
+      "claim_id": "C035",
+      "issue_id": "usability.library_playlists",
+      "metric": "mean_severity",
+      "value": "2.916416"
+    },
+    {
+      "claim_id": "C036",
+      "issue_id": "usability.library_playlists",
+      "metric": "priority_score",
+      "value": "18388"
+    },
+    {
+      "claim_id": "C037",
+      "issue_id": "catalog.missing_content",
+      "metric": "complaint_count",
+      "value": "5918"
+    },
+    {
+      "claim_id": "C038",
+      "issue_id": "catalog.missing_content",
+      "metric": "severity_sum",
+      "value": "16527"
+    },
+    {
+      "claim_id": "C039",
+      "issue_id": "catalog.missing_content",
+      "metric": "mean_severity",
+      "value": "2.792666"
+    },
+    {
+      "claim_id": "C040",
+      "issue_id": "catalog.missing_content",
+      "metric": "priority_score",
+      "value": "16527"
+    },
+    {
+      "claim_id": "C041",
+      "issue_id": "catalog.lyrics",
+      "metric": "complaint_count",
+      "value": "5518"
+    },
+    {
+      "claim_id": "C042",
+      "issue_id": "catalog.lyrics",
+      "metric": "severity_sum",
+      "value": "15524"
+    },
+    {
+      "claim_id": "C043",
+      "issue_id": "catalog.lyrics",
+      "metric": "mean_severity",
+      "value": "2.813338"
+    },
+    {
+      "claim_id": "C044",
+      "issue_id": "catalog.lyrics",
+      "metric": "priority_score",
+      "value": "15524"
+    },
+    {
+      "claim_id": "C045",
+      "issue_id": "playback.connectivity_errors",
+      "metric": "complaint_count",
+      "value": "4144"
+    },
+    {
+      "claim_id": "C046",
+      "issue_id": "playback.connectivity_errors",
+      "metric": "severity_sum",
+      "value": "14051"
+    },
+    {
+      "claim_id": "C047",
+      "issue_id": "playback.connectivity_errors",
+      "metric": "mean_severity",
+      "value": "3.390685"
+    },
+    {
+      "claim_id": "C048",
+      "issue_id": "playback.connectivity_errors",
+      "metric": "priority_score",
+      "value": "14051"
+    }
+  ],
+  "TOPIC_AGGREGATES": [
+    {
+      "area": "access",
+      "completed_records": 9751,
+      "complaint_records": 9517,
+      "cancellation_records": 521,
+      "severity_sum": 36683,
+      "mean_severity": "3.854471",
+      "sev4plus_complaints": 7915,
+      "share_of_all_complaints": "3.2%",
+      "share_of_completed": "1.5%"
+    },
+    {
+      "area": "usability",
+      "completed_records": 112276,
+      "complaint_records": 93313,
+      "cancellation_records": 9059,
+      "severity_sum": 219414,
+      "mean_severity": "2.351377",
+      "sev4plus_complaints": 1206,
+      "share_of_all_complaints": "31.4%",
+      "share_of_completed": "17.0%"
+    },
+    {
+      "area": "playback",
+      "completed_records": 43497,
+      "complaint_records": 35628,
+      "cancellation_records": 2711,
+      "severity_sum": 113213,
+      "mean_severity": "3.177641",
+      "sev4plus_complaints": 10177,
+      "share_of_all_complaints": "12.0%",
+      "share_of_completed": "6.6%"
+    },
+    {
+      "area": "downloads",
+      "completed_records": 8508,
+      "complaint_records": 6242,
+      "cancellation_records": 382,
+      "severity_sum": 20594,
+      "mean_severity": "3.299263",
+      "sev4plus_complaints": 1866,
+      "share_of_all_complaints": "2.1%",
+      "share_of_completed": "1.3%"
+    },
+    {
+      "area": "catalog",
+      "completed_records": 51319,
+      "complaint_records": 20643,
+      "cancellation_records": 1381,
+      "severity_sum": 56044,
+      "mean_severity": "2.714915",
+      "sev4plus_complaints": 502,
+      "share_of_all_complaints": "6.9%",
+      "share_of_completed": "7.8%"
+    },
+    {
+      "area": "billing",
+      "completed_records": 65487,
+      "complaint_records": 61547,
+      "cancellation_records": 10528,
+      "severity_sum": 173870,
+      "mean_severity": "2.824996",
+      "sev4plus_complaints": 1677,
+      "share_of_all_complaints": "20.7%",
+      "share_of_completed": "9.9%"
+    },
+    {
+      "area": "support",
+      "completed_records": 887,
+      "complaint_records": 528,
+      "cancellation_records": 71,
+      "severity_sum": 1376,
+      "mean_severity": "2.606061",
+      "sev4plus_complaints": 27,
+      "share_of_all_complaints": "0.2%",
+      "share_of_completed": "0.1%"
+    },
+    {
+      "area": "other",
+      "completed_records": 368746,
+      "complaint_records": 69942,
+      "cancellation_records": 6049,
+      "severity_sum": 139456,
+      "mean_severity": "1.993881",
+      "sev4plus_complaints": 235,
+      "share_of_all_complaints": "23.5%",
+      "share_of_completed": "55.8%"
+    },
+    {
+      "area": "billing_support",
+      "completed_records": 66374,
+      "complaint_records": 62075,
+      "cancellation_records": 10599,
+      "severity_sum": 175246,
+      "mean_severity": "2.823133",
+      "sev4plus_complaints": 1704,
+      "share_of_all_complaints": "20.9%",
+      "share_of_completed": "10.0%"
+    }
+  ],
+  "EVIDENCE": [
+    {
+      "issue_id": "billing.free_tier_restrictions",
+      "review_id": "478309eb-62e7-4d7f-8e16-5e214ad7abe2",
+      "intent": "complaint",
+      "severity": 5,
+      "quote": "Removed everything i love and made it into premium. Even 1 star is not be given for this app"
+    },
+    {
+      "issue_id": "billing.free_tier_restrictions",
+      "review_id": "3d948192-a58b-42a2-9adc-90a40a961544",
+      "intent": "cancellation",
+      "severity": 5,
+      "quote": "They deleted 30 of my recent likes"
+    },
+    {
+      "issue_id": "billing.free_tier_restrictions",
+      "review_id": "4cba79ac-114a-461c-893a-37021dc28ac5",
+      "intent": "cancellation",
+      "severity": 5,
+      "quote": "Uninstalled now!!"
+    },
+    {
+      "issue_id": "other.general",
+      "review_id": "1819b44c-1de6-4c34-9cfe-fc3773ec8dcb",
+      "intent": "complaint",
+      "severity": 5,
+      "quote": "My music library got deleted"
+    },
+    {
+      "issue_id": "other.general",
+      "review_id": "6a60b353-efaf-4181-9815-32bdfeff059d",
+      "intent": "complaint",
+      "severity": 5,
+      "quote": "Steals your info"
+    },
+    {
+      "issue_id": "other.general",
+      "review_id": "3656a2c6-9fd3-4e2a-850d-3336b7c815bf",
+      "intent": "complaint",
+      "severity": 5,
+      "quote": "Stole my data. Need I say more"
+    },
+    {
+      "issue_id": "usability.ads",
+      "review_id": "46c0b49f-83a1-427e-8f0b-cef62e3c94b5",
+      "intent": "complaint",
+      "severity": 5,
+      "quote": "my ears feel like they explode"
+    },
+    {
+      "issue_id": "usability.ads",
+      "review_id": "ee11e1df-cb73-4c3a-b5e8-7268c7872b01",
+      "intent": "complaint",
+      "severity": 5,
+      "quote": "playlist, that had hundreds of songs that took years to put together, just vanished"
+    },
+    {
+      "issue_id": "usability.ads",
+      "review_id": "6bb97cff-a467-4f6a-ba9f-4cdadbbe852c",
+      "intent": "cancellation",
+      "severity": 5,
+      "quote": "COMMERCIAL FOR LAY'S CHIPS"
+    },
+    {
+      "issue_id": "usability.ui_redesign",
+      "review_id": "2c534af8-0f60-46eb-ae4e-2edebb4ec94d",
+      "intent": "cancellation",
+      "severity": 5,
+      "quote": "90% of my library disappeared with the new interface"
+    },
+    {
+      "issue_id": "usability.ui_redesign",
+      "review_id": "dfaa8ddb-0a85-4ca4-a54b-a4e9202251f2",
+      "intent": "complaint",
+      "severity": 5,
+      "quote": "the way it messes with listening history is ridiculous!"
+    },
+    {
+      "issue_id": "usability.ui_redesign",
+      "review_id": "7281ee71-5dea-4ac4-a516-febe24d86834",
+      "intent": "complaint",
+      "severity": 5,
+      "quote": "Paisa barbad Ben stokes, Recent update horrible all Que songs are disappeared , Back to old update as soon as possible"
+    },
+    {
+      "issue_id": "usability.shuffle_queue_controls",
+      "review_id": "6faac9bf-cd49-43fc-a5da-5a36963127d0",
+      "intent": "complaint",
+      "severity": 5,
+      "quote": "Everyone connected to the same wifi can see and control devices from all users in the wifi"
+    },
+    {
+      "issue_id": "usability.shuffle_queue_controls",
+      "review_id": "c06565d0-9465-4929-9069-65f9d6b8cac7",
+      "intent": "complaint",
+      "severity": 5,
+      "quote": "it changes them every single day"
+    },
+    {
+      "issue_id": "usability.shuffle_queue_controls",
+      "review_id": "96406732-dfc0-43af-b932-885668650d3b",
+      "intent": "complaint",
+      "severity": 5,
+      "quote": "This app remove the hit songs from your playlist without giving even a notification"
+    },
+    {
+      "issue_id": "playback.stops_skips_lag",
+      "review_id": "06f215eb-ddb2-4380-b33d-39cc10b5f508",
+      "intent": "complaint",
+      "severity": 5,
+      "quote": "the history of the last 2 hours is gone"
+    },
+    {
+      "issue_id": "playback.stops_skips_lag",
+      "review_id": "9c640a31-7651-4778-a8d1-84fbdba55e45",
+      "intent": "complaint",
+      "severity": 5,
+      "quote": "It randomly deleted my storage for the app"
+    },
+    {
+      "issue_id": "playback.stops_skips_lag",
+      "review_id": "e726549a-bfaf-4522-b888-6d2a4079905b",
+      "intent": "complaint",
+      "severity": 5,
+      "quote": "Stop deleting my liked songs"
+    }
+  ]
+}

@@ -2,31 +2,156 @@
   "run_id": "full-v1",
   "label_config": "gpt-6-luna+effort-none+enrich-v1+schema-v2+quote150+entities-lexicon-v1",
   "status_counts": {
-    "pending": 660609,
-    "quarantined": 13
+    "completed": 660471,
+    "quarantined": 151
   },
   "quarantine_reasons": {
-    "empty_review_text": 13
+    "empty_review_text": 13,
+    "invalid_output_after_retry": 138
   },
-  "cache_reuse_records": 0,
-  "calls": {},
-  "spent_usd_estimated_from_usage": 0,
-  "spend_limit_usd": 2.0,
-  "project_budget_usd": 10.0,
-  "service_tiers": {},
+  "cache_reuse_records": 176413,
+  "calls": {
+    "enrich": {
+      "failed": {
+        "calls": 51,
+        "input_tokens": 213048,
+        "output_tokens": 210517,
+        "cached_tokens": 126503,
+        "cache_write_tokens": 86392,
+        "reasoning_tokens": 0,
+        "cost_usd_estimated_from_usage": 0.058669,
+        "all_usage_available": true
+      },
+      "succeeded": {
+        "calls": 12485,
+        "input_tokens": 49243732,
+        "output_tokens": 15986581,
+        "cached_tokens": 30524938,
+        "cache_write_tokens": 18681339,
+        "reasoning_tokens": 0,
+        "cost_usd_estimated_from_usage": 5.318726,
+        "all_usage_available": true
+      }
+    },
+    "group": {
+      "succeeded": {
+        "calls": 1,
+        "input_tokens": 14437,
+        "output_tokens": 2177,
+        "cached_tokens": 0,
+        "cache_write_tokens": 14434,
+        "reasoning_tokens": 0,
+        "cost_usd_estimated_from_usage": 0.002893,
+        "all_usage_available": true
+      }
+    },
+    "memo": {
+      "succeeded": {
+        "calls": 1,
+        "input_tokens": 4857,
+        "output_tokens": 815,
+        "cached_tokens": 0,
+        "cache_write_tokens": 4854,
+        "reasoning_tokens": 0,
+        "cost_usd_estimated_from_usage": 0.001015,
+        "all_usage_available": true
+      }
+    },
+    "verify": {
+      "succeeded": {
+        "calls": 195,
+        "input_tokens": 601831,
+        "output_tokens": 230308,
+        "cached_tokens": 276838,
+        "cache_write_tokens": 324408,
+        "reasoning_tokens": 0,
+        "cost_usd_estimated_from_usage": 0.079266,
+        "all_usage_available": true
+      }
+    }
+  },
+  "spent_usd_estimated_from_usage": 5.460569,
+  "spend_limit_usd": 7.5,
+  "project_budget_usd": 9.5,
+  "service_tiers": {
+    "flex": 12731,
+    "standard": 2
+  },
   "ledger_refusals": 0,
-  "workers": 1,
+  "workers": 10,
   "stage_times": {
     "ingest": [
       {
         "invocation": 1,
         "seconds": 24.022
+      },
+      {
+        "invocation": 2,
+        "seconds": 0.044
+      },
+      {
+        "invocation": 3,
+        "seconds": 0.046
+      },
+      {
+        "invocation": 4,
+        "seconds": 0.042
       }
     ],
     "export": [
       {
         "invocation": 1,
         "seconds": 6.601
+      },
+      {
+        "invocation": 2,
+        "seconds": 8.815
+      },
+      {
+        "invocation": 3,
+        "seconds": 9.784
+      },
+      {
+        "invocation": 4,
+        "seconds": 11.57
+      }
+    ],
+    "enrich": [
+      {
+        "invocation": 2,
+        "seconds": 67.393
+      },
+      {
+        "invocation": 3,
+        "seconds": 2875.776
+      },
+      {
+        "invocation": 4,
+        "seconds": 7255.696
+      }
+    ],
+    "verify": [
+      {
+        "invocation": 4,
+        "seconds": 1562.479
+      }
+    ],
+    "group": [
+      {
+        "invocation": 4,
+        "seconds": 18.225
+      }
+    ],
+    "rank": [
+      {
+        "invocation": 4,
+        "seconds": 10.848
+      }
+    ],
+    "memo": [
+      {
+        "invocation": 4,
+        "seconds": 8.468
       }
     ]
   },
@@ -38,8 +163,81 @@
         "ingest"
       ],
       "status": "ok"
+    },
+    {
+      "invocation": 2,
+      "seconds": 76.915,
+      "stages": [
+        "ingest",
+        "enrich",
+        "verify",
+        "group",
+        "rank",
+        "memo"
+      ],
+      "status": "enrich_stopped:keyboard_interrupt"
+    },
+    {
+      "invocation": 3,
+      "seconds": 2886.206,
+      "stages": [
+        "ingest",
+        "enrich",
+        "verify",
+        "group",
+        "rank",
+        "memo"
+      ],
+      "status": "enrich_stopped:fatal: HTTP 400: Error code: 400 - {'error': {'message': 'Invalid prompt: your prompt was flagged as potentially violating our usage policy. Please try again with a different prompt: https://platform.openai.com/docs/guides/reasoning#advice-on-prompting', 'type': 'invalid_request_error', 'param': None, 'code': 'inval"
+    },
+    {
+      "invocation": 4,
+      "seconds": 8873.38,
+      "stages": [
+        "ingest",
+        "enrich",
+        "verify",
+        "group",
+        "rank",
+        "memo"
+      ],
+      "status": "ok"
     }
   ],
-  "sessions": [],
+  "sessions": [
+    {
+      "session": 1,
+      "stage": "enrich",
+      "started_at": 1792265035.492257,
+      "ended_at": 1792265102.7022731,
+      "phase": "initial",
+      "completed_before": 0,
+      "completed_after": 138483,
+      "calls": 76,
+      "stop_reason": "keyboard_interrupt"
+    },
+    {
+      "session": 2,
+      "stage": "enrich",
+      "started_at": 1792265115.870347,
+      "ended_at": 1792267990.817855,
+      "phase": "resume",
+      "completed_before": 138483,
+      "completed_after": 303869,
+      "calls": 3441,
+      "stop_reason": "fatal: HTTP 400: Error code: 400 - {'error': {'message': 'Invalid prompt: your prompt was flagged as potentially violating our usage policy. Please try again with a different prompt: https://platform.openai.com/docs/guides/reasoning#advice-on-prompting', 'type': 'invalid_request_error', 'param': None, 'code': 'inval"
+    },
+    {
+      "session": 3,
+      "stage": "enrich",
+      "started_at": 1792268152.643904,
+      "ended_at": 1792275406.938606,
+      "phase": "resume",
+      "completed_before": 303869,
+      "completed_after": 660471,
+      "calls": 9019,
+      "stop_reason": "queue_empty"
+    }
+  ],
   "cost_note": "Costs are usage x rates in pipeline/config.py (see cost/rates.csv); not a provider invoice."
 }

@@ -1,0 +1,324 @@
+{
+  "labels_file": "golden/golden_50_labeled.csv",
+  "run": "runs/full-v1",
+  "cases": 50,
+  "ambiguous_cases": 2,
+  "missing_or_quarantined_predictions": 0,
+  "agreement_strict": {
+    "topic": 0.74,
+    "intent": 0.8,
+    "severity": 0.72,
+    "joint": 0.52
+  },
+  "agreement_accepted_set": {
+    "topic": 0.74,
+    "intent": 0.8,
+    "severity": 0.72,
+    "joint": 0.52
+  },
+  "macro_f1_singleton": {
+    "topic": {
+      "per_class": {
+        "catalog": {
+          "support": 1,
+          "predicted": 4,
+          "precision": 0.25,
+          "recall": 1.0,
+          "f1": 0.4
+        },
+        "downloads": {
+          "support": 1,
+          "predicted": 1,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "other": {
+          "support": 35,
+          "predicted": 27,
+          "precision": 1.0,
+          "recall": 0.7714,
+          "f1": 0.871
+        },
+        "playback": {
+          "support": 5,
+          "predicted": 4,
+          "precision": 0.75,
+          "recall": 0.6,
+          "f1": 0.6667
+        },
+        "usability": {
+          "support": 8,
+          "predicted": 9,
+          "precision": 0.5556,
+          "recall": 0.625,
+          "f1": 0.5882
+        }
+      },
+      "macro_f1": 0.7052
+    },
+    "intent": {
+      "per_class": {
+        "cancellation": {
+          "support": 1,
+          "predicted": 1,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "complaint": {
+          "support": 17,
+          "predicted": 22,
+          "precision": 0.7273,
+          "recall": 0.9412,
+          "f1": 0.8205
+        },
+        "praise": {
+          "support": 18,
+          "predicted": 20,
+          "precision": 0.85,
+          "recall": 0.9444,
+          "f1": 0.8947
+        },
+        "request": {
+          "support": 1,
+          "predicted": 1,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "unclear": {
+          "support": 13,
+          "predicted": 6,
+          "precision": 0.8333,
+          "recall": 0.3846,
+          "f1": 0.5263
+        }
+      },
+      "macro_f1": 0.8483
+    },
+    "severity": {
+      "per_class": {
+        "1": {
+          "support": 31,
+          "predicted": 27,
+          "precision": 0.9259,
+          "recall": 0.8065,
+          "f1": 0.8621
+        },
+        "2": {
+          "support": 9,
+          "predicted": 11,
+          "precision": 0.5455,
+          "recall": 0.6667,
+          "f1": 0.6
+        },
+        "3": {
+          "support": 9,
+          "predicted": 8,
+          "precision": 0.625,
+          "recall": 0.5556,
+          "f1": 0.5882
+        },
+        "4": {
+          "support": 1,
+          "predicted": 3,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      },
+      "macro_f1": 0.5126
+    }
+  },
+  "severity_exact": 0.72,
+  "severity_mae_vs_primary": 0.32,
+  "severity_mae_vs_nearest_accepted": 0.32,
+  "sentiment_mae": 0.18,
+  "sentiment_within_tolerance": 0.96,
+  "sentiment_tolerance_predeclared": 0.5,
+  "quote_exact_substring_rate": 1.0,
+  "quote_support_judgement": "human: fill quote_supports_label in golden_quote_review.csv (supports / partial / does_not)",
+  "entities_predicted_not_in_human": {
+    "ads": 8,
+    "update": 7,
+    "premium": 3,
+    "playlist": 2,
+    "subscription": 2,
+    "duo": 1,
+    "crash": 1,
+    "recommendations": 1,
+    "shuffle": 1,
+    "lyrics": 1,
+    "offline": 1,
+    "price": 1,
+    "free tier": 1
+  },
+  "entities_human_not_predicted": {},
+  "needs_review_as_predictor": {
+    "predicted": 9,
+    "human_flagged": 2,
+    "true_positive": 1,
+    "precision": 0.1111,
+    "recall": 0.5
+  },
+  "confusion": {
+    "topic": [
+      {
+        "expected": "other",
+        "predicted": "other",
+        "count": 27
+      },
+      {
+        "expected": "usability",
+        "predicted": "usability",
+        "count": 5
+      },
+      {
+        "expected": "other",
+        "predicted": "usability",
+        "count": 4
+      },
+      {
+        "expected": "playback",
+        "predicted": "playback",
+        "count": 3
+      },
+      {
+        "expected": "other",
+        "predicted": "catalog",
+        "count": 3
+      },
+      {
+        "expected": "usability",
+        "predicted": "billing",
+        "count": 2
+      },
+      {
+        "expected": "playback",
+        "predicted": "billing",
+        "count": 2
+      },
+      {
+        "expected": "catalog",
+        "predicted": "catalog",
+        "count": 1
+      },
+      {
+        "expected": "usability",
+        "predicted": "playback",
+        "count": 1
+      },
+      {
+        "expected": "other",
+        "predicted": "billing",
+        "count": 1
+      },
+      {
+        "expected": "downloads",
+        "predicted": "downloads",
+        "count": 1
+      }
+    ],
+    "intent": [
+      {
+        "expected": "praise",
+        "predicted": "praise",
+        "count": 17
+      },
+      {
+        "expected": "complaint",
+        "predicted": "complaint",
+        "count": 16
+      },
+      {
+        "expected": "unclear",
+        "predicted": "complaint",
+        "count": 5
+      },
+      {
+        "expected": "unclear",
+        "predicted": "unclear",
+        "count": 5
+      },
+      {
+        "expected": "unclear",
+        "predicted": "praise",
+        "count": 3
+      },
+      {
+        "expected": "praise",
+        "predicted": "complaint",
+        "count": 1
+      },
+      {
+        "expected": "complaint",
+        "predicted": "unclear",
+        "count": 1
+      },
+      {
+        "expected": "cancellation",
+        "predicted": "cancellation",
+        "count": 1
+      },
+      {
+        "expected": "request",
+        "predicted": "request",
+        "count": 1
+      }
+    ],
+    "severity": [
+      {
+        "expected": "1",
+        "predicted": "1",
+        "count": 25
+      },
+      {
+        "expected": "2",
+        "predicted": "2",
+        "count": 6
+      },
+      {
+        "expected": "3",
+        "predicted": "3",
+        "count": 5
+      },
+      {
+        "expected": "1",
+        "predicted": "2",
+        "count": 5
+      },
+      {
+        "expected": "3",
+        "predicted": "4",
+        "count": 3
+      },
+      {
+        "expected": "2",
+        "predicted": "1",
+        "count": 2
+      },
+      {
+        "expected": "2",
+        "predicted": "3",
+        "count": 1
+      },
+      {
+        "expected": "4",
+        "predicted": "3",
+        "count": 1
+      },
+      {
+        "expected": "1",
+        "predicted": "3",
+        "count": 1
+      },
+      {
+        "expected": "3",
+        "predicted": "5",
+        "count": 1
+      }
+    ]
+  },
+  "note": "50 cases are a small diagnostic sample, not a population accuracy estimate."
+}

@@ -1,0 +1,12 @@
+{
+  "version": "a5-audit-v1",
+  "analysis_count": 660622,
+  "analysis_sha256": "1fc85de68a304dd8978b537cfa58793d5f41cbaf417fa32cb53899f83a2fcef6",
+  "classification_input_fields": [
+    "review_text"
+  ],
+  "allow_multi_issue": false,
+  "run_id": "full-v1",
+  "label_config": "gpt-6-luna+effort-none+enrich-v1+schema-v2+quote150+entities-lexicon-v1",
+  "declared_scope": "Every source review ID; nonempty texts classified by the enrich role, empty texts quarantined."
+}

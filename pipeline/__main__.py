@@ -109,6 +109,7 @@ def main(argv=None):
     if a.cmd == "rank":
         from .stages import rank
         t0 = time.time()
+        a.src.mkdir(parents=True, exist_ok=True)
         ranked, _, _ = rank.run_from_files(a.src, a.records, a.membership)
         print(f"ranked {len(ranked)} issues from saved files in {time.time() - t0:.2f}s (no model calls)")
         for r in ranked[:10]:
