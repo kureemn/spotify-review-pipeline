@@ -77,9 +77,13 @@ def run_pipeline(input_csv: Path, run_id: str, cfg: RunConfig, cache_path: Path,
     out.mkdir(parents=True, exist_ok=True)
     store = RunStore(run_dir / "state.db")
     saved = store.get("config")
-    if saved and saved != cfg.to_dict() and not allow_config_change:
+    def comparable(d):
+        # max_output_tokens is a safety cap, not a classification setting (not in label_config).
+        return {k: ({kk: vv for kk, vv in v.items() if kk != "max_output_tokens"} if isinstance(v, dict) else v)
+                for k, v in (d or {}).items()}
+    if saved and comparable(saved) != comparable(cfg.to_dict()) and not allow_config_change:
         # Changing model/prompt/schema settings mid-run would mix label configs; refuse loudly.
-        changed = {k for k in cfg.to_dict() if saved.get(k) != cfg.to_dict()[k]}
+        changed = {k for k in cfg.to_dict() if comparable(saved).get(k) != comparable(cfg.to_dict())[k]}
         ignorable = {"workers", "spend_limit_usd", "max_minutes", "stop_after_batches", "mock_faults", "project_budget_usd"}
         if changed - ignorable:
             raise SystemExit(f"Config differs from saved run config in {sorted(changed - ignorable)}; "

@@ -149,8 +149,10 @@ class Enricher:
                             parsed, attempts, err = fut.result()
                         except FatalError as e:
                             stop_reason = stop_reason or f"fatal: {e}"
+                            # record the failed attempt(s) so the call log stays complete; reviews stay pending
+                            self._commit(items, retry_n, None, getattr(e, "attempts", []), "fatal", by_text, session, phase)
                             continue
-                        follow_up = self._commit(items, retry_n, parsed, attempts, err, by_text, session, phase)
+                        follow_ups = self._commit(items, retry_n, parsed, attempts, err, by_text, session, phase)
                         if err == "spend_limit":
                             stop_reason = stop_reason or "spend_limit"
                         if err == "transient_exhausted":
@@ -159,8 +161,8 @@ class Enricher:
                                 stop_reason = stop_reason or "repeated_transient_failures"
                         else:
                             consecutive_transient = 0
-                        if follow_up:
-                            queue.insert(0, follow_up)
+                        for fu in reversed(follow_ups):
+                            queue.insert(0, fu)
                         if cfg.stop_after_batches and self.stats["batches_committed"] >= cfg.stop_after_batches:
                             stop_reason = stop_reason or "deliberate_interrupt"
                     if stop_reason and not inflight:
@@ -189,7 +191,7 @@ class Enricher:
     def _commit(self, items, retry_n, parsed, attempts, err, by_text, session, phase):
         """Validate one response and save everything about it in ONE transaction."""
         ids = [rid for rid, _, _, _ in items]
-        failed_items, follow_up = [], None
+        failed_items, follow_ups = [], []
         completed, quarantined, cache_rows = [], [], []
         if parsed is not None:
             seen = {}
@@ -209,12 +211,27 @@ class Enricher:
                     completed.append((rid, tsha, fields))
         elif err == "invalid_output":
             failed_items = [(x, "invalid_output") for x in items]
-        # transient_exhausted / spend_limit: items stay pending for a later resume (not failures of the review).
+        elif err == "content_rejected":
+            # The provider refused the whole prompt (safety filter on some review). Not an invalid answer:
+            # bisect without spending the invalid-output retry, until the offending review stands alone.
+            if len(items) > 1:
+                mid = len(items) // 2
+                follow_ups = [(items[:mid], retry_n), (items[mid:], retry_n)]
+                self.stats["content_splits"] = self.stats.get("content_splits", 0) + 1
+            else:
+                quarantined.append((items[0][0], "provider_content_filter_rejected"))
+        # transient_exhausted / spend_limit / fatal: items stay pending for a later resume (not failures of the review).
 
         if failed_items:
             if retry_n < self.cfg.max_invalid_retries:
                 self.stats["item_retries"] += len(failed_items)
-                follow_up = ([x for x, _ in failed_items], retry_n + 1)
+                retry = [x for x, _ in failed_items]
+                if len(retry) == len(items) and len(retry) > 1:
+                    # Whole-batch failure (truncated or malformed output): the single retry is sent as two halves.
+                    mid = len(retry) // 2
+                    follow_ups = [(retry[:mid], retry_n + 1), (retry[mid:], retry_n + 1)]
+                else:
+                    follow_ups = [(retry, retry_n + 1)]
             else:
                 for (rid, text, tsha, att), why in failed_items:
                     if why == "quote_not_substring":
@@ -255,7 +272,7 @@ class Enricher:
         self.stats["requests"] += 1
         self.stats["attempts"] += len(attempts)
         self.stats["failed_attempts"] += sum(a["outcome"] == "failed" for a in attempts)
-        if parsed is not None or err == "invalid_output":
+        if parsed is not None or err in ("invalid_output", "content_rejected"):
             self.stats["batches_committed"] += 1
         self.log("enrich", "batch", n=len(ids), completed=len(completed), failed=len(failed_items),
                  failure_reasons={r: sum(1 for _, w in failed_items if w == r) for r in {w for _, w in failed_items}},
@@ -263,4 +280,4 @@ class Enricher:
                  quarantined=len(quarantined), retry_round=retry_n, error=err, attempts=len(attempts),
                  progress={"completed": self.done_total, "target": self.target, "spent_usd": round(self.ledger.spent, 4),
                            "batches": self.stats["batches_committed"]})
-        return follow_up
+        return follow_ups

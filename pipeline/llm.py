@@ -24,6 +24,10 @@ class FatalError(Exception):
     """Auth/permission/bad request: stop the run."""
 
 
+class ContentRejected(Exception):
+    """Provider refused the prompt (e.g. safety filter on one review in the batch): bisect, don't stop."""
+
+
 class InvalidOutput(Exception):
     """Response arrived but is not usable (bad JSON, incomplete, refused)."""
 
@@ -146,7 +150,10 @@ class OpenAIProvider:
         except o.APIStatusError as e:
             if e.status_code in (408, 409, 429) or e.status_code >= 500:
                 raise TransientError(f"HTTP {e.status_code}: {str(e)[:200]}")
-            raise FatalError(f"HTTP {e.status_code}: {str(e)[:300]}")
+            msg = str(e)
+            if e.status_code == 400 and ("invalid_prompt" in msg or "flagged" in msg or "usage policy" in msg):
+                raise ContentRejected(f"HTTP 400 content filter: {msg[:200]}")
+            raise FatalError(f"HTTP {e.status_code}: {msg[:300]}")
         u = resp.usage
         usage = {"input_tokens": u.input_tokens if u else None, "output_tokens": u.output_tokens if u else None,
                  "cached_tokens": getattr(getattr(u, "input_tokens_details", None), "cached_tokens", 0) or 0,
@@ -186,6 +193,8 @@ class MockProvider:
         if self.faults.get("transient") and n % self.faults["transient"] == 0:
             raise TransientError("mock 429 rate limit")
         data = json.loads(payload)
+        if isinstance(data, list) and any("FLAGGED_TEST" in x.get("text", "") for x in data):
+            raise ContentRejected("mock HTTP 400 content filter")
         if role == "enrich":
             items = [self._enrich_item(x) for x in data]
             if self.faults.get("drop") and n % self.faults["drop"] == 0 and len(items) > 1:
@@ -210,6 +219,8 @@ class MockProvider:
                    "memo_markdown": f"## Recommendation\nMOCK OUTPUT. {cited}\n## Supporting evidence\n-\n"
                                     f"## Alternatives considered\n-\n## Limitations\nMock provider."}
         text = json.dumps(out)
+        if self.faults.get("extra") and n % self.faults["extra"] == 0:
+            text = text + "\n" + text            # valid JSON followed by a duplicate (seen in the full run)
         if self.faults.get("malformed") and n % self.faults["malformed"] == 0:
             text = text[: len(text) // 2]
         usage["output_tokens"] = len(text) // 4
@@ -263,14 +274,21 @@ def call_with_retries(provider, ledger, *, role, rc, instructions, payload, max_
                                                  rc.service_tier)
             actual = cost_usd(model, usage, tier=usage.get("service_tier", "standard"))
             ledger.settle(reserve, actual)
+            note = None
             try:
                 parsed = json.loads(text)
             except (json.JSONDecodeError, TypeError) as e:
-                attempts.append(rec | _usage_fields(usage) | {"request_id": rid, "outcome": "failed",
-                                                              "error": f"malformed_json: {e}", "cost_usd": actual,
-                                                              "ended_at": time.time()})
-                return None, attempts, "invalid_output"
-            attempts.append(rec | _usage_fields(usage) | {"request_id": rid, "outcome": "succeeded", "error": None,
+                # Seen in production: a complete JSON answer followed by a duplicate. Keep the first complete
+                # object (it is still fully validated by the stage); anything else is invalid output.
+                try:
+                    parsed, end = json.JSONDecoder().raw_decode(text.lstrip())
+                    note = f"repaired: ignored {len(text.lstrip()) - end} chars after first JSON object"
+                except (json.JSONDecodeError, TypeError, AttributeError):
+                    attempts.append(rec | _usage_fields(usage) | {"request_id": rid, "outcome": "failed",
+                                                                  "error": f"malformed_json: {e}", "cost_usd": actual,
+                                                                  "ended_at": time.time()})
+                    return None, attempts, "invalid_output"
+            attempts.append(rec | _usage_fields(usage) | {"request_id": rid, "outcome": "succeeded", "error": note,
                                                           "cost_usd": actual, "ended_at": time.time()})
             return parsed, attempts, None
         except InvalidOutput as e:
@@ -287,8 +305,16 @@ def call_with_retries(provider, ledger, *, role, rc, instructions, payload, max_
                                                        "error": str(e), "cost_usd": 0.0, "ended_at": time.time()})
             if k < max_transient_retries:
                 time.sleep(min(30, (2 ** k)) * (0.5 + random.random()))
-        except FatalError:
+        except ContentRejected as e:
+            ledger.settle(reserve, 0.0)      # rejected before generation; no usage returned
+            attempts.append(rec | _usage_fields({}) | {"request_id": f"local-{uuid.uuid4().hex[:12]}", "outcome": "failed",
+                                                       "error": str(e)[:300], "cost_usd": 0.0, "ended_at": time.time()})
+            return None, attempts, "content_rejected"
+        except FatalError as e:
             ledger.settle(reserve, 0.0)
+            attempts.append(rec | _usage_fields({}) | {"request_id": f"local-{uuid.uuid4().hex[:12]}", "outcome": "failed",
+                                                       "error": f"fatal: {str(e)[:280]}", "cost_usd": 0.0, "ended_at": time.time()})
+            e.attempts = attempts            # so the caller can log the fatal attempt before stopping
             raise
     return None, attempts, "transient_exhausted"
 

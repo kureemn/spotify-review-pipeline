@@ -39,7 +39,7 @@ class RoleConfig:
 @dataclass
 class RunConfig:
     provider: str = "openai"            # "openai" or "mock" (offline plumbing tests, never business results)
-    enrich: RoleConfig = field(default_factory=lambda: RoleConfig(batch_size=50, max_output_tokens=3500, service_tier="flex"))
+    enrich: RoleConfig = field(default_factory=lambda: RoleConfig(batch_size=50, max_output_tokens=6000, service_tier="flex"))
     verify: RoleConfig = field(default_factory=lambda: RoleConfig(batch_size=50, max_output_tokens=3000, service_tier="flex"))
     group: RoleConfig = field(default_factory=lambda: RoleConfig(batch_size=60, max_output_tokens=6000))
     memo: RoleConfig = field(default_factory=lambda: RoleConfig(batch_size=1, max_output_tokens=3000))
