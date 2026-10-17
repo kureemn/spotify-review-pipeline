@@ -1,0 +1,184 @@
+[demo] starting in 20s ...
+[demo] starting in 15s ...
+[demo] starting in 10s ...
+[demo] starting in 5s ...
+
+==== STEP 1 - status before the full run (12:23:54) ====
+run full-v1 · label_config gpt-6-luna+effort-none+enrich-v1+schema-v2+quote150+entities-lexicon-v1
+  completed           0
+  pending       660,609
+  quarantined        13  {'empty_review_text': 13}
+  enrichment calls by phase: {} · API spend $0.0000
+
+==== STEP 2 - initial run; a real Ctrl-C (SIGINT) will be sent after 60s (12:23:54) ====
+[run] start run_id=full-v1 invocation=2 input=data/spotify_reviews_18months.csv stages=['ingest', 'enrich', 'verify', 'group', 'rank', 'memo'] provider=openai label_config=gpt-6-luna+effort-none+enrich-v1+schema-v2+quote150+entities-lexicon-v1 workers=10 spend_limit_usd=7.5
+[ingest] skip reason=already ingested counts={'pending': 660609, 'quarantined': 13}
+[run] budget run_cap_usd=7.5 project_budget_usd=9.5 other_runs_spent_usd=0.108178 this_run_spent_usd=0 effective_cap_usd=7.5
+[enrich] session_start session=1 phase=initial completed_before=0 label_config=gpt-6-luna+effort-none+enrich-v1+schema-v2+quote150+entities-lexicon-v1 workers=10 spend_limit_usd=7.5
+[enrich] queued pending_reviews=531130 distinct_texts=475741 batches=9515
+[enrich] saved batch     1: +50 -> 129,560 / 660,609 completed · $0.0010
+[enrich] saved batch     2: +50 -> 129,810 / 660,609 completed · $0.0010
+[enrich] saved batch     3: +50 -> 130,047 / 660,609 completed · $0.0032
+[enrich] saved batch     4: +50 -> 130,137 / 660,609 completed · $0.0032
+[enrich] saved batch     5: +49 -> 130,323 / 660,609 completed · $0.0032 · retrying 1
+[enrich] saved batch     6: +49 -> 130,399 / 660,609 completed · $0.0032 · retrying 1
+[enrich] saved batch     7: +49 -> 130,536 / 660,609 completed · $0.0037 · retrying 1
+[enrich] saved batch     8: +50 -> 130,779 / 660,609 completed · $0.0041
+[enrich] saved batch     9: +50 -> 130,874 / 660,609 completed · $0.0047
+[enrich] saved batch    10: +1  -> 130,875 / 660,609 completed · $0.0047 · retrying 1
+[enrich] saved batch    11: +1  -> 130,876 / 660,609 completed · $0.0047
+[enrich] saved batch    12: +50 -> 131,088 / 660,609 completed · $0.0053
+[enrich] saved batch    13: +1  -> 131,089 / 660,609 completed · $0.0053
+[enrich] saved batch    14: +50 -> 131,157 / 660,609 completed · $0.0058
+[enrich] saved batch    15: +49 -> 131,451 / 660,609 completed · $0.0063 · retrying 1
+[enrich] saved batch    16: +50 -> 131,597 / 660,609 completed · $0.0068
+[enrich] saved batch    17: +1  -> 131,598 / 660,609 completed · $0.0068
+[enrich] saved batch    18: +49 -> 131,677 / 660,609 completed · $0.0074 · retrying 1
+[enrich] saved batch    19: +50 -> 131,912 / 660,609 completed · $0.0090
+[enrich] saved batch    20: +50 -> 132,017 / 660,609 completed · $0.0090
+[enrich] saved batch    21: +50 -> 132,095 / 660,609 completed · $0.0090
+[enrich] saved batch    22: +50 -> 132,199 / 660,609 completed · $0.0095
+[enrich] saved batch    23: +50 -> 132,523 / 660,609 completed · $0.0100
+[enrich] saved batch    24: +50 -> 132,607 / 660,609 completed · $0.0105
+[enrich] saved batch    25: +1  -> 132,608 / 660,609 completed · $0.0106
+[enrich] saved batch    26: +50 -> 133,038 / 660,609 completed · $0.0110
+[enrich] saved batch    27: +50 -> 133,111 / 660,609 completed · $0.0116
+[enrich] saved batch    28: +48 -> 133,227 / 660,609 completed · $0.0121 · retrying 2
+[enrich] saved batch    29: +50 -> 133,399 / 660,609 completed · $0.0126
+[enrich] saved batch    30: +50 -> 133,642 / 660,609 completed · $0.0132
+[enrich] saved batch    31: +50 -> 133,882 / 660,609 completed · $0.0142
+[enrich] saved batch    32: +49 -> 134,041 / 660,609 completed · $0.0142 · retrying 1
+[enrich] saved batch    33: +49 -> 134,123 / 660,609 completed · $0.0147 · retrying 1
+[enrich] saved batch    34: +49 -> 134,258 / 660,609 completed · $0.0152 · retrying 1
+[enrich] saved batch    35: +2  -> 134,260 / 660,609 completed · $0.0153
+[enrich] saved batch    36: +1  -> 134,261 / 660,609 completed · $0.0153
+[enrich] saved batch    37: +1  -> 134,262 / 660,609 completed · $0.0153
+[enrich] saved batch    38: +1  -> 134,263 / 660,609 completed · $0.0154
+[enrich] saved batch    39: +50 -> 134,356 / 660,609 completed · $0.0159
+[enrich] saved batch    40: +50 -> 134,420 / 660,609 completed · $0.0164
+[enrich] saved batch    41: +50 -> 134,598 / 660,609 completed · $0.0175
+[enrich] saved batch    42: +50 -> 134,808 / 660,609 completed · $0.0175
+[enrich] saved batch    43: +50 -> 134,893 / 660,609 completed · $0.0180
+[enrich] saved batch    44: +0  -> 134,893 / 660,609 completed · $0.0190 · retrying 50
+[enrich] saved batch    45: +50 -> 135,041 / 660,609 completed · $0.0195
+[enrich] saved batch    46: +50 -> 135,167 / 660,609 completed · $0.0200
+[enrich] saved batch    47: +49 -> 135,242 / 660,609 completed · $0.0206 · retrying 1
+[enrich] saved batch    48: +50 -> 135,326 / 660,609 completed · $0.0211
+[enrich] saved batch    49: +1  -> 135,327 / 660,609 completed · $0.0211
+[enrich] saved batch    50: +50 -> 135,441 / 660,609 completed · $0.0216
+[enrich] saved batch    51: +50 -> 135,609 / 660,609 completed · $0.0221
+[enrich] saved batch    52: +50 -> 135,709 / 660,609 completed · $0.0227
+[enrich] saved batch    53: +50 -> 135,942 / 660,609 completed · $0.0232
+[enrich] saved batch    54: +49 -> 136,027 / 660,609 completed · $0.0237 · retrying 1
+[enrich] saved batch    55: +50 -> 136,237 / 660,609 completed · $0.0241
+[enrich] saved batch    56: +50 -> 136,412 / 660,609 completed · $0.0246
+[enrich] saved batch    57: +1  -> 136,413 / 660,609 completed · $0.0247
+[enrich] saved batch    58: +50 -> 136,581 / 660,609 completed · $0.0252
+[enrich] saved batch    59: +50 -> 136,685 / 660,609 completed · $0.0257
+[enrich] saved batch    60: +50 -> 136,748 / 660,609 completed · $0.0262
+[enrich] saved batch    61: +50 -> 136,812 / 660,609 completed · $0.0268
+[enrich] saved batch    62: +50 -> 136,928 / 660,609 completed · $0.0273
+[enrich] saved batch    63: +50 -> 137,054 / 660,609 completed · $0.0278
+[enrich] saved batch    64: +49 -> 137,197 / 660,609 completed · $0.0283 · retrying 1
+[enrich] saved batch    65: +50 -> 137,255 / 660,609 completed · $0.0289
+[enrich] saved batch    66: +50 -> 137,493 / 660,609 completed · $0.0294
+
+[demo] sending Ctrl-C (SIGINT) to pid 7358 at 12:24:54
+
+[enrich] Ctrl-C: no new requests; saving 10 in-flight batch(es) before exit (press again to abort without saving)
+[enrich] saved batch    67: +1  -> 137,494 / 660,609 completed · $0.0294
+[enrich] saved batch    68: +49 -> 137,636 / 660,609 completed · $0.0299 · retrying 1
+[enrich] saved batch    69: +50 -> 137,687 / 660,609 completed · $0.0304
+[enrich] saved batch    70: +49 -> 137,791 / 660,609 completed · $0.0309 · retrying 1
+[enrich] saved batch    71: +50 -> 137,912 / 660,609 completed · $0.0315
+[enrich] saved batch    72: +50 -> 138,081 / 660,609 completed · $0.0320
+[enrich] saved batch    73: +50 -> 138,179 / 660,609 completed · $0.0325
+[enrich] saved batch    74: +48 -> 138,238 / 660,609 completed · $0.0330 · retrying 2
+[enrich] saved batch    75: +50 -> 138,338 / 660,609 completed · $0.0336
+[enrich] saved batch    76: +48 -> 138,483 / 660,609 completed · $0.0342 · retrying 2
+[enrich] session_end session=1 phase=initial stop_reason=keyboard_interrupt completed_before=0 completed_after=138483 spent_usd=0.034151 requests=76 attempts=76 failed_attempts=1 batches_committed=76 completed_model=3144 completed_reuse_in_run=5860 completed_cache_hit=129479 quote_fallbacks=1 item_retries=69 quarantined
+[run] downstream_skipped reason=522126 reviews still pending; resume enrichment first
+[run] end status=enrich_stopped:keyboard_interrupt wall_clock_s=76.915 counts={'completed': 138483, 'pending': 522126, 'quarantined': 13} spent_usd=0.034151
+status: enrich_stopped:keyboard_interrupt
+[demo] initial run exited with code 3
+
+==== STEP 3 - status after the interruption: saved work is on disk (12:25:12) ====
+run full-v1 · label_config gpt-6-luna+effort-none+enrich-v1+schema-v2+quote150+entities-lexicon-v1
+  completed     138,483
+  pending       522,126
+  quarantined        13  {'empty_review_text': 13}
+  enrichment calls by phase: {'initial': 76} · API spend $0.0342
+  session 1 [initial] completed 0 -> 138,483 · stop: keyboard_interrupt
+
+==== STEP 4 - resume with identical settings (completed IDs are not sent again) (12:25:15) ====
+[run] start run_id=full-v1 invocation=3 input=data/spotify_reviews_18months.csv stages=['ingest', 'enrich', 'verify', 'group', 'rank', 'memo'] provider=openai label_config=gpt-6-luna+effort-none+enrich-v1+schema-v2+quote150+entities-lexicon-v1 workers=10 spend_limit_usd=7.5
+[ingest] skip reason=already ingested counts={'completed': 138483, 'pending': 522126, 'quarantined': 13}
+[run] budget run_cap_usd=7.5 project_budget_usd=9.5 other_runs_spent_usd=0.108178 this_run_spent_usd=0.034151 effective_cap_usd=7.5
+[enrich] session_start session=2 phase=resume completed_before=138483 label_config=gpt-6-luna+effort-none+enrich-v1+schema-v2+quote150+entities-lexicon-v1 workers=10 spend_limit_usd=7.5
+[enrich] queued pending_reviews=522126 distinct_texts=472597 batches=9452
+[enrich] saved batch     1: +50 -> 138,618 / 660,609 completed · $0.0346
+[enrich] saved batch     2: +48 -> 138,722 / 660,609 completed · $0.0351 · retrying 2
+[enrich] saved batch     3: +49 -> 138,862 / 660,609 completed · $0.0356 · retrying 1
+[enrich] saved batch     4: +50 -> 138,969 / 660,609 completed · $0.0361
+[enrich] saved batch     5: +50 -> 139,110 / 660,609 completed · $0.0366
+[enrich] saved batch     6: +49 -> 139,167 / 660,609 completed · $0.0372 · retrying 1
+[enrich] saved batch     7: +50 -> 139,257 / 660,609 completed · $0.0377
+[enrich] saved batch     8: +49 -> 139,403 / 660,609 completed · $0.0382 · retrying 1
+[enrich] saved batch     9: +50 -> 139,667 / 660,609 completed · $0.0387
+[enrich] saved batch    10: +1  -> 139,668 / 660,609 completed · $0.0393
+[enrich] saved batch    11: +48 -> 139,739 / 660,609 completed · $0.0393 · retrying 2
+[enrich] saved batch    12: +2  -> 139,741 / 660,609 completed · $0.0394
+[enrich] saved batch    13: +1  -> 139,742 / 660,609 completed · $0.0394
+[enrich] saved batch    14: +1  -> 139,743 / 660,609 completed · $0.0394
+[enrich] saved batch    15: +2  -> 139,745 / 660,609 completed · $0.0395 · retrying 1
+[enrich] saved batch    16: +50 -> 139,879 / 660,609 completed · $0.0400
+[enrich] saved batch    17: +50 -> 140,081 / 660,609 completed · $0.0405
+[enrich] saved batch    18: +50 -> 140,138 / 660,609 completed · $0.0411
+[enrich] saved batch    19: +50 -> 140,197 / 660,609 completed · $0.0422
+[enrich] saved batch    20: +50 -> 140,279 / 660,609 completed · $0.0422
+[enrich] saved batch    21: +50 -> 140,518 / 660,609 completed · $0.0427
+[enrich] saved batch    22: +50 -> 140,613 / 660,609 completed · $0.0432
+[enrich] saved batch    23: +50 -> 140,681 / 660,609 completed · $0.0438
+[enrich] saved batch    24: +50 -> 140,795 / 660,609 completed · $0.0442
+[enrich] saved batch    25: +0  -> 140,795 / 660,609 completed · $0.0452 · retrying 50
+[enrich] saved batch    26: +50 -> 140,887 / 660,609 completed · $0.0457
+[enrich] saved batch    27: +50 -> 141,047 / 660,609 completed · $0.0462
+[enrich] saved batch    28: +50 -> 141,172 / 660,609 completed · $0.0467
+[enrich] saved batch    29: +50 -> 141,280 / 660,609 completed · $0.0472
+[enrich] saved batch    30: +50 -> 141,353 / 660,609 completed · $0.0483
+[enrich] saved batch    31: +50 -> 141,450 / 660,609 completed · $0.0483
+[enrich] saved batch    32: +50 -> 141,697 / 660,609 completed · $0.0493
+[enrich] saved batch    33: +49 -> 141,821 / 660,609 completed · $0.0493 · retrying 1
+[enrich] saved batch    34: +49 -> 141,894 / 660,609 completed · $0.0498 · retrying 1
+[enrich] saved batch    35: +1  -> 141,895 / 660,609 completed · $0.0498
+[enrich] saved batch    36: +1  -> 141,896 / 660,609 completed · $0.0498
+[enrich] saved batch    37: +50 -> 142,046 / 660,609 completed · $0.0504
+[enrich] saved batch    38: +50 -> 142,123 / 660,609 completed · $0.0508
+[enrich] saved batch    39: +48 -> 142,236 / 660,609 completed · $0.0513 · retrying 2
+[enrich] saved batch    40: +49 -> 142,380 / 660,609 completed · $0.0518 · retrying 1
+[enrich] saved batch    41: +50 -> 142,440 / 660,609 completed · $0.0523
+[enrich] saved batch    42: +46 -> 142,505 / 660,609 completed · $0.0528 · retrying 4
+[enrich] saved batch    43: +50 -> 142,615 / 660,609 completed · $0.0533
+[enrich] saved batch    44: +1  -> 142,616 / 660,609 completed · $0.0533
+[enrich] saved batch    45: +2  -> 142,618 / 660,609 completed · $0.0534
+[enrich] saved batch    46: +50 -> 142,673 / 660,609 completed · $0.0539
+[enrich] saved batch    47: +4  -> 142,677 / 660,609 completed · $0.0540
+[enrich] saved batch    48: +40 -> 142,791 / 660,609 completed · $0.0545 · retrying 10
+[enrich] saved batch    49: +50 -> 142,872 / 660,609 completed · $0.0550
+[enrich] saved batch    50: +50 -> 142,937 / 660,609 completed · $0.0555
+[enrich] saved batch    51: +49 -> 143,056 / 660,609 completed · $0.0560 · retrying 1
+[enrich] saved batch    52: +10 -> 143,066 / 660,609 completed · $0.0562 · retrying 1
+[enrich] saved batch    53: +1  -> 143,067 / 660,609 completed · $0.0562
+[enrich] saved batch    54: +45 -> 143,163 / 660,609 completed · $0.0567 · retrying 5
+
+==== recorded segment ends; resume continues in the background (pid 7686), log runs/full-v1/out/resume_console.log (12:26:00) ====
+run full-v1 · label_config gpt-6-luna+effort-none+enrich-v1+schema-v2+quote150+entities-lexicon-v1
+  completed     143,163
+  pending       517,446
+  quarantined        13  {'empty_review_text': 13}
+  enrichment calls by phase: {'initial': 76, 'resume': 54} · API spend $0.0567
+  session 1 [initial] completed 0 -> 138,483 · stop: keyboard_interrupt
+  session 2 [resume] completed 138,483 -> 0 · stop: None
+Script started on Sat Oct 17 12:23:34 2026
+
+Script done on Sat Oct 17 12:26:00 2026

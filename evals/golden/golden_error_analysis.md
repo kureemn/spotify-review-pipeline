@@ -38,6 +38,11 @@ are a small share of the ranked complaints (see `runs/full-v1/out/aggregates.csv
 boundary that matters most for the recommendation is pattern A. It is a deliberate rule in the shared taxonomy, and the
 memo's limitations call it out.
 
+## Does the quote support the label?
+
+Code checks exact-substring membership (50/50 pass). Whether each quote *supports* its label is judged by the human
+labeller (pending): [`golden_quote_review.csv`](golden_quote_review.csv).
+
 ## needs_review as a prediction
 
 The model flagged 9 of 50 for review; the human flagged 2 as ambiguous. The overlap is 1 (precision 0.11, recall 0.50). The

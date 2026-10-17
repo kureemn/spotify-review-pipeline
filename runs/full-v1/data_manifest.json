@@ -1,0 +1,208 @@
+{
+  "run_id": "full-v1",
+  "source": {
+    "file": "spotify_reviews_18months.csv",
+    "sha256": "1fc85de68a304dd8978b537cfa58793d5f41cbaf417fa32cb53899f83a2fcef6",
+    "bytes": 97400616,
+    "records": 660622,
+    "parsed_rows_sha256": "eb5ea1e15f020212004a5b1e2f873e45a9f105d1b4516ad077020492364f71ff",
+    "dataset": "BwandoWando, 3.4 Million Spotify Google Store Reviews v2 (Kaggle, CC0); course extract 2022-05-17..2023-11-17"
+  },
+  "code": {
+    "git_commit_at_finalize": "74a04024a16b0ded3d1bbfb1d6e1c8b85525657f",
+    "pipeline_at_run_start": {
+      "git_commit": "87fc271",
+      "pipeline_dirty": false,
+      "pipeline_files_sha256": "f70e3d8596b93e8d"
+    }
+  },
+  "label_config": "gpt-6-luna+effort-none+enrich-v1+schema-v2+quote150+entities-lexicon-v1",
+  "models_and_settings": {
+    "enrich": {
+      "model": "gpt-6-luna",
+      "effort": "none",
+      "prompt_version": "v1",
+      "batch_size": 50,
+      "max_output_tokens": 6000,
+      "service_tier": "flex"
+    },
+    "verify": {
+      "model": "gpt-6-luna",
+      "effort": "none",
+      "prompt_version": "v1",
+      "batch_size": 50,
+      "max_output_tokens": 3000,
+      "service_tier": "flex"
+    },
+    "group": {
+      "model": "gpt-6-luna",
+      "effort": "none",
+      "prompt_version": "v1",
+      "batch_size": 60,
+      "max_output_tokens": 6000,
+      "service_tier": "standard"
+    },
+    "memo": {
+      "model": "gpt-6-luna",
+      "effort": "none",
+      "prompt_version": "v1",
+      "batch_size": 1,
+      "max_output_tokens": 3000,
+      "service_tier": "standard"
+    }
+  },
+  "prompts_sha256_12": {
+    "enrich_v1": "d753d125fd69",
+    "verify_v1": "b49e80c19673",
+    "group_v1": "b38970b15743",
+    "memo_v1": "2a2068649048"
+  },
+  "declared": {
+    "verify_rate": 0.02,
+    "verify_seed": "verify-v1",
+    "short_quote_chars": 150,
+    "max_invalid_retries": 1,
+    "max_transient_retries": 4,
+    "project_budget_usd": 9.5,
+    "spend_limit_usd": 7.5
+  },
+  "outputs": {
+    "grading/calls.jsonl.gz": {
+      "sha256": "8b25e14846900b5de31f2c0e56fb1bff21ca872cce58181bea889f6d9655630b",
+      "bytes": 11963396
+    },
+    "grading/checkpoint_after.json": {
+      "sha256": "5741b379f36e97f00cb07c7ee48e57b7cac0948b6108a0788a3e0ed9e73f664b",
+      "bytes": 26418859
+    },
+    "grading/checkpoint_before.json": {
+      "sha256": "2cf97d50a3bb7ebda19d04eb9d20e0bcc3e931c204734a002c675c19e9d3474f",
+      "bytes": 5539339
+    },
+    "grading/claims.csv": {
+      "sha256": "d4f3caad1de6d65c902f0198bd5107321b21beac76e6c3342fda476d6daf8968",
+      "bytes": 567
+    },
+    "grading/ingestion.json": {
+      "sha256": "5512dd793b0bde3bd51f28b20b440108f3c9bab31233819bea5f32ce19482153",
+      "bytes": 954
+    },
+    "grading/membership.csv": {
+      "sha256": "666a50e4207ef3c67ea5d1ff5d26920b24a75763e27a01f334c74f83487863f6",
+      "bytes": 17489129
+    },
+    "grading/ranking.csv": {
+      "sha256": "6a0f7ffc75171f348a56b8340ca283d52f71b6190a1f8b6b7730c20710f8bb6d",
+      "bytes": 1793
+    },
+    "grading/records.jsonl.gz": {
+      "sha256": "a5ae0b59ed0927d293e6cc9bc506d2b6ed6a059bbf790694a9f71a4c3040c3e5",
+      "bytes": 65810448
+    },
+    "grading/run.json": {
+      "sha256": "6f60cf249eaf57cff37ecbf94aec8fee067e5d17032c6c9d3074ddf3b124b405",
+      "bytes": 470
+    },
+    "release/enriched.jsonl.gz": {
+      "sha256": "5f16c593cc62f27cb64159e41b21c4170e90776c094d9b46331114d7b99a1c29",
+      "bytes": 73611988
+    },
+    "runs/full-v1/out/aggregates.csv": {
+      "sha256": "4cf287fd7bcacd8dd9f5c5f690890722d8da93884b96552251d50d823e963c50",
+      "bytes": 3021
+    },
+    "runs/full-v1/out/checkpoint_after.json": {
+      "sha256": "5741b379f36e97f00cb07c7ee48e57b7cac0948b6108a0788a3e0ed9e73f664b",
+      "bytes": 26418859
+    },
+    "runs/full-v1/out/checkpoint_before.json": {
+      "sha256": "2cf97d50a3bb7ebda19d04eb9d20e0bcc3e931c204734a002c675c19e9d3474f",
+      "bytes": 5539339
+    },
+    "runs/full-v1/out/claims.csv": {
+      "sha256": "d4f3caad1de6d65c902f0198bd5107321b21beac76e6c3342fda476d6daf8968",
+      "bytes": 567
+    },
+    "runs/full-v1/out/enriched.jsonl": {
+      "sha256": "08ee0204b6898fb3638d06a6c29f9deea98a99d593887cdd1670b2aac1016e58",
+      "bytes": 419449053
+    },
+    "runs/full-v1/out/ingestion.json": {
+      "sha256": "5512dd793b0bde3bd51f28b20b440108f3c9bab31233819bea5f32ce19482153",
+      "bytes": 954
+    },
+    "runs/full-v1/out/ingestion_report.json": {
+      "sha256": "68fd751c2a5edb0dd1f5395d50285231f90780f08015d5f61475454174a927a0",
+      "bytes": 2830
+    },
+    "runs/full-v1/out/issues.json": {
+      "sha256": "5404815476b813113c2eabe1b1fdc4b914a6ca54e4a802097f7723fd26471843",
+      "bytes": 29310
+    },
+    "runs/full-v1/out/membership.csv": {
+      "sha256": "666a50e4207ef3c67ea5d1ff5d26920b24a75763e27a01f334c74f83487863f6",
+      "bytes": 17489129
+    },
+    "runs/full-v1/out/memo.json": {
+      "sha256": "839579d7282199a19e1652f1203edb72bbc6640edd5bc24913cf82b9aac58692",
+      "bytes": 3752
+    },
+    "runs/full-v1/out/memo.md": {
+      "sha256": "0f04293ab3dd6bb1de63d9b5bb85a128c9b2aaa082faa527261ddbe07ece5f92",
+      "bytes": 3663
+    },
+    "runs/full-v1/out/memo_inputs.json": {
+      "sha256": "4a876d76e0d06c4d96b897d771b87e56920918d5aed634d59350992f49bc56aa",
+      "bytes": 17547
+    },
+    "runs/full-v1/out/monthly_complaint_share.csv": {
+      "sha256": "e5911a35eb5fcc9dc1e7d492f545a6fcda72118d51188635bb3181493932f853",
+      "bytes": 7491
+    },
+    "runs/full-v1/out/quarantine.jsonl": {
+      "sha256": "49d7861420a9a31c78981416138fa5481e16ce47355f4fb889fa9337762a4849",
+      "bytes": 38086
+    },
+    "runs/full-v1/out/quarantine_ingest.jsonl": {
+      "sha256": "034049ad40e8bf9d3c5ef290954904ca41388785e873c9713db9a10f789dcadb",
+      "bytes": 1625
+    },
+    "runs/full-v1/out/ranking.csv": {
+      "sha256": "6a0f7ffc75171f348a56b8340ca283d52f71b6190a1f8b6b7730c20710f8bb6d",
+      "bytes": 1793
+    },
+    "runs/full-v1/out/records.jsonl": {
+      "sha256": "0248fd01e746b2fc90c057f0706296f443b98df60d9be1e63335715eda0a6a55",
+      "bytes": 297082065
+    },
+    "runs/full-v1/out/resume_console.log": {
+      "sha256": "7ee7be17c78f9ab93065ea6681dbe93103fd0d56b840248a23a01ef88fc8307a",
+      "bytes": 972174
+    },
+    "runs/full-v1/out/run_log.jsonl": {
+      "sha256": "61713bb9aef5245dff20f86cd6b8315a23023e53c635a7a56a36e18af52fc0e4",
+      "bytes": 4065445
+    },
+    "runs/full-v1/out/run_summary.json": {
+      "sha256": "1ccd310834fbbae3fe5dcadb22e839a97a04ab1afd0e38116ad982eda99d5cf3",
+      "bytes": 5759
+    },
+    "runs/full-v1/out/topic_aggregates.csv": {
+      "sha256": "071fb7412d6b5f828950ed1aa31fb8fe674b37f286c87ad2ee982aa527157a5a",
+      "bytes": 658
+    },
+    "runs/full-v1/out/verify/disagreements.jsonl": {
+      "sha256": "4f006abf49c4cd94e2e286f66c007b18b06a50a0a3800a4cedde56fecfe0a54b",
+      "bytes": 1017721
+    },
+    "runs/full-v1/out/verify/verifier_predictions.jsonl": {
+      "sha256": "fbf65504600a93b3383f19f08c78f957eb6d538b613251ef8bf64cfb2ba41f9a",
+      "bytes": 1548996
+    },
+    "runs/full-v1/out/verify/verify_summary.json": {
+      "sha256": "2ae14f22544d485799574a9db299b9ddab6c231c3ff162db224a1707ef54cc58",
+      "bytes": 4945
+    }
+  },
+  "note": "enriched.jsonl / records.jsonl are large: gzipped copies are in grading/ and the GitHub release (release/)."
+}

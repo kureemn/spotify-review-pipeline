@@ -26,7 +26,12 @@ traces to a saved calculation. A reviewer can inspect and recompute everything b
 | Golden-50 vs human labels | topic **74%**, intent **80%**, severity exact **72%** (MAE 0.32), joint 52%, sentiment within ±0.5 **96%**, quotes 100% exact | [`evals/golden/golden_error_analysis.md`](evals/golden/golden_error_analysis.md) |
 | Full-run API cost (usage × rates) | **$5.46** (12,733 calls, 12,731 on the flex tier); **$5.57 for the whole project** including pilot, dev runs and tests, under the $9.50 code cap and the $10 course cap | [`runs/full-v1/out/run_summary.json`](runs/full-v1/out/run_summary.json) |
 | Full-run wall clock | **3.3 h** across 3 enrichment sessions (10 workers): initial → recorded Ctrl-C → resume → content-filter stop → fixed → resume | `runs/full-v1/out/run_log.jsonl` |
+| Cost forecast vs actual | the calculator's base projection (refreshed at 10k) was **$5.19**; the full run cost **$5.46 (+5%)**, inside the base–conservative range ($5.19–$14.73) | [`cost/report.md`](cost/report.md) · `run_summary.json` |
 | Measured 100-review pilot | cold $0.003343 / 38.6 s · warm 0 calls / $0 / 0.55 s | [`cost/report.md`](cost/report.md) |
+
+**Large files:** `enriched.jsonl` (660,471 validated predictions with subtopic and provenance, 74 MB gzipped) is a
+[GitHub release asset](https://github.com/kureemn/spotify-review-pipeline/releases/tag/v1.0-full-run). Everything the checker needs is committed in `grading/`. Hashes for every output are in
+[`runs/full-v1/data_manifest.json`](runs/full-v1/data_manifest.json).
 
 Measured values and estimates are labelled separately throughout. "Accounted for" (completed **or** quarantined) is not
 the same as "classified" (valid completed records).
@@ -39,12 +44,12 @@ the same as "classified" (valid completed records).
 | Accessible code, setup, artifacts | [Setup](#setup) · [Commands](#commands-paid-calls-always-need---confirm-paid) · pinned [`requirements.txt`](requirements.txt) · [`.env.example`](.env.example) · offline checks in [Verify without an API key](#verify-without-an-api-key) |
 | Architecture, shared schema, provenance | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) (diagram + stage contracts) · [`docs/LABELS.md`](docs/LABELS.md) · [`pipeline/labels.py`](pipeline/labels.py) · `runs/*/run_manifest.json` (source sha, code sha, prompt shas, model/tier) · `label_config` on every record · direct `cache_source_id` provenance |
 | Memo numbers ↔ calculations ↔ evidence | memo cites `claims.csv` IDs; [`pipeline/stages/memo.py`](pipeline/stages/memo.py) rejects any unknown claim, number or review ID (the 10k run's first draft was rejected and fixed on retry: see its `run_log.jsonl`); checker recomputes claims |
-| Recommendation, alternatives, limitations | [Decision memo](#decision-memo) · trend analysis with denominators · [Limitations](#limitations) |
+| Recommendation, alternatives, limitations | [Decision memo](#decision-memo) (reviewed and approved by the author, below) · trend with denominators: [`monthly_complaint_share.csv`](runs/full-v1/out/monthly_complaint_share.csv) · [Limitations](#limitations) |
 
 ### Testing & evaluation
 | Criterion | Where to look |
 |---|---|
-| 50 human labels, per-field comparison, error analysis | `golden/golden_50_labeled.csv` · [`evals/golden/golden_report.md`](evals/golden/golden_report.md) · protocol **predeclared before labelling** in [`docs/RUBRIC_PLAN.md`](docs/RUBRIC_PLAN.md) |
+| 50 human labels, per-field comparison, error analysis | [`golden/golden_50_labeled.csv`](golden/golden_50_labeled.csv) (committed before evaluation) · [`golden_report.md`](evals/golden/golden_report.md) (agreement, macro F1, confusion tables) · [`golden_error_analysis.md`](evals/golden/golden_error_analysis.md) (patterns, quote-support inspection, needs_review as a predictor) · per-case [`golden_cases.jsonl`](evals/golden/golden_cases.jsonl) · protocol **predeclared** in [`docs/RUBRIC_PLAN.md`](docs/RUBRIC_PLAN.md) |
 | Independent verification, planted-error and injection tests | blind verifier (text + rubric only): `runs/full-v1/out/verify/` · planted errors: [`evals/planted/`](evals/planted/) (30/30 gross) and [`evals/planted_subtle/`](evals/planted_subtle/) (57/60 near-miss) · injection: [`evals/injection/`](evals/injection/) (5/5 resisted by both roles, 15 ordinary reviews in the same batch unaffected) |
 | Real 100-review cold/warm pilot, offline calculator, retry/spend/recovery controls | [`cost/report.md`](cost/report.md) · `python3 cost/calculator.py selftest` · controls demonstrated in [Controls in action](#controls-in-action) |
 
@@ -52,7 +57,7 @@ the same as "classified" (valid completed records).
 | Criterion | Where to look |
 |---|---|
 | Full ingestion, coverage, classification | `grading/ingestion.json` (byte-identical to the course profile) · checker output in [Verify without an API key](#verify-without-an-api-key) |
-| Runnable staged program, bounded calls, saved handoffs, resume | `python -m pipeline run --input <csv>` · ≤ 50 reviews per enrichment request · `runs/<id>/out/` handoffs · **real interrupt + resume of the graded run**: [recording](docs/evidence/resume_demo.rec), `grading/checkpoint_before.json` / `checkpoint_after.json` |
+| Runnable staged program, bounded calls, saved handoffs, resume | `python -m pipeline run --input <csv>` · ≤ 50 reviews per enrichment request · `runs/<id>/out/` handoffs · **real interrupt + resume of the graded run**: timed recording [`resume_demo.rec`](docs/evidence/resume_demo.rec) (macOS `script -p`), readable [transcript](docs/evidence/resume_demo_transcript.txt), `grading/checkpoint_before.json` / `checkpoint_after.json` |
 | Reproducible ranking + deployed dashboard / backend / database | `python -m pipeline rank --from rerank --records grading/records.jsonl.gz --membership grading/membership.csv` (byte-identical, 8 s, no model) · [live dashboard](https://spotify-review-insights-smoky.vercel.app) → Vercel functions ([`dashboard/api/`](dashboard/api/)) → Neon Postgres ([`dashboard/db/`](dashboard/db/)) |
 
 ## Architecture (summary)
@@ -108,7 +113,7 @@ python3 cost/calculator.py selftest
 script -p docs/evidence/resume_demo.rec                        # replays the recorded interrupt/resume in real time
 ```
 
-Checker result on the submitted `grading/` folder (`self-check.json`, not committed): `status: review_required` with a single
+Checker result on the submitted `grading/` folder (saved outside it as [`evals/self_check_full_run.json`](evals/self_check_full_run.json)): `status: review_required` with a single
 issue, **`unfinished_classification: 138`**, the honestly reported quarantines. Ranking, claims, cache reuse, call logs,
 label configs, quote membership and resume evidence all pass. 12,964 calls are reported (the full run plus the
 dev-checkpoint calls whose results it reused by review ID).
@@ -170,6 +175,9 @@ and both labels are kept. At corpus scale, July 2023's boycott wave (48,907 comp
 only 4.5% billing) inflates `other.general` (rank 2). The memo treats it as not actionable.
 
 ## Decision memo
+
+**Human review:** the author read the memo against the saved ranking, claims and evidence and approved the argument
+on 2026-10-17. The caveat about the premium-only billing boundary is added in [Limitations](#limitations).
 
 Full text: [`runs/full-v1/out/memo.md`](runs/full-v1/out/memo.md), generated by the memo role from saved aggregates only
 and validated by code (claim IDs, every number, every review ID). It is also on the live dashboard, where each claim ID
