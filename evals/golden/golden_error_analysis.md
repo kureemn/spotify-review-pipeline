@@ -40,8 +40,30 @@ memo's limitations call it out.
 
 ## Does the quote support the label?
 
-Code checks exact-substring membership (50/50 pass). Whether each quote *supports* its label is judged by the human
-labeller (pending): [`golden_quote_review.csv`](golden_quote_review.csv).
+Code checks exact-substring membership (50/50 pass). Whether each quote *supports* the model's label was judged by the
+**human labeller**, case by case, on a blind page that showed the review, the model's label and the highlighted quote
+([`golden/quote_check.html`](../../golden/quote_check.html); raw export [`golden/golden_quote_check.csv`](../../golden/golden_quote_check.csv)):
+**39 supports · 7 partial · 4 does not support**. 41 of 50 quotes are the full review text (reviews ≤ 150
+characters), so they contain all available evidence by construction.
+
+| Review | Model label | Judgement | Human comment |
+|---|---|---|---|
+| `991b6b3a` | billing.free_tier_restrictions / complaint / 3 | does not | — |
+| `1fc8b08f` | usability.ads / praise / 1 | partial | very ambigious statement |
+| `46842184` | catalog.lyrics / complaint / 2 | does not | — |
+| `5de7f95b` | other.general / unclear / 1 | partial | intent is complaint |
+| `372d4e67` | usability.ads / complaint / 2 | does not | Unclear to me what language is saying |
+| `3ddb3f4e` | billing.free_tier_restrictions / cancellation / 3 | partial | unsure what is cause of issue, if related to billing |
+| `16d640e9` | billing.free_tier_restrictions / complaint / 3 | partial | unclear statement |
+| `2aa566c6` | usability.ads / praise / 1 | partial | might categorize as other |
+| `8c0546b0` | billing.free_tier_restrictions / complaint / 3 | does not | not sure if related to free tier |
+| `dceb14e7` | billing.free_tier_restrictions / complaint / 3 | partial | not sure if specific to free tier |
+| `d2f3874f` | usability.ads / complaint / 2 | partial | might up the severity |
+
+What the non-supporting cases show: (1) the **premium-only billing rule** is often applied without "Premium" appearing in
+the quote (`991b6b3a`, `8c0546b0`, `3ddb3f4e`, `16d640e9`), which is pattern A again. (2) For **non-English text** the quote
+cannot convince a reader who does not read the language (`46842184`, `372d4e67`). (3) Praise quotes about ads read as
+generic praise to the human (`1fc8b08f`, `2aa566c6`), which is pattern F.
 
 ## needs_review as a prediction
 
