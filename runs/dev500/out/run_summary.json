@@ -1,0 +1,151 @@
+{
+  "run_id": "dev500",
+  "label_config": "gpt-6-luna+effort-none+enrich-v1+schema-v2+quote150+entities-lexicon-v1",
+  "status_counts": {
+    "completed": 500
+  },
+  "quarantine_reasons": {},
+  "cache_reuse_records": 21,
+  "calls": {
+    "enrich": {
+      "succeeded": {
+        "calls": 13,
+        "input_tokens": 49262,
+        "output_tokens": 15560,
+        "cached_tokens": 29292,
+        "cache_write_tokens": 19931,
+        "reasoning_tokens": 0,
+        "cost_usd_estimated_from_usage": 0.005284,
+        "all_usage_available": true
+      }
+    },
+    "group": {
+      "succeeded": {
+        "calls": 1,
+        "input_tokens": 7104,
+        "output_tokens": 1724,
+        "cached_tokens": 0,
+        "cache_write_tokens": 7101,
+        "reasoning_tokens": 0,
+        "cost_usd_estimated_from_usage": 0.00175,
+        "all_usage_available": true
+      }
+    },
+    "memo": {
+      "failed": {
+        "calls": 1,
+        "input_tokens": 4804,
+        "output_tokens": 1640,
+        "cached_tokens": 0,
+        "cache_write_tokens": 4801,
+        "reasoning_tokens": 0,
+        "cost_usd_estimated_from_usage": 0.00142,
+        "all_usage_available": true
+      },
+      "succeeded": {
+        "calls": 1,
+        "input_tokens": 4804,
+        "output_tokens": 797,
+        "cached_tokens": 4801,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 0,
+        "cost_usd_estimated_from_usage": 0.000447,
+        "all_usage_available": true
+      }
+    },
+    "verify": {
+      "succeeded": {
+        "calls": 1,
+        "input_tokens": 2725,
+        "output_tokens": 1167,
+        "cached_tokens": 0,
+        "cache_write_tokens": 2722,
+        "reasoning_tokens": 0,
+        "cost_usd_estimated_from_usage": 0.000462,
+        "all_usage_available": true
+      }
+    }
+  },
+  "spent_usd_estimated_from_usage": 0.009363,
+  "spend_limit_usd": 0.1,
+  "project_budget_usd": 9.5,
+  "service_tiers": {
+    "flex": 14,
+    "standard": 3
+  },
+  "ledger_refusals": 0,
+  "workers": 2,
+  "stage_times": {
+    "ingest": [
+      {
+        "invocation": 1,
+        "seconds": 0.014
+      }
+    ],
+    "enrich": [
+      {
+        "invocation": 1,
+        "seconds": 47.848
+      }
+    ],
+    "export": [
+      {
+        "invocation": 1,
+        "seconds": 0.016
+      }
+    ],
+    "verify": [
+      {
+        "invocation": 1,
+        "seconds": 6.487
+      }
+    ],
+    "group": [
+      {
+        "invocation": 1,
+        "seconds": 14.99
+      }
+    ],
+    "rank": [
+      {
+        "invocation": 1,
+        "seconds": 0.012
+      }
+    ],
+    "memo": [
+      {
+        "invocation": 1,
+        "seconds": 21.954
+      }
+    ]
+  },
+  "wall_clock": [
+    {
+      "invocation": 1,
+      "seconds": 91.902,
+      "stages": [
+        "ingest",
+        "enrich",
+        "verify",
+        "group",
+        "rank",
+        "memo"
+      ],
+      "status": "ok"
+    }
+  ],
+  "sessions": [
+    {
+      "session": 1,
+      "stage": "enrich",
+      "started_at": 1792264155.775458,
+      "ended_at": 1792264203.6227698,
+      "phase": "initial",
+      "completed_before": 0,
+      "completed_after": 500,
+      "calls": 13,
+      "stop_reason": "queue_empty"
+    }
+  ],
+  "cost_note": "Costs are usage x rates in pipeline/config.py (see cost/rates.csv); not a provider invoice."
+}

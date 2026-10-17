@@ -1,0 +1,18 @@
+{
+  "status": "validated",
+  "source": "model",
+  "validation_problems": [],
+  "cited_claims": [
+    "C001",
+    "C002",
+    "C004",
+    "C005",
+    "C009",
+    "C017",
+    "C018",
+    "C025"
+  ],
+  "priority_area": "billing_support",
+  "headline": "Make free-tier controls clearer and more dependable",
+  "memo_markdown": "## Recommendation\nPrioritize **billing/support**, beginning with free-tier restrictions: make the controls available on each plan explicit, and remove confusing or unexpected barriers to ordinary listening. This is the clearest high-volume, high-severity issue in the ranked list: basic-feature restrictions have a priority score of 2357 [C004], with 814 complaints [C001]. Pair product changes with clearer in-app explanations and help content. Treat the second-ranked general dissatisfaction category cautiously: it is large but too nonspecific to define a focused fix. Investigate ad interruptions next as a distinct experience issue.\n\n## Supporting evidence\n1. **Basic features require Premium.** This is the top ranked issue; its severity sum is 2357 [C002]. Reviews describe being unable to stream or play songs without Premium (review e8a47caf-064b-4ebb-9ceb-f17477e6c3a1; review c7101a30-63ec-49c4-af65-1dcc34de394b). Address the mismatch between user expectations and plan restrictions, without assuming the reviews establish a pricing or policy cause.\n2. **General dissatisfaction.** This ranks second, with 1067 complaints [C005], but the label groups unspecified grievances rather than a clearly actionable product defect. Use it as a signal to collect more specific feedback, not as a single intervention target.\n3. **Frequent or intrusive ads.** This is the third ranked issue, with 634 complaints [C009]. The label points to interruptions as a potential usability problem, but the supplied representative evidence is not well matched: the listed reviews under this label mention vanished playlists, songs not playing, and an alarm commercial (review ee11e1df-cb73-4c3a-b5e8-7268c7872b01; review 68d9fe0f-e915-42d6-adc4-4033f2baf0ca). Validate the classification before committing substantial effort.\n\n## Alternatives considered\n**Usability** has broad reach: it accounts for 31.2% of all complaints in topic aggregates, compared with billing at 20.8%. But the leading usability issues are ads and general dissatisfaction, and the provided ad examples raise label-fit concerns. **Playback** is a credible second priority: playback has a mean severity of 3.203800, and stops/restarts have severity sum 676 [C018] from 213 complaints [C017]. This is a narrower, actionable reliability problem, but its issue-level complaint volume is below the leading billing issue. **Access** appears severe when raised (mean severity 3.880000 is not supplied; therefore do not infer it from issue aggregates), but login failures total 120 complaints [C025]. Support alone has only 5 complaint records in the topic aggregates, so it is not the leading standalone investment area.\n\n## Limitations\nThese are self-selected public Google Play reviews from 2022-05-17 to 2023-11-15, not representative customer research; the source provides no revenue, plan tier, or confirmed churn. Cancellation language expresses intent, not observed churn. RUN_FACTS reports 10,000 completed classifications and 0 unresolved or quarantined nonempty records, but completion does not establish accuracy. Exact text reuse affects 1,552 records. Issue labels and evidence can be noisy or mismatched, especially for ads; validate findings with targeted research and product telemetry before sizing or forecasting impact."
+}

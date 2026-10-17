@@ -1,0 +1,524 @@
+{
+  "grouping_rule": "issue_id = topic.subtopic of each completed complaint/cancellation record; one issue per review",
+  "group_config": "gpt-6-luna+effort-none+group-v1+k8",
+  "issues": [
+    {
+      "issue_id": "access.account_hacked_or_locked",
+      "topic": "access",
+      "subtopic": "account_hacked_or_locked",
+      "name": "Hacked Account and Lost Playlists",
+      "summary": "The reviewer says their account was hacked and they cannot recover their playlists.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "d87536c5-6fe0-4b38-b0b1-c47936e4a0d8"
+      ],
+      "member_count": 1,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "access.general",
+      "topic": "access",
+      "subtopic": "general",
+      "name": "Token Error Blocks Access",
+      "summary": "A “no token provided” message appears and the reviewer cannot resolve it.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "686fa8a8-f220-4ddd-b283-d61dd242051a"
+      ],
+      "member_count": 1,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "access.login_failure",
+      "topic": "access",
+      "subtopic": "login_failure",
+      "name": "Unable to Log In",
+      "summary": "Reviewers report being unable to log in because of repeated phone-number prompts, password rejection, or errors.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "84acb6b0-dd91-4330-944f-2686cbd15ce0",
+        "0a7f2420-1b49-41fa-8cfc-0b2e178bea6b",
+        "12efd15d-4d4f-4a71-8e71-69d03b6f983a",
+        "de0a9cdf-8974-48bc-802f-331228df4619",
+        "32fb340f-4f9f-4551-8dae-755221e58d6a",
+        "f6f9c680-0970-443f-b422-b1a6ad85e7ce"
+      ],
+      "member_count": 6,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "billing.free_tier_restrictions",
+      "topic": "billing",
+      "subtopic": "free_tier_restrictions",
+      "name": "Too Many Features Behind Premium",
+      "summary": "Reviewers say basic listening features, song choice, skips, or audio quality now require Premium.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "237e6174-4921-44df-828c-28f7b9d6196e",
+        "21915fcd-9a35-48ba-b277-6296c4154603",
+        "a8170750-1671-4962-bba3-bd297d78f0bc",
+        "a78d831a-69f4-428a-9235-cfdd9775c509",
+        "398566f7-2519-40e6-a2f4-6676657a18a7",
+        "a06df5ff-01c8-4aff-a89c-a0c2ddc88f76",
+        "9db060c5-2ff5-493a-8a19-01a3da91ff1d",
+        "6a4f84b4-18e2-47d9-adb8-2461a9319c11"
+      ],
+      "member_count": 46,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "billing.price",
+      "topic": "billing",
+      "subtopic": "price",
+      "name": "Subscription Seems Too Expensive",
+      "summary": "The reviewer asks how much money is wanted.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "08c07310-e802-4a88-bd97-2a5f240c0b44"
+      ],
+      "member_count": 1,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "billing.subscription_activation",
+      "topic": "billing",
+      "subtopic": "subscription_activation",
+      "name": "Unable to Buy or Access Premium",
+      "summary": "Reviewers cannot complete a Premium purchase or still cannot access music after paying.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "1d1480fb-0142-46da-8570-45bf3983bf6d",
+        "57aca404-d58b-4bb4-97b1-c64db92f054a",
+        "16929558-ce1e-4b87-8738-a1de3f557f66"
+      ],
+      "member_count": 3,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "catalog.general",
+      "topic": "catalog",
+      "subtopic": "general",
+      "name": "Spotify Wrapped or Collab Content Issues",
+      "summary": "The examples mention trouble opening Spotify Wrapped and the removal of BTS collaboration streams.",
+      "coherence": "mixed",
+      "outlier_ids": [],
+      "example_ids": [
+        "c1726764-f0ce-4abc-ad9e-6cd143e1b2c7",
+        "9f3626e0-1bcb-4788-a412-f812102502d1"
+      ],
+      "member_count": 2,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "catalog.lyrics",
+      "topic": "catalog",
+      "subtopic": "lyrics",
+      "name": "Lyrics Missing or Hard to Read",
+      "summary": "Reviewers report missing or unloaded lyrics, and one dislikes the new lyrics font.",
+      "coherence": "coherent",
+      "outlier_ids": [
+        "59f31721-b2c8-40c5-ba3c-b9fe64a58d68"
+      ],
+      "example_ids": [
+        "e5e362d7-1057-43bf-a3ca-8ffd93f80789",
+        "47becad0-8ae5-4a10-9731-fde8f2091862",
+        "9f7a013a-082e-4ec1-8a65-a1e0a0395d20",
+        "e0127547-4edd-44a0-8d5e-e8398bc07086",
+        "59f31721-b2c8-40c5-ba3c-b9fe64a58d68"
+      ],
+      "member_count": 5,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "catalog.missing_content",
+      "topic": "catalog",
+      "subtopic": "missing_content",
+      "name": "Songs or Genres Missing",
+      "summary": "Reviewers say songs, removed tracks, or genres such as gospel are missing from the catalog.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "0658feaa-5bec-416e-b6b0-3de2a4c14580",
+        "0b716a9d-85bf-4f4e-8e2e-be71e4a379a6",
+        "a1a28752-3256-4f81-b888-3e943343529f",
+        "4b3ace8e-b199-40b3-8ad4-5c0580e38203"
+      ],
+      "member_count": 4,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "catalog.podcasts_audiobooks",
+      "topic": "catalog",
+      "subtopic": "podcasts_audiobooks",
+      "name": "Podcast or Canvas Feature Problems",
+      "summary": "One reviewer cannot switch podcast playback between video and audio, while another says Canvas disappeared after an update.",
+      "coherence": "mixed",
+      "outlier_ids": [],
+      "example_ids": [
+        "caa9bb7e-814c-4895-b872-10637419b9ba",
+        "384008ad-eb79-4525-a794-b0b67f7fb3f5"
+      ],
+      "member_count": 2,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "catalog.recommendations",
+      "topic": "catalog",
+      "subtopic": "recommendations",
+      "name": "Unwanted or Repetitive Recommendations",
+      "summary": "Reviewers dislike unwanted recommendations, repetitive DJ selections, or changes to recommended music.",
+      "coherence": "coherent",
+      "outlier_ids": [
+        "618d1dbb-0186-4537-923a-7b4dabf19afb"
+      ],
+      "example_ids": [
+        "7c5d9a4d-1bb1-4da3-bc3b-2500ae0246f1",
+        "d26566f7-a898-4298-a06a-50bd3f7319c1",
+        "618d1dbb-0186-4537-923a-7b4dabf19afb",
+        "1807cc68-ba99-4edc-b6f1-2a1478e69109",
+        "544a8481-e12b-4878-92d0-ec3a5256e13a",
+        "ed8efdfe-43e3-4baa-bbed-317807663531"
+      ],
+      "member_count": 6,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "catalog.search_discovery",
+      "topic": "catalog",
+      "subtopic": "search_discovery",
+      "name": "Only a 30-Second Clip",
+      "summary": "The reviewer says they can access only a 30-second clip.",
+      "coherence": "mislabeled",
+      "outlier_ids": [
+        "4d327494-7846-481a-bf00-f4b5abc099c4"
+      ],
+      "example_ids": [
+        "4d327494-7846-481a-bf00-f4b5abc099c4"
+      ],
+      "member_count": 1,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "downloads.downloads_lost_failing",
+      "topic": "downloads",
+      "subtopic": "downloads_lost_failing",
+      "name": "Downloads Fail or Disappear",
+      "summary": "Reviewers say downloads get stuck, fail, disappear, or are deleted during a storage move.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "2ffdf599-a0d5-4c01-bf26-025215d44c06",
+        "394b1e3e-205a-48a7-a9ca-64170fa5f6a0",
+        "5be3399d-dcd2-405b-a931-29b02ffc966e",
+        "b03d6dc9-449a-4647-b112-559186656759"
+      ],
+      "member_count": 4,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "downloads.general",
+      "topic": "downloads",
+      "subtopic": "general",
+      "name": "Free Music Downloads Unavailable",
+      "summary": "The reviewer says music cannot be downloaded for free.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "1d3f978e-b31f-4a4b-ab17-ec46ab4966b3"
+      ],
+      "member_count": 1,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "downloads.offline_mode",
+      "topic": "downloads",
+      "subtopic": "offline_mode",
+      "name": "Offline Playback Does Not Work",
+      "summary": "Reviewers say they can no longer listen to music offline.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "1f13c3a2-e57b-460c-b569-964e6b2b1f31",
+        "dcff57c6-abd6-413b-b255-aec3dc34fcbd"
+      ],
+      "member_count": 2,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "other.general",
+      "topic": "other",
+      "subtopic": "general",
+      "name": "General Dissatisfaction With Spotify",
+      "summary": "Reviewers express broad dislike of the app, its updates, or its content without describing one specific product problem.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "0ed90e01-b1ca-40a5-a0a2-4660c0fdaf60",
+        "a0036cd0-72ae-4d2d-98a1-c12938dd166c",
+        "d27e9b26-a7af-469c-9a4e-8deea2db72ae",
+        "68107809-52c1-469d-a78a-569280e49ed6",
+        "b47c203f-366e-4409-922d-cd52aa8bbef6",
+        "06a45bd5-3ed9-43af-b7f2-8b9487e2ffff",
+        "33526c6f-7a49-4b3d-bd20-d1bc191c494c",
+        "507bc222-f269-4f06-82be-b80a34df9691"
+      ],
+      "member_count": 52,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "playback.audio_quality",
+      "topic": "playback",
+      "subtopic": "audio_quality",
+      "name": "Music Adjustment Control Not Working",
+      "summary": "The reviewer says the music adjustment control does not work properly.",
+      "coherence": "mislabeled",
+      "outlier_ids": [
+        "9c9757da-6b99-4c95-a0e7-0661ee858027"
+      ],
+      "example_ids": [
+        "9c9757da-6b99-4c95-a0e7-0661ee858027"
+      ],
+      "member_count": 1,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "playback.connectivity_errors",
+      "topic": "playback",
+      "subtopic": "connectivity_errors",
+      "name": "Connection Errors Despite Internet Access",
+      "summary": "Reviewers describe internet or playback failures, including repeated no-connection messages despite working network access.",
+      "coherence": "mixed",
+      "outlier_ids": [
+        "9ce5f16c-aef0-48eb-ace1-91905796bc3d",
+        "3df77a78-ad9a-4456-8be8-8178ffd43d67"
+      ],
+      "example_ids": [
+        "4ab2089a-ffa8-49e7-a8a3-aeb583a96796",
+        "bcdf315e-c82d-41f0-9fcd-ba5933dfe77e",
+        "9ce5f16c-aef0-48eb-ace1-91905796bc3d",
+        "98d936e1-fd1d-475a-89ee-0e1517cb60d3",
+        "c64af4d8-ac17-48fe-ae38-fd54b41b16b1",
+        "3df77a78-ad9a-4456-8be8-8178ffd43d67",
+        "05fa5b8a-a49b-43be-bab5-38af789a65a7",
+        "f87fb3d9-501a-4119-bc40-b0669270ae44"
+      ],
+      "member_count": 8,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "playback.crashes_wont_open",
+      "topic": "playback",
+      "subtopic": "crashes_wont_open",
+      "name": "App Crashes or Will Not Load",
+      "summary": "Reviewers say the app crashes, shuts down, or gets stuck before opening or loading properly.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "4a806587-0dde-4fb4-b4f1-f5c7d197c927",
+        "55cc3abf-c295-4591-8c3a-78085cfdefaa",
+        "651e6e7b-f93e-4369-9631-15c73ddcd4ad",
+        "66a29b3c-c14d-440e-b722-b23e0c99ae82",
+        "0fcf89b2-0b81-4838-bf5f-41c684e43b2d",
+        "065c418e-7f18-42a3-b241-fe693b7a2b0c",
+        "89be32ab-664a-4647-a5e3-e4006a67e4e1"
+      ],
+      "member_count": 7,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "playback.device_connect",
+      "topic": "playback",
+      "subtopic": "device_connect",
+      "name": "Playback on Connected Devices Fails",
+      "summary": "Reviewers report problems starting or casting Spotify playback through assistants, alarms, Google Home, or other devices.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "46ff0c74-5e86-4e5b-b4cd-36201aab0f9e",
+        "4526d439-a6e4-4e0a-b0bc-ae0f9ce5bd96",
+        "c7df9cb8-7bec-4036-a6a1-1353d2d705d8",
+        "01124066-b5dd-4c79-8618-d1bea99d197a",
+        "8b9d84a8-f650-4272-b332-4d60cb42377d"
+      ],
+      "member_count": 5,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "playback.general",
+      "topic": "playback",
+      "subtopic": "general",
+      "name": "Songs Will Not Play",
+      "summary": "Reviewers say Spotify will not let them play songs or anything at all.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "530b7128-1b64-46a7-81ad-d69c4bf821cf",
+        "a7b7539a-c8d3-4f4e-9edd-d46cd1b1fd12",
+        "4c34f240-76d4-451a-ac74-5bc6bd484825"
+      ],
+      "member_count": 3,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "playback.performance_battery",
+      "topic": "playback",
+      "subtopic": "performance_battery",
+      "name": "High Data and Storage Use",
+      "summary": "The reviewer says the app wastes data and phone storage.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "a862b037-7542-4a3e-94ef-836b7092f4ef"
+      ],
+      "member_count": 1,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "playback.stops_skips_lag",
+      "topic": "playback",
+      "subtopic": "stops_skips_lag",
+      "name": "Playback Fails or Stops Unexpectedly",
+      "summary": "Reviewers report songs or podcasts failing to play, lagging, pausing, stopping, or not advancing as expected.",
+      "coherence": "mixed",
+      "outlier_ids": [
+        "77a53aa5-a453-4bcb-8267-d4f44a492dd3",
+        "06d4c78d-73b4-4b54-9ef3-3d5a0d18cb96",
+        "a0cbc9d6-51bb-46f0-9ba9-ad4f4593c266"
+      ],
+      "example_ids": [
+        "d3b74f36-aa48-42af-ae4a-d4a8b0499a60",
+        "77a53aa5-a453-4bcb-8267-d4f44a492dd3",
+        "06d4c78d-73b4-4b54-9ef3-3d5a0d18cb96",
+        "a0cbc9d6-51bb-46f0-9ba9-ad4f4593c266",
+        "3899ed22-7b96-4c4f-9706-42985b8d8049",
+        "179d79f7-d052-490f-a9d6-f97525b32642",
+        "f1abd13b-2391-4b04-8109-efa7f3cfed0b",
+        "509915ba-cf86-4baa-9bea-a73af229ca48"
+      ],
+      "member_count": 12,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "usability.ads",
+      "topic": "usability",
+      "subtopic": "ads",
+      "name": "Frequent or Annoying Ads",
+      "summary": "Reviewers complain that ads are frequent, irritating, or interrupt listening, including one report of ads despite Premium.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "4d7c1b3b-b7f8-417e-a984-6ae27c3acef5",
+        "80e2b39e-11a5-485a-aace-8a8d8c564dc1",
+        "aa86aa43-19d5-40b4-8b03-535a96346e18",
+        "fe5dadcb-e99c-4675-b8c8-6c2bacb338d7",
+        "10775595-01b9-4623-9163-51619e2a0fa9",
+        "b9ae23d2-1152-4bfe-a876-afc09c005377",
+        "e07b106c-f454-46aa-a592-0b92d644bac0",
+        "864e390b-135e-411a-9d03-f28648086cfd"
+      ],
+      "member_count": 35,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "usability.car_device_integration",
+      "topic": "usability",
+      "subtopic": "car_device_integration",
+      "name": "App Starts Automatically",
+      "summary": "The reviewer says the app starts automatically despite permissions being disabled.",
+      "coherence": "mislabeled",
+      "outlier_ids": [
+        "8cd35162-9223-42d1-8097-06e22fde94ea"
+      ],
+      "example_ids": [
+        "8cd35162-9223-42d1-8097-06e22fde94ea"
+      ],
+      "member_count": 1,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "usability.general",
+      "topic": "usability",
+      "subtopic": "general",
+      "name": "Difficult to Use or Navigate",
+      "summary": "Reviewers find the app unfriendly, buggy, or hard to navigate.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "e8f2fb9b-ad3b-4fec-8194-ab67956ee50a",
+        "91755919-64e7-4613-94f9-4cfb44976c44",
+        "0853c56b-0fa1-4d12-9cb9-6817d52233f5"
+      ],
+      "member_count": 3,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "usability.library_playlists",
+      "topic": "usability",
+      "subtopic": "library_playlists",
+      "name": "Playlist and Library Management Problems",
+      "summary": "Reviewers report missing playlist search, removed album context for liked songs, or a liked-songs list that does not display.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "b4f4440f-d952-405d-bf7b-f19fb0adf484",
+        "dd89d3d3-e4c1-446e-b899-fc038cfbcf95",
+        "991dc66a-aba8-4844-be48-816539680877"
+      ],
+      "member_count": 3,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "usability.shuffle_queue_controls",
+      "topic": "usability",
+      "subtopic": "shuffle_queue_controls",
+      "name": "Shuffle and Song Selection Issues",
+      "summary": "Reviewers object to Smart Shuffle or report unwanted, random, or repetitive song selection.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "d108ae38-c395-4789-9b6b-661d1efb60d7",
+        "f8a85378-c4dd-40e2-b548-beebcdf3b991",
+        "145ea602-b8fb-41c1-bfdd-79293a18681f",
+        "0e5a2a0d-7f67-48a5-9edd-27064f670656",
+        "232c669e-8bfe-4642-b0c9-229c2911cc6c",
+        "5c9c17d3-9d6a-4fa1-a2a4-ae98eefbbd25",
+        "e393cec1-67e8-4f58-a484-8d9d76dc8fd6"
+      ],
+      "member_count": 7,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "usability.ui_redesign",
+      "topic": "usability",
+      "subtopic": "ui_redesign",
+      "name": "Unpopular Update or New Layout",
+      "summary": "Reviewers dislike recent updates or the new layout, with one saying they can no longer find something after an update.",
+      "coherence": "mixed",
+      "outlier_ids": [
+        "5d5e08d1-1686-4c86-b9bd-cb0f3a719e0b",
+        "83e0e3fb-c641-483d-8b6a-16dff7c2ab24",
+        "d3ddb3ad-e576-4638-a100-926ba56caabe",
+        "a598cfe0-473b-4665-9eb2-4eebb3c1d877",
+        "7f27bbab-ef19-4fb1-80d8-cd014da3e002"
+      ],
+      "example_ids": [
+        "0d9c62d1-2b53-4887-8156-a28eeac86e82",
+        "5d5e08d1-1686-4c86-b9bd-cb0f3a719e0b",
+        "83e0e3fb-c641-483d-8b6a-16dff7c2ab24",
+        "d3ddb3ad-e576-4638-a100-926ba56caabe",
+        "a598cfe0-473b-4665-9eb2-4eebb3c1d877",
+        "0e71515c-ecf1-4b23-b783-00f58e51d96a",
+        "7f27bbab-ef19-4fb1-80d8-cd014da3e002",
+        "2e2480c1-7799-4a66-be67-a947a2d99680"
+      ],
+      "member_count": 18,
+      "naming_source": "model"
+    }
+  ]
+}

@@ -1,0 +1,161 @@
+{
+  "run_id": "dev10k",
+  "label_config": "gpt-6-luna+effort-none+enrich-v1+schema-v2+quote150+entities-lexicon-v1",
+  "status_counts": {
+    "completed": 10000
+  },
+  "quarantine_reasons": {},
+  "cache_reuse_records": 1552,
+  "calls": {
+    "enrich": {
+      "failed": {
+        "calls": 3,
+        "input_tokens": 12959,
+        "output_tokens": 8391,
+        "cached_tokens": 7323,
+        "cache_write_tokens": 5627,
+        "reasoning_tokens": 0,
+        "cost_usd_estimated_from_usage": 0.002487,
+        "all_usage_available": true
+      },
+      "succeeded": {
+        "calls": 204,
+        "input_tokens": 792297,
+        "output_tokens": 261555,
+        "cached_tokens": 503591,
+        "cache_write_tokens": 288094,
+        "reasoning_tokens": 0,
+        "cost_usd_estimated_from_usage": 0.085943,
+        "all_usage_available": true
+      }
+    },
+    "group": {
+      "succeeded": {
+        "calls": 1,
+        "input_tokens": 13970,
+        "output_tokens": 2007,
+        "cached_tokens": 0,
+        "cache_write_tokens": 13967,
+        "reasoning_tokens": 0,
+        "cost_usd_estimated_from_usage": 0.00275,
+        "all_usage_available": true
+      }
+    },
+    "memo": {
+      "failed": {
+        "calls": 1,
+        "input_tokens": 4877,
+        "output_tokens": 848,
+        "cached_tokens": 0,
+        "cache_write_tokens": 4874,
+        "reasoning_tokens": 0,
+        "cost_usd_estimated_from_usage": 0.001034,
+        "all_usage_available": true
+      },
+      "succeeded": {
+        "calls": 1,
+        "input_tokens": 4912,
+        "output_tokens": 755,
+        "cached_tokens": 0,
+        "cache_write_tokens": 4909,
+        "reasoning_tokens": 0,
+        "cost_usd_estimated_from_usage": 0.000991,
+        "all_usage_available": true
+      }
+    },
+    "verify": {
+      "succeeded": {
+        "calls": 4,
+        "input_tokens": 10478,
+        "output_tokens": 3718,
+        "cached_tokens": 5708,
+        "cache_write_tokens": 4758,
+        "reasoning_tokens": 0,
+        "cost_usd_estimated_from_usage": 0.001256,
+        "all_usage_available": true
+      }
+    }
+  },
+  "spent_usd_estimated_from_usage": 0.09446,
+  "spend_limit_usd": 0.6,
+  "project_budget_usd": 9.5,
+  "service_tiers": {
+    "flex": 211,
+    "standard": 3
+  },
+  "ledger_refusals": 0,
+  "workers": 6,
+  "stage_times": {
+    "ingest": [
+      {
+        "invocation": 1,
+        "seconds": 0.243
+      }
+    ],
+    "enrich": [
+      {
+        "invocation": 1,
+        "seconds": 236.856
+      }
+    ],
+    "export": [
+      {
+        "invocation": 1,
+        "seconds": 0.202
+      }
+    ],
+    "verify": [
+      {
+        "invocation": 1,
+        "seconds": 20.46
+      }
+    ],
+    "group": [
+      {
+        "invocation": 1,
+        "seconds": 17.533
+      }
+    ],
+    "rank": [
+      {
+        "invocation": 1,
+        "seconds": 0.101
+      }
+    ],
+    "memo": [
+      {
+        "invocation": 1,
+        "seconds": 16.96
+      }
+    ]
+  },
+  "wall_clock": [
+    {
+      "invocation": 1,
+      "seconds": 292.904,
+      "stages": [
+        "ingest",
+        "enrich",
+        "verify",
+        "group",
+        "rank",
+        "memo"
+      ],
+      "status": "ok"
+    }
+  ],
+  "sessions": [
+    {
+      "session": 1,
+      "stage": "enrich",
+      "started_at": 1792264293.614455,
+      "ended_at": 1792264530.467207,
+      "phase": "initial",
+      "completed_before": 0,
+      "completed_after": 10000,
+      "calls": 207,
+      "stop_reason": "queue_empty"
+    }
+  ],
+  "cost_note": "Costs are usage x rates in pipeline/config.py (see cost/rates.csv); not a provider invoice."
+}

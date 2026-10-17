@@ -1,6 +1,6 @@
 {
   "_note": "Editable projection assumptions. Changing these never changes the measured pilot results.",
-  "budget_usd": 10.0,
+  "budget_usd": 9.5,
   "output_token_cap_per_request": 3500,
   "max_workers": 8,
   "max_fallback_fraction": 0.0,

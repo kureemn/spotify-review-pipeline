@@ -1,0 +1,9 @@
+claim_id,issue_id,metric,value
+C001,billing.free_tier_restrictions,complaint_count,46
+C002,billing.free_tier_restrictions,severity_sum,134
+C004,billing.free_tier_restrictions,priority_score,134
+C005,other.general,complaint_count,52
+C009,usability.ads,complaint_count,35
+C010,usability.ads,severity_sum,74
+C017,playback.stops_skips_lag,complaint_count,12
+C021,playback.connectivity_errors,complaint_count,8

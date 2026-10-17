@@ -52,15 +52,21 @@ Formula: `item_cost = billed_units × price_per_unit` (price per 1M ÷ 1,000,000
 
 ## Full-run projection (660,622 rows · 660,609 nonempty classifications · 13 empty-text quarantines)
 
-| scenario | work | requests | tier | cached / cache-write share | in tok/req | out tok/review | enrich | verify | group+memo (once) | **total API** | per 1k rows | elapsed (h) | budget |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| base | exact-text reuse (484,189) | 9,684 | flex | 54% / 46% | 3,412 | 32.4 | $5.11 | $0.1142 | $0.003130 | **$5.23** | $0.007920 | 2.0 | within $10.00 |
-| base | no reuse (660,609) | 13,213 | flex | 54% / 46% | 3,412 | 32.4 | $6.98 | $0.1558 | $0.003130 | **$7.14** | $0.0108 | 2.7 | within $10.00 |
-| conservative | exact-text reuse (484,189) | 9,684 | standard | 0% / 100% | 3,412 | 32.4 | $13.77 | $0.2464 | $0.003130 | **$14.02** | $0.0212 | 3.6 | ⚠️ EXCEEDS $10.00 |
-| conservative | no reuse (660,609) | 13,213 | standard | 0% / 100% | 3,412 | 32.4 | $18.78 | $0.3361 | $0.003130 | **$19.12** | $0.0289 | 4.9 | ⚠️ EXCEEDS $10.00 |
+| scenario | token basis | work | requests | tier | cached / cache-write share | in tok/req | out tok/review | enrich | verify | group+memo (once) | **total API** | per 1k rows | elapsed (h) | budget |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| base | dev10k | exact-text reuse (484,189) | 9,684 | flex | 64% / 36% | 3,884 | 32.6 | $5.07 | $0.1142 | $0.003130 | **$5.19** | $0.007851 | 2.0 | within $9.50 |
+| base | dev10k | no reuse (660,609) | 13,213 | flex | 64% / 36% | 3,884 | 32.6 | $6.92 | $0.1558 | $0.003130 | **$7.08** | $0.0107 | 2.7 | within $9.50 |
+| conservative | dev10k | exact-text reuse (484,189) | 9,684 | standard | 0% / 100% | 3,884 | 32.6 | $14.48 | $0.2464 | $0.003130 | **$14.73** | $0.0223 | 3.6 | ⚠️ EXCEEDS $9.50 |
+| conservative | dev10k | no reuse (660,609) | 13,213 | standard | 0% / 100% | 3,884 | 32.6 | $19.76 | $0.3361 | $0.003130 | **$20.10** | $0.0304 | 4.9 | ⚠️ EXCEEDS $9.50 |
 
-Controls: spend limit **$10.00** (enforced in code across all runs with pre-dispatch reservations) · output-token cap 3500/request · max workers 8 · stronger-model fallback fraction 0% (none configured).
+Controls: spend limit **$9.50** (enforced in code across all runs with pre-dispatch reservations) · output-token cap 3500/request · max workers 8 · stronger-model fallback fraction 0% (none configured).
 Base: measured tokens and measured input billing mix (cached / cache-write / uncached), small retry rates. Conservative: standard tier, zero prompt-cache hits with all input billed at the higher cache-write rate, 10% transient + 5% invalid retries, 50% parallel efficiency.
 
 Local compute: Apple M1 Pro laptop, 16 GB — cost **unknown** (Orchestration runs locally; electricity/hardware cost not measured -> reported as unknown, not zero.).
 
+## Refresh at development checkpoints
+
+| run | records | status | wall clock (s) | texts sent | API spend |
+|---|---|---|---|---|---|
+| dev500 | 500 | {'completed': 500} | 91.9 | 479 | $0.009363 |
+| dev10k | 10000 | {'completed': 10000} | 292.9 | 7969 | $0.0945 |

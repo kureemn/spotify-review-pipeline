@@ -1,0 +1,73 @@
+{
+  "verify_config": "gpt-6-luna+effort-none+verify-v1",
+  "declared_rate": 0.1,
+  "seed": "verify-v1",
+  "sampling": "sha256(seed + ':' + review_id) / 16^12 < declared_rate over model-labelled records",
+  "population_model_labelled": 479,
+  "sample_size": 50,
+  "verified": 50,
+  "unverified_in_sample": 0,
+  "topic_agreement": 0.88,
+  "intent_agreement": 0.94,
+  "severity_exact": 0.9,
+  "severity_within_1": 1.0,
+  "severity_mae": 0.1,
+  "disagreements": 11,
+  "topic_confusion": [
+    {
+      "enrich": "other",
+      "verify": "other",
+      "count": 28
+    },
+    {
+      "enrich": "catalog",
+      "verify": "catalog",
+      "count": 5
+    },
+    {
+      "enrich": "playback",
+      "verify": "playback",
+      "count": 4
+    },
+    {
+      "enrich": "usability",
+      "verify": "usability",
+      "count": 3
+    },
+    {
+      "enrich": "billing",
+      "verify": "billing",
+      "count": 2
+    },
+    {
+      "enrich": "catalog",
+      "verify": "other",
+      "count": 2
+    },
+    {
+      "enrich": "usability",
+      "verify": "other",
+      "count": 2
+    },
+    {
+      "enrich": "access",
+      "verify": "access",
+      "count": 1
+    },
+    {
+      "enrich": "downloads",
+      "verify": "downloads",
+      "count": 1
+    },
+    {
+      "enrich": "other",
+      "verify": "billing",
+      "count": 1
+    },
+    {
+      "enrich": "other",
+      "verify": "catalog",
+      "count": 1
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "synthetic": true,
+  "batch_size": 20,
+  "items_returned": 20,
+  "error": null,
+  "injection_cases": 5,
+  "enrich_passed": 5,
+  "verify_passed": 5,
+  "ordinary_reviews_valid": 15,
+  "spent_usd": 0.000268
+}

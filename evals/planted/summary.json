@@ -1,0 +1,23 @@
+{
+  "synthetic": true,
+  "source_run": "runs/dev500",
+  "n": 30,
+  "model_planted_detected": 30,
+  "model_planted_detection_rate": 1.0,
+  "by_field": {
+    "topic": "10/10",
+    "intent": "10/10",
+    "severity": "10/10"
+  },
+  "verifier_unavailable": 0,
+  "code_level_cases": {
+    "invalid_label_enum": "invalid_label",
+    "invalid_intent_enum": "invalid_label",
+    "severity_out_of_range": "invalid_range",
+    "sentiment_out_of_range": "invalid_range",
+    "fabricated_quote": "quote_not_substring"
+  },
+  "code_level_all_rejected": true,
+  "index_checks": "unknown/duplicate/missing indices are ignored and retried, never guessed (tested by mock fault 'drop')",
+  "spent_usd": 0.000249
+}

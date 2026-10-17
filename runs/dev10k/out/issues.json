@@ -1,0 +1,720 @@
+{
+  "grouping_rule": "issue_id = topic.subtopic of each completed complaint/cancellation record; one issue per review",
+  "group_config": "gpt-6-luna+effort-none+group-v1+k8",
+  "issues": [
+    {
+      "issue_id": "access.account_hacked_or_locked",
+      "topic": "access",
+      "subtopic": "account_hacked_or_locked",
+      "name": "Account Hacked or Missing",
+      "summary": "Users report accounts being hacked, disappearing, or becoming inaccessible along with saved playlists.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "45d07c5b-1110-422a-8c4d-7f128042697c",
+        "305c3fe1-109c-4f52-b7c4-5b95bb526035",
+        "f70cd149-8148-4aac-b2bd-a84504d350de",
+        "90614e21-3f8f-4ba1-97a8-1db8d8c7a764",
+        "7a9422f5-7266-4f53-adf3-7cc65803e8bf",
+        "d87536c5-6fe0-4b38-b0b1-c47936e4a0d8"
+      ],
+      "member_count": 6,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "access.general",
+      "topic": "access",
+      "subtopic": "general",
+      "name": "Other Account Access Problems",
+      "summary": "Users report trouble retrieving or signing out of accounts, token errors, regional access restrictions, and desktop login scanning.",
+      "coherence": "mixed",
+      "outlier_ids": [],
+      "example_ids": [
+        "686fa8a8-f220-4ddd-b283-d61dd242051a",
+        "9ec6712e-a862-4605-ae0e-e6998105f921",
+        "c7708024-e341-4e46-bd8f-0ff0838c8b9e",
+        "578b2052-09e2-4ead-a0fb-c39541651c13",
+        "e379efda-83fe-4ce4-8cef-8474060b47cf",
+        "6626456c-1973-4824-a9be-5982593408a8"
+      ],
+      "member_count": 6,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "access.login_failure",
+      "topic": "access",
+      "subtopic": "login_failure",
+      "name": "Unable to Log In",
+      "summary": "Users cannot log in or are unexpectedly logged out, with errors involving phone numbers, OTPs, or Google sign-in.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "bdfa79f0-b070-4158-a801-51c44568ad99",
+        "9cb34d3c-bd83-4710-a5df-33fed13e294f",
+        "7087c6fb-1187-4680-a79c-9e1f2045ea0e",
+        "d0eecbd1-69ca-4ed2-8371-a0568e710ea8",
+        "a1a52508-1b15-478f-8582-d39dfe0df66c",
+        "1b7cdfac-87c1-4526-acaf-48b9a450195f",
+        "85463d94-d90f-4c97-ac48-0d4b655c9723",
+        "28df7699-4354-4771-9f90-fe38d157ad27"
+      ],
+      "member_count": 120,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "access.signup",
+      "topic": "access",
+      "subtopic": "signup",
+      "name": "Unable to Sign Up",
+      "summary": "Users report being unable to create an account because signup fails or rejects their phone number or verification attempt.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "7617f44b-2875-4f78-a5f3-77375b0d350e",
+        "8d31f548-8329-44c9-b86c-2ddd387da72a",
+        "8fa7d069-242e-4689-aff7-507b19cb36ed",
+        "c4cf5200-bc7b-442c-9036-348057f623b5",
+        "4a55195a-83b2-49ea-8f4e-273f22c55a62",
+        "2553701f-b0e9-4ba0-9c4a-a29671c3276f",
+        "9e8f4310-9ed0-4565-966c-cb2e2a708133",
+        "901d5176-e6ab-4df1-b9f4-1a990e9f13ac"
+      ],
+      "member_count": 10,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "billing.charges_refunds",
+      "topic": "billing",
+      "subtopic": "charges_refunds",
+      "name": "Unexpected Subscription Charges",
+      "summary": "Users report being charged unexpectedly or continuing to be charged after cancellation, including during trials or supposedly free plans.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "10800b01-920d-4c22-91f5-521c45caf4f0",
+        "a551564e-db4a-489a-a210-1d994984150e",
+        "70c10706-cb1c-4623-9c21-bf303e1e6ebe",
+        "6985febf-75fa-47e9-9a86-c62f47a18554",
+        "ae7f1da6-8656-4abc-8d2d-3730923fa741",
+        "8d1bfaf3-2632-42a1-90d0-eb7fd381358a",
+        "ff7a2f97-2603-4e0e-95c9-29fa03a803a3",
+        "3cdb5635-b2bc-43a0-808d-267bde5f6ce7"
+      ],
+      "member_count": 12,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "billing.free_tier_restrictions",
+      "topic": "billing",
+      "subtopic": "free_tier_restrictions",
+      "name": "Basic Features Require Premium",
+      "summary": "Free users say basic controls such as changing songs, choosing tracks, looping, or skipping are restricted or require Premium.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "85cbf393-19d0-4303-961b-a5fec30b63c3",
+        "237e6174-4921-44df-828c-28f7b9d6196e",
+        "85d3ad60-6780-4c05-a89f-4f17caab1991",
+        "d1522936-53f1-4a95-883f-52d4a630391a",
+        "ce71ffa8-ed53-4bd6-b7e0-6af5be6a45b5",
+        "21915fcd-9a35-48ba-b277-6296c4154603",
+        "4757f58e-8504-416f-98e8-d22d6391924e",
+        "d6d60a52-4545-4169-a75f-6b866d23aef2"
+      ],
+      "member_count": 814,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "billing.general",
+      "topic": "billing",
+      "subtopic": "general",
+      "name": "Subscription and Premium Complaints",
+      "summary": "Users criticize the subscription policy, premium promotions, or the app’s emphasis on paid features.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "b74dd51b-bae2-437e-91bb-33d25ac8d5d0",
+        "c47fb0a3-2a80-40c7-be45-d7374e967cf8",
+        "75eea3c7-fbbd-4998-abf1-8e62c7c78cf7",
+        "27039274-4dbf-4781-872b-efcda4a0b7c4",
+        "fb90c1d4-f8a2-4e29-93d8-fcd9df19e66e",
+        "0efd6996-ed9c-4e73-9faf-bce27fd63945",
+        "63237583-0181-43fb-92ae-913863fdccc4",
+        "446eea99-fb26-42cb-907a-91d924d4cdb1"
+      ],
+      "member_count": 27,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "billing.price",
+      "topic": "billing",
+      "subtopic": "price",
+      "name": "Premium Prices Too High",
+      "summary": "Users say Premium or the app costs too much and ask for lower prices or better value.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "66be58f6-e8d3-4e9c-98b9-58c6b8355fd9",
+        "ba2cc0ff-e1ca-4805-be07-5c9046c29c25",
+        "c93316d8-8aa0-4c05-ac9d-7fceb731d612",
+        "a9eceb1c-d2a2-4b73-a50b-f25d63e87ac2",
+        "2d91bf33-5bdf-4e0c-855c-9947af5c08f9",
+        "610910a5-dafc-4cdb-bdfe-522594b04db0",
+        "9e5b62dd-9ff8-4525-aa14-4f75b26fe2e6",
+        "53e8b58a-59d8-4227-8055-fd3fc2b762e4"
+      ],
+      "member_count": 53,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "billing.subscription_activation",
+      "topic": "billing",
+      "subtopic": "subscription_activation",
+      "name": "Premium Subscription Not Working",
+      "summary": "Users report trouble subscribing, receiving the promised trial or package, or retaining Premium access and benefits.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "935c6ad6-ec8b-4295-a15a-b235c80d9f41",
+        "41ed2d5f-2092-4bdf-b469-3ae3a4441e58",
+        "f2acbcce-9ceb-46a7-9fbe-09ebf0c98a16",
+        "18957acc-aebb-44c1-92ff-52304c79ab0e",
+        "302a3d09-cc5e-4bca-8a6f-06678b98e6f4",
+        "c46f202e-0e8b-402d-9f7f-cbd05b982c54",
+        "6509f91f-8097-429f-a5c3-f7a0ef0bb101",
+        "fa0cf08c-968d-40ba-afa0-a30223c680fc"
+      ],
+      "member_count": 39,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "catalog.general",
+      "topic": "catalog",
+      "subtopic": "general",
+      "name": "Other Catalog and Content Issues",
+      "summary": "Users report problems with Wrapped, Canvas, HiFi, AI DJ access, content suitability, or language presentation.",
+      "coherence": "mixed",
+      "outlier_ids": [],
+      "example_ids": [
+        "790dad2b-85c5-4462-ace7-7e89e7cdca6a",
+        "c1685ff7-d7a2-422d-b5a4-de159c38b49b",
+        "bd277589-d872-482b-9c6f-1b7dbc415c96",
+        "2e8666c0-b720-493c-9d19-c3dfb23a1c87",
+        "45e8308e-9d97-4ba7-bb63-0bc4d3115ff7",
+        "dc1bc630-5867-44b0-8b93-4130cdb8d478",
+        "c1726764-f0ce-4abc-ad9e-6cd143e1b2c7",
+        "74c9e474-2308-46c4-8126-2cbed5fe6e0c"
+      ],
+      "member_count": 19,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "catalog.lyrics",
+      "topic": "catalog",
+      "subtopic": "lyrics",
+      "name": "Lyrics Missing or Restricted",
+      "summary": "Users say lyrics are unavailable, incomplete, inaccurate, hard to navigate, or require Premium.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "206815ed-7798-4902-9d1d-f808510135b4",
+        "f5cc272c-caa4-4433-ab5d-7c4e7f08f54c",
+        "caf4eb21-e9dc-4d5d-aa33-d91b3f64d83c",
+        "b74cd3b5-1308-4af3-8969-8d5f4dd5170c",
+        "97c57930-0ead-4e3c-96ad-efda13654871",
+        "f29e8bfd-7773-4f4e-8863-6d829fc6985f",
+        "9b275c3c-b894-46a6-8436-443cfdd87731",
+        "f6861ab2-84bc-48fd-87eb-7e655fefa61a"
+      ],
+      "member_count": 81,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "catalog.missing_content",
+      "topic": "catalog",
+      "subtopic": "missing_content",
+      "name": "Songs Missing or Removed",
+      "summary": "Users say songs or other content are missing, unavailable, or disappearing from the catalog.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "45a57a15-dfcc-4188-930c-0538d0379dbd",
+        "be4ffc58-c9cc-4b37-83e8-aba9c63e8e51",
+        "e44bf9c3-8e60-4b0c-9133-ab5d3a8e003a",
+        "0658feaa-5bec-416e-b6b0-3de2a4c14580",
+        "50ec21da-e33d-4e49-abdc-ddf13664eb85",
+        "430d17bb-98ab-4941-950d-080e7ec55b73",
+        "ec882998-ec3a-4240-8f8c-d3344c73fd6c",
+        "adf576fa-4039-403f-96b6-a6bc48db2edd"
+      ],
+      "member_count": 73,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "catalog.podcasts_audiobooks",
+      "topic": "catalog",
+      "subtopic": "podcasts_audiobooks",
+      "name": "Podcast and Audiobook Problems",
+      "summary": "Users report problems finding, accessing, following, playing, or removing podcasts and audiobooks, including unavailable regional features and paid access.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "6432b70d-3348-4601-bd6e-dcfd8248b93b",
+        "d0dc4dba-818a-4f50-a286-694f60f02f76",
+        "fab3970e-7538-4e77-b850-fa1b47738df5",
+        "be3d80bd-cfa5-4e59-85c7-60a3c7467f7b",
+        "1d859558-21e6-4dcb-ad0e-ffe90bc68d53",
+        "b34163fb-4fd2-4793-9923-1356a8e171a4",
+        "1c266019-d0ce-4671-bda9-3708a9ead40f",
+        "42da37cb-8bbf-4208-b9d1-5cde1a2c9dc4"
+      ],
+      "member_count": 46,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "catalog.recommendations",
+      "topic": "catalog",
+      "subtopic": "recommendations",
+      "name": "Irrelevant Music Recommendations",
+      "summary": "Users say recommendations, playlists, or algorithmic suggestions are irrelevant, unwanted, repetitive, or poor for discovering music.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "cf5c7e7f-5e64-42cb-888f-a8cce3b79292",
+        "c55baccd-1d03-41cb-a6bc-255a16bb5165",
+        "7c5d9a4d-1bb1-4da3-bc3b-2500ae0246f1",
+        "14e6daaf-a7fa-4f36-a0a4-37a7acd61ebf",
+        "8ba96b9d-2617-4174-a217-febfc2e3ee92",
+        "cb4f0532-83e0-4a15-a019-cd40d0a425cf",
+        "828498c3-fff5-4b7d-a3a5-e1d532077bdd",
+        "cdd613c4-9cac-45ed-83b3-88be4ad48c84"
+      ],
+      "member_count": 41,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "catalog.search_discovery",
+      "topic": "catalog",
+      "subtopic": "search_discovery",
+      "name": "Search and Discovery Problems",
+      "summary": "Users report difficulty searching for or finding music, broken browsing filters, and inconvenient discovery features.",
+      "coherence": "mixed",
+      "outlier_ids": [
+        "4d327494-7846-481a-bf00-f4b5abc099c4",
+        "cf9510a8-c722-4812-be26-5454559676c4"
+      ],
+      "example_ids": [
+        "4d327494-7846-481a-bf00-f4b5abc099c4",
+        "38005fc6-66a5-4872-adc4-7fb2341c1071",
+        "ca1c201e-9412-4b52-9017-1aee02f64d81",
+        "2d7b2ebe-826f-49cd-a109-b0ab3bf52c2d",
+        "370b863c-fd4a-428f-bb3e-0c4173c13813",
+        "ef730aa8-289b-4622-ba74-a5eae0e8215f",
+        "77248c0b-7f51-4b30-b508-da39f83fd3a4",
+        "cf9510a8-c722-4812-be26-5454559676c4"
+      ],
+      "member_count": 37,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "downloads.downloads_lost_failing",
+      "topic": "downloads",
+      "subtopic": "downloads_lost_failing",
+      "name": "Downloads Disappear or Fail",
+      "summary": "Users say downloads or saved music disappear, fail to download, or need to be downloaded again.",
+      "coherence": "mixed",
+      "outlier_ids": [
+        "982b2743-9b23-491c-a946-56304fc6e45a"
+      ],
+      "example_ids": [
+        "b96aefd6-209e-4d50-885b-82ccc253d01b",
+        "d54583d1-4467-45ef-a687-2ae45945ae1f",
+        "4fa17991-f6dd-444c-9878-26055a48280e",
+        "80d73a7a-01d3-4f5c-a8c1-cb2c248806f7",
+        "e8b8ced6-5849-4be4-be9a-18a4c7c7993f",
+        "982b2743-9b23-491c-a946-56304fc6e45a",
+        "db3c28f0-9c0e-4658-a0f2-eab69f540cd0",
+        "e825690b-d260-4eda-a6b4-0df0ece8ed6b"
+      ],
+      "member_count": 40,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "downloads.general",
+      "topic": "downloads",
+      "subtopic": "general",
+      "name": "Download Management and Limits",
+      "summary": "Users report difficulty managing downloads or downloading individual songs and say offline downloads are unavailable or subscription-restricted.",
+      "coherence": "mixed",
+      "outlier_ids": [
+        "2e643b07-9126-4fed-bb00-3c0102e62bde"
+      ],
+      "example_ids": [
+        "2e643b07-9126-4fed-bb00-3c0102e62bde",
+        "8c123311-a158-4864-9603-582f3c34edba",
+        "5caa9852-09b5-4a86-9a50-ba9417d75134",
+        "db5ee55c-fb51-43c2-aabf-3913818bbce0",
+        "ee983e94-fcf6-47f2-bb23-25b202e0a804",
+        "1d3f978e-b31f-4a4b-ab17-ec46ab4966b3",
+        "ed610e9b-1cfd-4e14-a801-51eb543fcfc0",
+        "1c115a68-2c92-488f-bbfb-28c28fa4bd94"
+      ],
+      "member_count": 15,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "downloads.offline_mode",
+      "topic": "downloads",
+      "subtopic": "offline_mode",
+      "name": "Downloaded Music Won’t Play Offline",
+      "summary": "Users say downloaded music or podcasts cannot be played without an internet connection, sometimes despite having a paid plan.",
+      "coherence": "coherent",
+      "outlier_ids": [
+        "dc54a7ff-2e40-47bb-be8c-255f5a69a49e"
+      ],
+      "example_ids": [
+        "dc54a7ff-2e40-47bb-be8c-255f5a69a49e",
+        "b833a768-e9c8-4e0a-a7a0-d73ec7420d7d",
+        "0629557c-88ef-4032-beaa-399ef427cf6c",
+        "c92258cc-062a-49ca-b967-62ff0847bb36",
+        "e89ed60a-b50f-4e8b-90f4-3012ac98bc9a",
+        "6776233d-55bf-4279-9360-41d2e138dde5",
+        "27d60da3-2cc6-4c81-ab35-ba70ed419683",
+        "2ec69f89-936c-4c2b-8ea3-27b0d276b1ae"
+      ],
+      "member_count": 33,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "other.general",
+      "topic": "other",
+      "subtopic": "general",
+      "name": "General App Dissatisfaction",
+      "summary": "Users express broad dissatisfaction with the app without identifying a specific problem.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "c6fed5dd-dc06-4aef-8f82-e71fb3d99f7a",
+        "23e2317f-311f-44b5-b720-608bd6356ae4",
+        "9c74bf40-4136-4ee8-b10a-ee29ffd30a40",
+        "67cdb420-7146-4edd-a5aa-b471cfc5ed6e",
+        "02cc2c27-8eb7-48cf-8eb7-e894965c81d3",
+        "0ffa5006-c03e-4239-85f8-05381a605766",
+        "30ee8c7d-d690-4ba3-944c-d8103b9b07a1",
+        "ba766c9b-a627-445f-acd7-8ce8feabcb12"
+      ],
+      "member_count": 1067,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "playback.audio_quality",
+      "topic": "playback",
+      "subtopic": "audio_quality",
+      "name": "Audio Quality and Volume Problems",
+      "summary": "Users report poor sound quality, low or inconsistent volume, broken crossfade, or a lack of HD and HiFi audio options.",
+      "coherence": "mixed",
+      "outlier_ids": [
+        "537afa7a-ef65-4a18-a66a-dc75798f2f82"
+      ],
+      "example_ids": [
+        "2eced01d-f1ed-4587-be97-c796e2036e74",
+        "f1be6b02-4e16-4170-a06e-1d9e84da2012",
+        "ed87f9dc-7043-4903-b66b-436f5c454952",
+        "df643965-43d1-42bc-9cb7-65a069c9feea",
+        "537afa7a-ef65-4a18-a66a-dc75798f2f82",
+        "4426ccca-483e-4cff-be73-7bb547df5257",
+        "1ff55f94-d0b8-46aa-a2a5-ff97ec74d8bd",
+        "5bc6e690-c1cb-4a8f-9a97-86cdc0ace7f2"
+      ],
+      "member_count": 33,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "playback.connectivity_errors",
+      "topic": "playback",
+      "subtopic": "connectivity_errors",
+      "name": "False Network or Playback Errors",
+      "summary": "Users report network errors despite having a connection, or say songs and playlists fail to play or appear.",
+      "coherence": "mixed",
+      "outlier_ids": [],
+      "example_ids": [
+        "006b8080-637f-497f-893a-e8b2e44f1a0c",
+        "44b33350-d10b-417d-b1cd-4603c9a35633",
+        "32aa399c-bef2-411f-9d4d-776db0c2c704",
+        "91e69717-0266-471a-8f36-b4e7efa7012d",
+        "ff434191-87c8-4a76-a30a-de1591982192",
+        "004d1c8a-a8c8-4746-b975-cd2f31c2a730",
+        "a7344840-1a7b-4948-b823-b882342e858e",
+        "ae1347b2-d0ce-48d9-9f38-144cde8db30e"
+      ],
+      "member_count": 72,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "playback.crashes_wont_open",
+      "topic": "playback",
+      "subtopic": "crashes_wont_open",
+      "name": "App Crashes or Won’t Open",
+      "summary": "Users say the app freezes, crashes, fails to load, or will not open after starting or updating.",
+      "coherence": "mixed",
+      "outlier_ids": [
+        "c1d5142d-acf3-4019-b81d-5e5999cdfa45"
+      ],
+      "example_ids": [
+        "69d125b2-52ff-4d9c-a4c5-b71fab01e61b",
+        "dbedafae-36c8-48eb-adf9-b16f4ff2d38a",
+        "c1d5142d-acf3-4019-b81d-5e5999cdfa45",
+        "68657bca-b647-4308-afc1-23b5e9a31b63",
+        "0caf4cac-c9b7-459f-8efa-d52416e7f37e",
+        "df14fc02-1b82-496f-9da4-887ab20e69cb",
+        "f16bad3e-1bb7-491c-9891-5eeafd1b4d86",
+        "af1108e7-2c3a-46b9-8ead-0e03f3c6a362"
+      ],
+      "member_count": 118,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "playback.device_connect",
+      "topic": "playback",
+      "subtopic": "device_connect",
+      "name": "Device Connection and Playback Handoffs",
+      "summary": "Users report problems with Bluetooth, casting, assistant playback, or switching Spotify playback between connected devices.",
+      "coherence": "mixed",
+      "outlier_ids": [
+        "97514a20-4d5c-4cb3-9c67-8871fd7e920e",
+        "16d5c14d-b278-4247-a259-3041e2958ee5"
+      ],
+      "example_ids": [
+        "ac415d37-c92e-4ed9-b717-5be1828b7d50",
+        "e6e975e6-7a26-411d-b2b4-dd5acfcc9bd6",
+        "b0b81704-45ad-43f6-9e69-617ff33d5d7b",
+        "46ff0c74-5e86-4e5b-b4cd-36201aab0f9e",
+        "2139aed7-bcd2-4da7-ba23-503064041c3c",
+        "b8b31529-9476-4a5f-8c66-cea9626f9a21",
+        "97514a20-4d5c-4cb3-9c67-8871fd7e920e",
+        "16d5c14d-b278-4247-a259-3041e2958ee5"
+      ],
+      "member_count": 41,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "playback.general",
+      "topic": "playback",
+      "subtopic": "general",
+      "name": "General Playback Problems",
+      "summary": "Users say playback or the app is buggy or unreliable, including cases where a different song plays than the one requested.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "03c7321b-1f5c-481c-b0b7-75ffeaa07390",
+        "229839bc-9835-4657-aa10-016c279ecd46",
+        "370a80c0-7705-4e61-ae2b-c2483aab44e3",
+        "ffd0de5c-3023-4865-a1ad-feb11588655f",
+        "eb80076c-d5fc-4e1d-a67c-43fe76b455a4",
+        "0eef8496-affc-401d-b0c4-75ca2861738a",
+        "4604296b-aa50-4776-a7a2-f633d991423b",
+        "202ec44c-0ecb-49af-b520-4dcb2e1640ab"
+      ],
+      "member_count": 68,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "playback.performance_battery",
+      "topic": "playback",
+      "subtopic": "performance_battery",
+      "name": "Slowness and Resource Use",
+      "summary": "Users report slow or laggy performance, battery drain, heat, and high data or storage use.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "3b198677-19ee-4a14-80d3-a7a95cd83a91",
+        "a862b037-7542-4a3e-94ef-836b7092f4ef",
+        "b5cd9678-e1f1-4dde-a5d7-23732dba25e4",
+        "0bdc56e3-499d-403e-89cc-c659ceadc86b",
+        "7d1cee16-2ab4-4284-950d-50e16eb6e238",
+        "a340f1dd-cc36-4ef4-a226-f186d9711502",
+        "ca816db0-393c-4a11-9a6f-09726bfd854e",
+        "b16764cb-bee5-4c53-bad7-ce2acdd9537b"
+      ],
+      "member_count": 34,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "playback.stops_skips_lag",
+      "topic": "playback",
+      "subtopic": "stops_skips_lag",
+      "name": "Playback Stops or Restarts",
+      "summary": "Users say playback stops, pauses, restarts, or fails to play reliably during songs.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "19ffafd0-9b45-4971-8267-cdf54335948b",
+        "42920064-d1d3-440d-97b2-41bb0fbdb825",
+        "0fd832a2-f63f-4954-af0a-0c2399c96ae0",
+        "aaeefd61-d1fc-4578-badb-183f6a39480a",
+        "9a0f86dd-f3a3-455a-825e-cba00c2ccf54",
+        "fd58754b-6bbd-4084-9d27-8b2ef4e02ecd",
+        "d3b74f36-aa48-42af-ae4a-d4a8b0499a60",
+        "04cacca8-18b9-4472-885b-9fa8ea35c232"
+      ],
+      "member_count": 213,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "support.no_or_poor_response",
+      "topic": "support",
+      "subtopic": "no_or_poor_response",
+      "name": "Slow or Unhelpful Support",
+      "summary": "Users say support or other contacted parties did not respond, ignored messages, or failed to help.",
+      "coherence": "mixed",
+      "outlier_ids": [
+        "946070c1-d690-4251-a550-07b0af85859c"
+      ],
+      "example_ids": [
+        "5c34c25a-b5ca-4127-9287-14a2880f4e07",
+        "946070c1-d690-4251-a550-07b0af85859c",
+        "c4a8d123-9254-4a2f-a0b5-e62d429b8436",
+        "d7f0416d-849f-43d3-88b0-e821a1802383",
+        "e3ab8023-f0d4-4ef3-beb1-6d0fc554bd05"
+      ],
+      "member_count": 5,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "usability.ads",
+      "topic": "usability",
+      "subtopic": "ads",
+      "name": "Frequent or Intrusive Ads",
+      "summary": "Users complain that ads are too frequent, lengthy, loud, or disruptive between songs.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "b9f12425-9f66-4b0d-9b6f-b619344d80cd",
+        "633e67a5-24e1-4316-af50-45be782d4702",
+        "0ddf7409-188c-43f9-9019-aa18091fa5b3",
+        "5121fb84-1094-4729-b2d9-86815116f60d",
+        "23e9321b-39c8-48b1-af18-351ba820207d",
+        "135b4061-874b-44f5-b12e-32815b978732",
+        "53f94362-8725-43ae-9fd9-d64d1e959fa4",
+        "986a77c9-c565-40a1-872b-de51c92781dc"
+      ],
+      "member_count": 634,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "usability.car_device_integration",
+      "topic": "usability",
+      "subtopic": "car_device_integration",
+      "name": "Device Controls and Integration Issues",
+      "summary": "Users report problems with device widgets, watch or car behavior, Bluetooth prompts, notification controls, or stopping playback when the app is not in use.",
+      "coherence": "mixed",
+      "outlier_ids": [
+        "084ad8d7-a9a3-4b9c-bbce-f1782cdbe843",
+        "6b6da50d-a7d5-433e-88a5-c4126131866c"
+      ],
+      "example_ids": [
+        "3489f203-6761-4eb8-b454-c7ebcf63e606",
+        "013d0737-24f8-481e-b3bc-b3aad1996acf",
+        "369fa2da-3673-451a-a6b8-6b40c9cf5de7",
+        "24422da5-4cc0-43a7-a5af-daa373f23a2d",
+        "084ad8d7-a9a3-4b9c-bbce-f1782cdbe843",
+        "f146eced-9c6e-4dc1-97cf-cacbef84ce70",
+        "7fc8466c-75e7-434b-856e-2d47acaea187",
+        "6b6da50d-a7d5-433e-88a5-c4126131866c"
+      ],
+      "member_count": 50,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "usability.general",
+      "topic": "usability",
+      "subtopic": "general",
+      "name": "General Interface and Feature Usability",
+      "summary": "Users report confusing or missing controls and features, broken Canvas or Jam functions, and inconvenience using the app.",
+      "coherence": "mixed",
+      "outlier_ids": [
+        "f49819e9-9c4b-4b93-bd7e-8de8264922ba"
+      ],
+      "example_ids": [
+        "f49819e9-9c4b-4b93-bd7e-8de8264922ba",
+        "2d88550f-e917-4dfc-b0d0-94e0e69729b1",
+        "2101f41a-94a6-496c-a472-a4896dc00295",
+        "48bfd4a7-5ad1-4275-932f-e609bf83cdde",
+        "d4de2036-2be5-4a20-ae34-a7669ae05f88",
+        "9e52389f-0aed-4716-a6a0-b4bd77f181b1",
+        "6678d67e-81f8-412d-89f4-0da0ba807806",
+        "0ab0d890-5d22-4cbf-9069-608d76338001"
+      ],
+      "member_count": 64,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "usability.library_playlists",
+      "topic": "usability",
+      "subtopic": "library_playlists",
+      "name": "Library and Playlist Management",
+      "summary": "Users report difficulty adding, finding, sorting, or accessing saved songs, albums, and playlists.",
+      "coherence": "mixed",
+      "outlier_ids": [
+        "6dfc27ea-dc74-4a88-a67e-99d9554063ef",
+        "8fe183d0-b907-41e7-918b-8a46112e8cec"
+      ],
+      "example_ids": [
+        "6c0e97e8-5413-4230-82ee-9844da47f88a",
+        "b4f4440f-d952-405d-bf7b-f19fb0adf484",
+        "f0171f12-9b8e-4835-adf3-a421484c9f0d",
+        "6dfc27ea-dc74-4a88-a67e-99d9554063ef",
+        "d51452c1-bcfb-4866-9f4f-1b610ffc7fb4",
+        "5d089fc1-cadd-420b-ab1e-eeabd21c57f3",
+        "8fe183d0-b907-41e7-918b-8a46112e8cec",
+        "abd4032c-47b5-4bc8-b203-f3600e0aba63"
+      ],
+      "member_count": 88,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "usability.shuffle_queue_controls",
+      "topic": "usability",
+      "subtopic": "shuffle_queue_controls",
+      "name": "Shuffle and Queue Behave Unexpectedly",
+      "summary": "Users say playback ignores their chosen tracks or playlists, plays unexpected songs, or mishandles queue and autoplay controls.",
+      "coherence": "coherent",
+      "outlier_ids": [
+        "df3b0a01-8b8a-4fb6-b82d-3b3cafe26f43"
+      ],
+      "example_ids": [
+        "6b2efab6-200b-4e8c-88e2-bc13096db123",
+        "71a5fdd0-7476-4d9a-9564-8598b3289387",
+        "5d21706b-50cc-4fed-ab90-5fca978e2830",
+        "df3b0a01-8b8a-4fb6-b82d-3b3cafe26f43",
+        "25bbe898-e819-4fcb-942b-0fccd065a33f",
+        "506e14e3-664f-4e88-91e7-9d9d85096b42",
+        "75be14a6-4d4c-4230-8938-53a8cc25853f",
+        "b7f0c40d-ebcb-499e-97c2-ec805a026a99"
+      ],
+      "member_count": 221,
+      "naming_source": "model"
+    },
+    {
+      "issue_id": "usability.ui_redesign",
+      "topic": "usability",
+      "subtopic": "ui_redesign",
+      "name": "Unpopular App Updates and UI Changes",
+      "summary": "Users say recent updates or interface changes made the app worse or harder to use.",
+      "coherence": "coherent",
+      "outlier_ids": [],
+      "example_ids": [
+        "bec25555-202d-415b-b497-02c9647a12c4",
+        "6689c8e5-f2c4-4099-99ce-a323df17a499",
+        "21d8dedd-90b5-4294-9386-67ddd8b37282",
+        "f93cfbf3-385e-4924-bb22-e20b32b66bd1",
+        "dff83b18-b895-4d48-970c-111e98225035",
+        "e751c62f-31cb-4375-be52-775959e4b268",
+        "1d9633c4-8cb0-4cc3-9c8d-bb99b9ece7ed",
+        "8171d771-6b94-4db2-90e7-ae2dd915a28f"
+      ],
+      "member_count": 361,
+      "naming_source": "model"
+    }
+  ]
+}
