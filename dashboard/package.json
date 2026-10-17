@@ -2,7 +2,7 @@
   "name": "spotify-review-insights",
   "private": true,
   "type": "module",
-  "engines": { "node": ">=20" },
+  "engines": { "node": "22.x" },
   "dependencies": {
     "@neondatabase/serverless": "1.2.0"
   }

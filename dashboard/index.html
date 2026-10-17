@@ -51,7 +51,7 @@
   .kpi .note { color: var(--text-muted); font-size: 12px; margin-top: 2px; }
   .two { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); margin-bottom: 16px; }
   .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; padding: 2px 8px; border-radius: 999px;
-           background: var(--surface-2); color: var(--text-secondary); border: 1px solid var(--line); white-space: nowrap; }
+           background: var(--surface-2); color: var(--text-secondary); border: 1px solid var(--line); max-width: 100%; }
   .badge .dot { width: 8px; height: 8px; border-radius: 50%; }
   .rec-area { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--accent); font-weight: 650; }
   .rec-headline { font-size: 20px; font-weight: 650; margin: 4px 0 10px; letter-spacing: -.01em; }
@@ -105,6 +105,7 @@
   footer { margin-top: 28px; color: var(--text-muted); font-size: 12px; }
   footer a { color: var(--accent); }
   @media (max-width: 1100px) { .kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); } .two { grid-template-columns: 1fr; } }
+  #subtitle { overflow-wrap: anywhere; }
   @media (max-width: 560px) { .wrap { padding: 16px 16px 48px; } .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .kpi .value { font-size: 20px; } .kv { grid-template-columns: 1fr; } }
 </style>
