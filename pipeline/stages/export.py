@@ -59,7 +59,7 @@ def call_rows(store):
     cols = ("request_id", "run_id", "session", "role", "phase", "provider", "model", "effort", "prompt_version",
             "label_config", "outcome", "error", "review_ids", "attempt", "input_tokens", "cached_tokens",
             "cache_write_tokens", "output_tokens", "reasoning_tokens", "usage_available", "cost_usd",
-            "started_at", "ended_at", "latency_s", "artifacts")
+            "started_at", "ended_at", "latency_s", "artifacts", "service_tier")
     sources = [store.con]
     origin_runs = [r[0] for r in store.con.execute(
         "SELECT DISTINCT origin_run_id FROM results WHERE origin_run_id IS NOT NULL")]

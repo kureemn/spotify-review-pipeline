@@ -61,7 +61,7 @@
   "parsed_rows_sha256": "eb5ea1e15f020212004a5b1e2f873e45a9f105d1b4516ad077020492364f71ff",
   "pending_queue": 660609,
   "quarantine_policy": "Only empty/whitespace-only texts are quarantined at ingestion (reason empty_review_text). Missing app_version does not block classification.",
-  "seconds": 18.59,
+  "seconds": 23.9,
   "expected_full_file_checks": {
     "records": {
       "expected": 660622,

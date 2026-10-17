@@ -7,7 +7,7 @@ combined "topic.subtopic" label so the two can never disagree.
 
 import re
 
-SCHEMA_VERSION = "schema-v1"
+SCHEMA_VERSION = "schema-v2"  # v2: compact enrich keys (i,l,t,v,s,q,f)
 
 TOPICS = ("access", "usability", "playback", "downloads", "catalog", "billing", "support", "other")
 # Precedence order: the first that applies wins.

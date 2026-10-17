@@ -34,15 +34,16 @@ def _strict(props: dict, required=None) -> dict:
 
 
 SCHEMAS = {
+    # Compact keys keep output tokens (the dominant cost) low: i=index, l=label, t=intent,
+    # v=severity, s=sentiment, q=quote, f=needs-review reason ("" = no review needed).
     "enrich": _strict({"items": {"type": "array", "items": _strict({
         "i": {"type": "integer"},
-        "label": {"type": "string", "enum": list(LABELS)},
-        "intent": {"type": "string", "enum": list(INTENTS)},
-        "severity": {"type": "integer", "enum": [1, 2, 3, 4, 5]},
-        "sentiment": {"type": "integer", "enum": [-2, -1, 0, 1, 2]},
-        "quote": {"type": "string"},
-        "needs_review": {"type": "boolean"},
-        "note": {"type": "string"},
+        "l": {"type": "string", "enum": list(LABELS)},
+        "t": {"type": "string", "enum": list(INTENTS)},
+        "v": {"type": "integer", "enum": [1, 2, 3, 4, 5]},
+        "s": {"type": "integer", "enum": [-2, -1, 0, 1, 2]},
+        "q": {"type": "string"},
+        "f": {"type": "string"},
     })}}),
     "verify": _strict({"items": {"type": "array", "items": _strict({
         "i": {"type": "integer"},
@@ -66,10 +67,12 @@ SCHEMAS = {
 }
 
 
-def cost_usd(model: str, usage: dict, rates: dict = None) -> float:
+def cost_usd(model: str, usage: dict, rates: dict = None, tier: str = "standard") -> float:
     """Mutually exclusive billing items: uncached input, cached input, cache writes, output.
-    Reasoning tokens are already inside output_tokens, so they are not added again."""
-    r = (rates or DEFAULT_RATES)[model]
+    Reasoning tokens are already inside output_tokens, so they are not added again.
+    Rates are looked up for the processing tier actually used (standard or flex)."""
+    table = rates or DEFAULT_RATES
+    r = table.get(f"{model}@{tier}") or table[model]
     inp = usage.get("input_tokens") or 0
     cached = usage.get("cached_tokens") or 0
     cw = usage.get("cache_write_tokens") or 0
@@ -102,7 +105,8 @@ class Ledger:
 
 
 def worst_case_cost(model: str, input_chars: int, max_output_tokens: int) -> float:
-    # ~3 chars/token is pessimistic for this corpus (emoji, non-Latin scripts); assume no cache hits.
+    # ~3 chars/token is pessimistic for this corpus (emoji, non-Latin scripts); assume no cache hits
+    # and standard-tier prices even when flex is requested (it may fall back).
     return cost_usd(model, {"input_tokens": input_chars // 3 + 200, "output_tokens": max_output_tokens})
 
 
@@ -122,11 +126,12 @@ class OpenAIProvider:
         import openai
         self.openai = openai
 
-    def complete(self, role, instructions, payload, model, effort, max_output_tokens):
+    def complete(self, role, instructions, payload, model, effort, max_output_tokens, service_tier="standard"):
         o = self.openai
         try:
+            extra = {"service_tier": "flex"} if service_tier == "flex" else {}
             resp = self.client.responses.create(
-                model=model, instructions=instructions, input=payload,
+                model=model, instructions=instructions, input=payload, **extra,
                 reasoning={"effort": effort}, max_output_tokens=max_output_tokens, store=False,
                 prompt_cache_key=f"spotify-a5-{role}",
                 text={"format": {"type": "json_schema", "name": f"{role}_output",
@@ -142,7 +147,9 @@ class OpenAIProvider:
                  "cached_tokens": getattr(getattr(u, "input_tokens_details", None), "cached_tokens", 0) or 0,
                  "cache_write_tokens": getattr(getattr(u, "input_tokens_details", None), "cache_write_tokens", 0) or 0,
                  "reasoning_tokens": getattr(getattr(u, "output_tokens_details", None), "reasoning_tokens", 0) or 0,
-                 "usage_available": u is not None}
+                 "usage_available": u is not None,
+                 # tier the provider reports it actually used ("flex", "default", ...)
+                 "service_tier": "flex" if getattr(resp, "service_tier", None) == "flex" else "standard"}
         request_id = getattr(resp, "_request_id", None) or resp.id
         if resp.status != "completed":
             reason = getattr(getattr(resp, "incomplete_details", None), "reason", resp.status)
@@ -165,11 +172,11 @@ class MockProvider:
             self.n += 1
             return self.n
 
-    def complete(self, role, instructions, payload, model, effort, max_output_tokens):
+    def complete(self, role, instructions, payload, model, effort, max_output_tokens, service_tier="standard"):
         n = self._tick()
         time.sleep(0.01)
         usage = {"input_tokens": (len(instructions) + len(payload)) // 4, "cached_tokens": 0, "cache_write_tokens": 0,
-                 "reasoning_tokens": 0, "usage_available": True}
+                 "reasoning_tokens": 0, "usage_available": True, "service_tier": service_tier}
         rid = f"mock-{uuid.uuid4().hex[:12]}"
         if self.faults.get("transient") and n % self.faults["transient"] == 0:
             raise TransientError("mock 429 rate limit")
@@ -181,12 +188,12 @@ class MockProvider:
             if self.faults.get("badquote") and n % self.faults["badquote"] == 0:
                 for it, x in zip(items, data):
                     if not x["short"]:
-                        it["quote"] = "THIS QUOTE IS NOT IN THE REVIEW"
+                        it["q"] = "THIS QUOTE IS NOT IN THE REVIEW"
                         break
             out = {"items": items}
         elif role == "verify":
-            out = {"items": [{k: v for k, v in self._enrich_item(x).items() if k in ("i", "label", "intent", "severity")}
-                             | {"confidence": "medium"} for x in data]}
+            out = {"items": [{"i": it["i"], "label": it["l"], "intent": it["t"], "severity": it["v"], "confidence": "medium"}
+                             for it in (self._enrich_item(x) for x in data)]}
         elif role == "group":
             out = {"issues": [{"issue_id": i["issue_id"], "name": i["issue_id"].replace(".", ": ").replace("_", " "),
                                "summary": "Mock summary of " + i["issue_id"], "coherence": "coherent", "outlier_ids": []}
@@ -219,9 +226,8 @@ class MockProvider:
                 intent, sev = "complaint", 2
         words = x["text"].split()
         quote = "" if x.get("short", True) else " ".join(words[: min(8, len(words))])
-        return {"i": x["i"], "label": label, "intent": intent, "severity": sev,
-                "sentiment": -1 if intent in ("complaint", "cancellation") else 1, "quote": quote,
-                "needs_review": False, "note": ""}
+        return {"i": x["i"], "l": label, "t": intent, "v": sev,
+                "s": -1 if intent in ("complaint", "cancellation") else 1, "q": quote, "f": ""}
 
 
 def make_provider(cfg):
@@ -245,10 +251,12 @@ def call_with_retries(provider, ledger, *, role, rc, instructions, payload, max_
             return None, attempts, "spend_limit"
         t0 = time.time()
         rec = {"model": model, "effort": rc.effort, "prompt_version": rc.prompt_version, "provider": provider.name,
+               "service_tier": rc.service_tier,
                "attempt": attempt_base + k + 1, "started_at": t0}
         try:
-            text, usage, rid = provider.complete(role, instructions, payload, model, rc.effort, rc.max_output_tokens)
-            actual = cost_usd(model, usage)
+            text, usage, rid = provider.complete(role, instructions, payload, model, rc.effort, rc.max_output_tokens,
+                                                 rc.service_tier)
+            actual = cost_usd(model, usage, tier=usage.get("service_tier", "standard"))
             ledger.settle(reserve, actual)
             try:
                 parsed = json.loads(text)
@@ -262,7 +270,7 @@ def call_with_retries(provider, ledger, *, role, rc, instructions, payload, max_
             return parsed, attempts, None
         except InvalidOutput as e:
             usage, rid = (e.args[1], e.args[2]) if len(e.args) == 3 else ({}, f"local-{uuid.uuid4().hex[:12]}")
-            actual = cost_usd(model, usage) if usage else 0.0
+            actual = cost_usd(model, usage, tier=usage.get("service_tier", "standard")) if usage else 0.0
             ledger.settle(reserve, actual)
             attempts.append(rec | _usage_fields(usage) | {"request_id": rid, "outcome": "failed", "error": str(e.args[0]),
                                                           "cost_usd": actual, "ended_at": time.time()})
@@ -283,4 +291,5 @@ def call_with_retries(provider, ledger, *, role, rc, instructions, payload, max_
 def _usage_fields(usage):
     return {"input_tokens": usage.get("input_tokens") or 0, "output_tokens": usage.get("output_tokens") or 0,
             "cached_tokens": usage.get("cached_tokens") or 0, "cache_write_tokens": usage.get("cache_write_tokens") or 0,
-            "reasoning_tokens": usage.get("reasoning_tokens") or 0, "usage_available": int(bool(usage.get("usage_available")))}
+            "reasoning_tokens": usage.get("reasoning_tokens") or 0, "usage_available": int(bool(usage.get("usage_available"))),
+            **({"service_tier": usage["service_tier"]} if usage.get("service_tier") else {})}

@@ -49,6 +49,22 @@ class Logger:
                   flush=True)
 
 
+def project_spent(exclude_run=None):
+    """Spend recorded by every run under runs/ (one shared ledger for the professor's $10 cap)."""
+    import sqlite3
+    total = 0.0
+    for db in RUNS.glob("*/state.db"):
+        if db.parent.name == exclude_run:
+            continue
+        try:
+            con = sqlite3.connect(f"file:{db}?mode=ro", uri=True)
+            total += con.execute("SELECT COALESCE(SUM(cost_usd),0) FROM calls").fetchone()[0]
+            con.close()
+        except sqlite3.Error:
+            pass
+    return total
+
+
 def run_pipeline(input_csv: Path, run_id: str, cfg: RunConfig, cache_path: Path, stages=STAGES,
                  allow_config_change=False, quiet=False):
     run_dir = RUNS / run_id
@@ -96,7 +112,11 @@ def run_pipeline(input_csv: Path, run_id: str, cfg: RunConfig, cache_path: Path,
             manifest["source"] = {"file_sha256": report["file_sha256"], "bytes": report["bytes"], "records": report["records"]}
         provider = make_provider(cfg) if set(stages) & {"enrich", "verify", "group", "memo"} else None
         cache = ResultCache(cache_path)
-        ledger = Ledger(cfg.spend_limit_usd, already_spent=store.spent_usd())
+        other = project_spent(exclude_run=run_id)
+        cap = min(cfg.spend_limit_usd, cfg.project_budget_usd - other)
+        ledger = Ledger(cap, already_spent=store.spent_usd())
+        log("run", "budget", run_cap_usd=cfg.spend_limit_usd, project_budget_usd=cfg.project_budget_usd,
+            other_runs_spent_usd=round(other, 6), this_run_spent_usd=round(store.spent_usd(), 6), effective_cap_usd=round(cap, 6))
         ctx = Context(store, cache, provider, ledger, cfg, run_id, out, log)
         if "enrich" in stages:
             enr = enrich_stage.Enricher(store, cache, provider, ledger, cfg, run_id, log)
@@ -161,7 +181,9 @@ def write_summary(store, out, cfg, ledger):
                    "SELECT reason, COUNT(*) FROM reviews WHERE status='quarantined' GROUP BY reason").fetchall()),
                "cache_reuse_records": con.execute("SELECT COUNT(*) FROM results WHERE cache_source_id IS NOT NULL").fetchone()[0],
                "calls": calls, "spent_usd_estimated_from_usage": round(store.spent_usd(), 6),
-               "spend_limit_usd": cfg.spend_limit_usd, "ledger_refusals": ledger.refusals if ledger else None,
+               "spend_limit_usd": cfg.spend_limit_usd, "project_budget_usd": cfg.project_budget_usd,
+               "service_tiers": dict(con.execute("SELECT COALESCE(service_tier,'standard'), COUNT(*) FROM calls GROUP BY 1").fetchall()),
+               "ledger_refusals": ledger.refusals if ledger else None,
                "workers": cfg.workers, "stage_times": store.get("stage_times", {}), "wall_clock": store.get("wall_clock", []),
                "sessions": sessions,
                "cost_note": "Costs are usage x rates in pipeline/config.py (see cost/rates.csv); not a provider invoice."}

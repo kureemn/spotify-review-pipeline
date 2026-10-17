@@ -22,16 +22,17 @@ def _instructions(cfg):
 
 def _validate_item(item, text, short_limit):
     """Return (record_fields, None) or (None, failure_reason)."""
-    if item.get("label") not in LABELS or item.get("intent") not in INTENTS:
+    if item.get("l") not in LABELS or item.get("t") not in INTENTS:
         return None, "invalid_label"
-    sev, sent = item.get("severity"), item.get("sentiment")
+    sev, sent = item.get("v"), item.get("s")
     if type(sev) is not int or not 1 <= sev <= 5 or type(sent) is not int or not -2 <= sent <= 2:
         return None, "invalid_range"
-    needs_review, note = bool(item.get("needs_review")), (item.get("note") or "").strip()
+    note = (item.get("f") or "").strip()
+    needs_review = bool(note)
     if len(text) <= short_limit:
         quote, method = text, "full_text_short"
     else:
-        q = item.get("quote") or ""
+        q = item.get("q") or ""
         if q.strip() and q in text:
             quote, method = q, "model_exact"
         else:
@@ -39,8 +40,8 @@ def _validate_item(item, text, short_limit):
             if pos < 0:
                 return None, "quote_not_substring"
             quote, method = text[pos:pos + len(q)], "model_case_repaired"   # original characters, exact substring
-    topic, subtopic = split_label(item["label"])
-    return {"topic": topic, "subtopic": subtopic, "intent": item["intent"], "severity": sev,
+    topic, subtopic = split_label(item["l"])
+    return {"topic": topic, "subtopic": subtopic, "intent": item["t"], "severity": sev,
             "sentiment": sentiment_value(sent), "entities": extract_entities(text), "evidence_quote": quote,
             "needs_review": needs_review, "note": note, "quote_method": method}, None
 
@@ -202,7 +203,7 @@ class Enricher:
                     if why == "quote_not_substring":
                         # Saved with a visible flag instead of being lost: the full text is always an exact substring.
                         it = seen.get(items.index((rid, text, tsha, att)) + 1)
-                        fields, _ = _validate_item(dict(it, quote=""), text, len(text))
+                        fields, _ = _validate_item(dict(it, q=""), text, len(text))
                         fields.update(needs_review=True, note="quote_fallback_full_text", quote_method="fallback_full_text")
                         completed.append((rid, tsha, fields))
                         self.stats["quote_fallbacks"] += 1

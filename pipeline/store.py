@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS calls(
   outcome TEXT, error TEXT, review_ids TEXT, n_items INTEGER, attempt INTEGER, batch_key TEXT,
   input_tokens INTEGER, cached_tokens INTEGER, cache_write_tokens INTEGER,
   output_tokens INTEGER, reasoning_tokens INTEGER, usage_available INTEGER,
-  cost_usd REAL, started_at REAL, ended_at REAL, latency_s REAL, artifacts TEXT);
+  cost_usd REAL, started_at REAL, ended_at REAL, latency_s REAL, artifacts TEXT, service_tier TEXT);
 CREATE TABLE IF NOT EXISTS sessions(
   session INTEGER PRIMARY KEY, stage TEXT, started_at REAL, ended_at REAL, phase TEXT,
   completed_before INTEGER, completed_after INTEGER, calls INTEGER, stop_reason TEXT);
@@ -64,6 +64,9 @@ class RunStore:
     def __init__(self, path: Path):
         self.path = path
         self.con = connect(path, RUN_SCHEMA)
+        cols = {r[1] for r in self.con.execute("PRAGMA table_info(calls)")}
+        if "service_tier" not in cols:   # migrate state DBs created before tier tracking
+            self.con.execute("ALTER TABLE calls ADD COLUMN service_tier TEXT")
 
     # -- key/value metadata ---------------------------------------------------------------
     def get(self, key, default=None):

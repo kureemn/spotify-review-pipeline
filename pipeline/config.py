@@ -16,10 +16,12 @@ CHECKER = DATA / "check_submission.py"
 # Model allowlist: anything else is refused before a call is made.
 MODEL_ALLOWLIST = {"gpt-6-luna", "mock-keyword-v1"}
 
-# USD per 1M tokens, standard tier, checked 2026-10-16 at
-# https://developers.openai.com/api/docs/models/gpt-6-luna . Editable copy lives in cost/rates.csv.
+# USD per 1M tokens, checked 2026-10-16 at https://developers.openai.com/api/docs/models/gpt-6-luna .
+# The page lists standard rates and states Batch and Flex cost 50% of standard; flex rows apply that.
+# Editable copy lives in cost/rates.csv (the calculator reads that file, not these defaults).
 DEFAULT_RATES = {
     "gpt-6-luna": {"input": 0.10, "cached_input": 0.01, "cache_write": 0.125, "output": 0.50},
+    "gpt-6-luna@flex": {"input": 0.05, "cached_input": 0.005, "cache_write": 0.0625, "output": 0.25},
     "mock-keyword-v1": {"input": 0.0, "cached_input": 0.0, "cache_write": 0.0, "output": 0.0},
 }
 
@@ -31,13 +33,14 @@ class RoleConfig:
     prompt_version: str = "v1"
     batch_size: int = 50
     max_output_tokens: int = 4000
+    service_tier: str = "standard"      # "flex" = 50% price, slower, more 429s (retried with backoff)
 
 
 @dataclass
 class RunConfig:
     provider: str = "openai"            # "openai" or "mock" (offline plumbing tests, never business results)
-    enrich: RoleConfig = field(default_factory=lambda: RoleConfig(batch_size=50, max_output_tokens=4500))
-    verify: RoleConfig = field(default_factory=lambda: RoleConfig(batch_size=50, max_output_tokens=3000))
+    enrich: RoleConfig = field(default_factory=lambda: RoleConfig(batch_size=50, max_output_tokens=3500, service_tier="flex"))
+    verify: RoleConfig = field(default_factory=lambda: RoleConfig(batch_size=50, max_output_tokens=3000, service_tier="flex"))
     group: RoleConfig = field(default_factory=lambda: RoleConfig(batch_size=60, max_output_tokens=6000))
     memo: RoleConfig = field(default_factory=lambda: RoleConfig(batch_size=1, max_output_tokens=3000))
     short_quote_chars: int = 150        # reviews this short use the full text as evidence_quote
@@ -51,7 +54,8 @@ class RunConfig:
     max_minutes: float = 0              # 0 = no time cap
     max_transient_retries: int = 4      # 429/5xx/timeouts, backoff + jitter
     max_invalid_retries: int = 1        # invalid output: retry once, then save-with-flag or quarantine
-    request_timeout_s: float = 90
+    request_timeout_s: float = 300      # flex requests can queue; long timeout avoids paying for retries
+    project_budget_usd: float = 10.0    # professor's cap: total across ALL runs in runs/, enforced at dispatch
     stop_after_batches: int = 0         # >0: deliberate interruption for the resume demo
     mock_faults: str = ""               # e.g. "transient=7,malformed=5,drop=3" (mock provider only)
 

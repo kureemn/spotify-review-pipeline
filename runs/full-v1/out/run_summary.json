@@ -1,6 +1,6 @@
 {
   "run_id": "full-v1",
-  "label_config": "gpt-6-luna+effort-none+enrich-v1+schema-v1+quote150+entities-lexicon-v1",
+  "label_config": "gpt-6-luna+effort-none+enrich-v1+schema-v2+quote150+entities-lexicon-v1",
   "status_counts": {
     "pending": 660609,
     "quarantined": 13
@@ -12,26 +12,28 @@
   "calls": {},
   "spent_usd_estimated_from_usage": 0,
   "spend_limit_usd": 2.0,
+  "project_budget_usd": 10.0,
+  "service_tiers": {},
   "ledger_refusals": 0,
   "workers": 1,
   "stage_times": {
     "ingest": [
       {
         "invocation": 1,
-        "seconds": 18.694
+        "seconds": 24.022
       }
     ],
     "export": [
       {
         "invocation": 1,
-        "seconds": 5.142
+        "seconds": 6.601
       }
     ]
   },
   "wall_clock": [
     {
       "invocation": 1,
-      "seconds": 23.922,
+      "seconds": 30.808,
       "stages": [
         "ingest"
       ],
