@@ -127,8 +127,19 @@ def main(argv=None):
     if a.cmd == "status":
         from .store import RunStore
         store = RunStore(RUNS / a.run_id / "state.db")
-        print(json.dumps({"counts": store.counts(), "spent_usd": round(store.spent_usd(), 6),
-                          "label_config": store.get("label_config")}, indent=2))
+        c = store.counts()
+        con = store.con
+        sessions = con.execute("SELECT session, phase, completed_before, completed_after, stop_reason FROM sessions "
+                               "WHERE stage='enrich' ORDER BY session").fetchall()
+        calls = con.execute("SELECT phase, COUNT(*) FROM calls WHERE role='enrich' GROUP BY phase").fetchall()
+        print(f"run {a.run_id} · label_config {store.get('label_config')}")
+        print(f"  completed   {c.get('completed', 0):>9,}")
+        print(f"  pending     {c.get('pending', 0):>9,}")
+        print(f"  quarantined {c.get('quarantined', 0):>9,}  " + str(dict(con.execute(
+            "SELECT reason, COUNT(*) FROM reviews WHERE status='quarantined' GROUP BY reason").fetchall())))
+        print(f"  enrichment calls by phase: {dict(calls)} · API spend ${store.spent_usd():.4f}")
+        for s_ in sessions:
+            print(f"  session {s_[0]} [{s_[1]}] completed {s_[2]:,} -> {s_[3] or 0:,} · stop: {s_[4]}")
 
 
 if __name__ == "__main__":

@@ -44,7 +44,12 @@ class Logger:
         row = {"ts": round(time.time(), 3), "stage": stage, "event": event, **fields}
         with self.path.open("a") as f:
             f.write(json.dumps(row, ensure_ascii=False, default=str) + "\n")
-        if not self.quiet and event != "batch":
+        if not self.quiet and event == "batch" and "progress" in fields:
+            pr = fields["progress"]
+            note = f" · retrying {fields['failed']}" if fields.get("failed") else ""
+            print(f"[{stage}] saved batch {pr['batches']:>5}: +{fields['completed']:<2} -> {pr['completed']:>7,} / {pr['target']:,} "
+                  f"completed · ${pr['spent_usd']:.4f}{note}", flush=True)
+        elif not self.quiet and event != "batch":
             print(f"[{stage}] {event} " + " ".join(f"{k}={v}" for k, v in fields.items() if k != "review_ids")[:300],
                   flush=True)
 
@@ -75,7 +80,7 @@ def run_pipeline(input_csv: Path, run_id: str, cfg: RunConfig, cache_path: Path,
     if saved and saved != cfg.to_dict() and not allow_config_change:
         # Changing model/prompt/schema settings mid-run would mix label configs; refuse loudly.
         changed = {k for k in cfg.to_dict() if saved.get(k) != cfg.to_dict()[k]}
-        ignorable = {"workers", "spend_limit_usd", "max_minutes", "stop_after_batches", "mock_faults"}
+        ignorable = {"workers", "spend_limit_usd", "max_minutes", "stop_after_batches", "mock_faults", "project_budget_usd"}
         if changed - ignorable:
             raise SystemExit(f"Config differs from saved run config in {sorted(changed - ignorable)}; "
                              f"use a new --run-id or --allow-config-change.")

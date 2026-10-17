@@ -103,6 +103,9 @@ class Enricher:
         pending = self._pending()
         self._apply_cache_hits(pending)
         pending = self._pending()
+        counts = self.store.counts()
+        self.done_total = counts.get("completed", 0)
+        self.target = self.done_total + len(pending)   # completed so far + still pending (excludes quarantined)
         # One representative (first in source order) per distinct text; duplicates reuse its result.
         reps, by_text = [], {}
         for rid, text, tsha, attempts in pending:
@@ -129,10 +132,24 @@ class Enricher:
                         inflight[fut] = (items, retry_n)
                     if not inflight:
                         break
-                    done, _ = wait(inflight, return_when=FIRST_COMPLETED)
+                    try:
+                        done, _ = wait(inflight, return_when=FIRST_COMPLETED)
+                    except KeyboardInterrupt:
+                        # Stop admitting work, but finish and SAVE requests already sent (they are paid for).
+                        if stop_reason == "keyboard_interrupt":
+                            raise                       # second Ctrl-C: abort now; saved batches stay saved
+                        if not stop_reason:
+                            print(f"\n[enrich] Ctrl-C: no new requests; saving {len(inflight)} in-flight batch(es) "
+                                  f"before exit (press again to abort without saving)", flush=True)
+                        stop_reason = stop_reason or "keyboard_interrupt"
+                        continue
                     for fut in done:
                         items, retry_n = inflight.pop(fut)
-                        parsed, attempts, err = fut.result()
+                        try:
+                            parsed, attempts, err = fut.result()
+                        except FatalError as e:
+                            stop_reason = stop_reason or f"fatal: {e}"
+                            continue
                         follow_up = self._commit(items, retry_n, parsed, attempts, err, by_text, session, phase)
                         if err == "spend_limit":
                             stop_reason = stop_reason or "spend_limit"
@@ -221,9 +238,11 @@ class Enricher:
             for rid, tsha, fields in completed:
                 self._complete(c, rid, fields, ok_attempt["request_id"], self.run_id)
                 self.stats["completed_model"] += 1
+                self.done_total += 1
                 for dup in by_text.get(tsha, [])[1:]:
                     self._complete(c, dup, fields, ok_attempt["request_id"], self.run_id, cache_source_id=rid)
                     self.stats["completed_reuse_in_run"] += 1
+                    self.done_total += 1
                 cache_rows.append((tsha, self.label_config, rid, self.run_id, ok_attempt["request_id"],
                                    json.dumps(fields, ensure_ascii=False), time.time()))
             for rid, reason in quarantined:
@@ -241,5 +260,7 @@ class Enricher:
         self.log("enrich", "batch", n=len(ids), completed=len(completed), failed=len(failed_items),
                  failure_reasons={r: sum(1 for _, w in failed_items if w == r) for r in {w for _, w in failed_items}},
                  failed_ids=[x[0] for x, _ in failed_items][:50],
-                 quarantined=len(quarantined), retry_round=retry_n, error=err, attempts=len(attempts))
+                 quarantined=len(quarantined), retry_round=retry_n, error=err, attempts=len(attempts),
+                 progress={"completed": self.done_total, "target": self.target, "spent_usd": round(self.ledger.spent, 4),
+                           "batches": self.stats["batches_committed"]})
         return follow_up

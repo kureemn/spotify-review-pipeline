@@ -179,7 +179,7 @@ class MockProvider:
 
     def complete(self, role, instructions, payload, model, effort, max_output_tokens, service_tier="standard"):
         n = self._tick()
-        time.sleep(0.01)
+        time.sleep(self.faults.get("latency_ms", 10) / 1000)
         usage = {"input_tokens": (len(instructions) + len(payload)) // 4, "cached_tokens": 0, "cache_write_tokens": 0,
                  "reasoning_tokens": 0, "usage_available": True, "service_tier": service_tier}
         rid = f"mock-{uuid.uuid4().hex[:12]}"
