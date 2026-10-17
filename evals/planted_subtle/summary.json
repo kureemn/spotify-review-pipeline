@@ -1,0 +1,24 @@
+{
+  "synthetic": true,
+  "variant": "subtle (adjacent label / one severity step)",
+  "source_run": "runs/dev10k",
+  "n": 60,
+  "model_planted_detected": 57,
+  "model_planted_detection_rate": 0.95,
+  "by_field": {
+    "topic": "20/20",
+    "intent": "18/20",
+    "severity": "19/20"
+  },
+  "verifier_unavailable": 0,
+  "code_level_cases": {
+    "invalid_label_enum": "invalid_label",
+    "invalid_intent_enum": "invalid_label",
+    "severity_out_of_range": "invalid_range",
+    "sentiment_out_of_range": "invalid_range",
+    "fabricated_quote": "quote_not_substring"
+  },
+  "code_level_all_rejected": true,
+  "index_checks": "unknown/duplicate/missing indices are ignored and retried, never guessed (tested by mock fault 'drop')",
+  "spent_usd": 0.000495
+}

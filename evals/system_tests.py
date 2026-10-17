@@ -34,6 +34,11 @@ from pipeline.store import ResultCache, RunStore
 # A deliberately wrong replacement for each true topic (clearly unrelated area).
 WRONG_TOPIC = {"access": "catalog", "usability": "support", "playback": "billing", "downloads": "access",
                "catalog": "playback", "billing": "downloads", "support": "catalog", "other": "access"}
+# Subtle variant: a plausible neighbouring label / one severity step, closer to real labelling mistakes.
+SUBTLE_TOPIC = {"access": "billing", "usability": "playback", "playback": "usability", "downloads": "playback",
+                "catalog": "other", "billing": "usability", "support": "billing", "other": "usability"}
+SUBTLE_INTENT = {"cancellation": "complaint", "complaint": "request", "request": "complaint", "praise": "unclear",
+                 "unclear": "complaint"}
 WRONG_INTENT = {"cancellation": "praise", "complaint": "praise", "request": "cancellation", "praise": "complaint",
                 "unclear": "praise"}
 
@@ -73,7 +78,9 @@ def make_ctx(name, a):
 
 
 def planted(a):
-    ctx, cfg = make_ctx("planted", a)
+    name = "planted_subtle" if a.subtle else "planted"
+    ctx, cfg = make_ctx(name, a)
+    topic_map, intent_map = (SUBTLE_TOPIC, SUBTLE_INTENT) if a.subtle else (WRONG_TOPIC, WRONG_INTENT)
     recs = [json.loads(l) for l in open(Path(a.source_run) / "out" / "enriched.jsonl")]
     recs = [r for r in recs if not r.get("cache_source_id")]
     recs.sort(key=lambda r: hashlib.sha256(("planted-v1:" + r["review_id"]).encode()).hexdigest())
@@ -88,15 +95,17 @@ def planted(a):
         planted_rec = dict(r, synthetic_test_copy=True)
         field = ("topic", "intent", "severity")[k % 3]
         if field == "topic":
-            planted_rec["topic"] = WRONG_TOPIC[r["topic"]]
+            planted_rec["topic"] = topic_map[r["topic"]]
         elif field == "intent":
-            planted_rec["intent"] = WRONG_INTENT[r["intent"]]
+            planted_rec["intent"] = intent_map[r["intent"]]
+        elif a.subtle:
+            planted_rec["severity"] = r["severity"] + 1 if r["severity"] < 5 else 4
         else:
             planted_rec["severity"] = 5 if r["severity"] <= 2 else 1
         copy.append({"review_id": r["review_id"], "planted_field": field, "original": r[field], "planted": planted_rec[field],
                      "record": planted_rec})
     (ctx.out / "test_copy_with_planted_errors.jsonl").write_text("".join(json.dumps(c, ensure_ascii=False) + "\n" for c in copy))
-    ver = verify_texts(ctx, [(c["review_id"], texts[c["review_id"]]) for c in copy], artifacts=["evals/planted/test_copy_with_planted_errors.jsonl"])
+    ver = verify_texts(ctx, [(c["review_id"], texts[c["review_id"]]) for c in copy], artifacts=[f"evals/{name}/test_copy_with_planted_errors.jsonl"])
     results = []
     for c in copy:
         v = ver.get(c["review_id"])
@@ -116,7 +125,8 @@ def planted(a):
     }
     code_results = {name: _validate_item(item, text, cfg.short_quote_chars)[1] for name, (item, text) in code_cases.items()}
     summary = {
-        "synthetic": True, "source_run": str(a.source_run), "n": len(results),
+        "synthetic": True, "variant": "subtle (adjacent label / one severity step)" if a.subtle else "gross (unrelated label)",
+        "source_run": str(a.source_run), "n": len(results),
         "model_planted_detected": sum(r["detected"] for r in results),
         "model_planted_detection_rate": round(sum(r["detected"] for r in results) / len(results), 4) if results else None,
         "by_field": {f: f"{sum(r['detected'] for r in results if r['field'] == f)}/{sum(r['field'] == f for r in results)}" for f in ("topic", "intent", "severity")},
@@ -199,6 +209,7 @@ def main():
     ap.add_argument("test", choices=["planted", "injection"])
     ap.add_argument("--source-run", default="runs/dev500")
     ap.add_argument("--n", type=int, default=30)
+    ap.add_argument("--subtle", action="store_true", help="plausible near-miss planted errors")
     ap.add_argument("--provider", choices=["openai", "mock"], default="mock")
     ap.add_argument("--confirm-paid", action="store_true")
     ap.add_argument("--spend-limit", type=float, default=0.10)
