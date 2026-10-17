@@ -1,0 +1,17 @@
+model,tier,item,usd_per_unit,unit,unit_size,source_url,checked_date,note
+gpt-6-luna,standard,input_uncached,0.10,tokens,1000000,https://developers.openai.com/api/docs/models/gpt-6-luna,2026-10-16,listed input price
+gpt-6-luna,standard,input_cached,0.01,tokens,1000000,https://developers.openai.com/api/docs/models/gpt-6-luna,2026-10-16,listed cached input price
+gpt-6-luna,standard,cache_write,0.125,tokens,1000000,https://developers.openai.com/api/docs/models/gpt-6-luna,2026-10-16,listed cache write price
+gpt-6-luna,standard,output,0.50,tokens,1000000,https://developers.openai.com/api/docs/models/gpt-6-luna,2026-10-16,listed output price; reasoning tokens are included in output and not billed again
+gpt-6-luna,flex,input_uncached,0.05,tokens,1000000,https://developers.openai.com/api/docs/models/gpt-6-luna,2026-10-16,page states Flex = 50% of standard
+gpt-6-luna,flex,input_cached,0.005,tokens,1000000,https://developers.openai.com/api/docs/models/gpt-6-luna,2026-10-16,page states Flex = 50% of standard
+gpt-6-luna,flex,cache_write,0.0625,tokens,1000000,https://developers.openai.com/api/docs/models/gpt-6-luna,2026-10-16,page states Flex = 50% of standard
+gpt-6-luna,flex,output,0.25,tokens,1000000,https://developers.openai.com/api/docs/models/gpt-6-luna,2026-10-16,page states Flex = 50% of standard (listed Batch/Flex output $0.25)
+mock-keyword-v1,standard,input_uncached,0,tokens,1000000,local,2026-10-16,offline mock provider (tests only)
+mock-keyword-v1,standard,input_cached,0,tokens,1000000,local,2026-10-16,offline mock provider (tests only)
+mock-keyword-v1,standard,cache_write,0,tokens,1000000,local,2026-10-16,offline mock provider (tests only)
+mock-keyword-v1,standard,output,0,tokens,1000000,local,2026-10-16,offline mock provider (tests only)
+mock-keyword-v1,flex,input_uncached,0,tokens,1000000,local,2026-10-16,offline mock provider (tests only)
+mock-keyword-v1,flex,input_cached,0,tokens,1000000,local,2026-10-16,offline mock provider (tests only)
+mock-keyword-v1,flex,cache_write,0,tokens,1000000,local,2026-10-16,offline mock provider (tests only)
+mock-keyword-v1,flex,output,0,tokens,1000000,local,2026-10-16,offline mock provider (tests only)

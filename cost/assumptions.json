@@ -1,0 +1,16 @@
+{
+  "_note": "Editable projection assumptions. Changing these never changes the measured pilot results.",
+  "budget_usd": 10.0,
+  "output_token_cap_per_request": 3500,
+  "max_workers": 8,
+  "max_fallback_fraction": 0.0,
+  "full_run": {"rows": 660622, "nonempty": 660609, "empty_quarantines": 13, "distinct_nonempty_texts": 484189},
+  "verify_rate_full_run": 0.02,
+  "scenarios": {
+    "base":         {"retry_rate": 0.02, "invalid_retry_rate": 0.01, "cache_hit_share_of_input": "measured", "parallel_efficiency": 0.8},
+    "conservative": {"retry_rate": 0.10, "invalid_retry_rate": 0.05, "cache_hit_share_of_input": 0.0, "parallel_efficiency": 0.5,
+                     "tier_override": "standard"}
+  },
+  "local_compute": {"machine": "Apple M1 Pro laptop, 16 GB", "usd_per_hour": null,
+                    "note": "Orchestration runs locally; electricity/hardware cost not measured -> reported as unknown, not zero."}
+}

@@ -26,3 +26,5 @@ runs/mock*/
 runs/*/out/records.jsonl
 runs/*/out/enriched.jsonl
 runs/*/out/quarantine.jsonl
+runs/*/systest_cache.db*
+cost/.selftest_assumptions.json

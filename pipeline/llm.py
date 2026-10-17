@@ -136,7 +136,12 @@ class OpenAIProvider:
                 prompt_cache_key=f"spotify-a5-{role}",
                 text={"format": {"type": "json_schema", "name": f"{role}_output",
                                  "schema": SCHEMAS[role], "strict": True}})
-        except (o.RateLimitError, o.APITimeoutError, o.APIConnectionError, o.InternalServerError) as e:
+        except o.RateLimitError as e:
+            # Prepaid credit exhausted also arrives as HTTP 429; retrying it only burns time.
+            if "insufficient_quota" in str(e) or getattr(e, "code", None) == "insufficient_quota":
+                raise FatalError(f"insufficient_quota (credit balance exhausted): {str(e)[:200]}")
+            raise TransientError(f"RateLimitError: {str(e)[:200]}")
+        except (o.APITimeoutError, o.APIConnectionError, o.InternalServerError) as e:
             raise TransientError(f"{type(e).__name__}: {str(e)[:200]}")
         except o.APIStatusError as e:
             if e.status_code in (408, 409, 429) or e.status_code >= 500:

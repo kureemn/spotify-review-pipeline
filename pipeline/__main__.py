@@ -43,7 +43,7 @@ def add_run_args(p):
     p.add_argument("--confirm-paid", action="store_true", help="required for any paid provider call")
     p.add_argument("--workers", type=int, default=1)
     p.add_argument("--spend-limit", type=float, default=2.0, help="USD hard cap for this run (cumulative)")
-    p.add_argument("--project-budget", type=float, default=10.0, help="USD cap across all runs in runs/")
+    p.add_argument("--project-budget", type=float, default=9.5, help="USD cap across all runs in runs/")
     p.add_argument("--tier", choices=["flex", "standard"], default="flex", help="processing tier for enrich/verify")
     p.add_argument("--max-minutes", type=float, default=0)
     p.add_argument("--stop-after-batches", type=int, default=0, help="deliberate interruption for the resume demo")

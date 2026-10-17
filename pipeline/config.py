@@ -55,7 +55,7 @@ class RunConfig:
     max_transient_retries: int = 4      # 429/5xx/timeouts, backoff + jitter
     max_invalid_retries: int = 1        # invalid output: retry once, then save-with-flag or quarantine
     request_timeout_s: float = 300      # flex requests can queue; long timeout avoids paying for retries
-    project_budget_usd: float = 10.0    # professor's cap: total across ALL runs in runs/, enforced at dispatch
+    project_budget_usd: float = 9.5     # professor's $10 cap minus headroom for estimate-vs-invoice drift: total across ALL runs in runs/, enforced at dispatch
     stop_after_batches: int = 0         # >0: deliberate interruption for the resume demo
     mock_faults: str = ""               # e.g. "transient=7,malformed=5,drop=3" (mock provider only)
 
